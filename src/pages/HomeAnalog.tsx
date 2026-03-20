@@ -109,6 +109,43 @@ export function HomeAnalog() {
         </p>
       </section>
 
+      {/* ═══ ABOUT ═══ */}
+      <section id="analog-about" className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ borderTop: `1px solid ${muted}` }}>
+        <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2 md:gap-20">
+          <div>
+            <p className="mb-2 text-xs uppercase" style={{ color: primary, letterSpacing: "0.2em" }}>About</p>
+            <h2 style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>
+              Where soul<br />meets precision.
+            </h2>
+          </div>
+          <div className="flex flex-col justify-end gap-5">
+            <p className="leading-relaxed" style={{ color: fg }}>
+              Francisco Catarro is a guitarist, pianist, musical director, and producer whose playing
+              carries the raw energy of a live stage and the precision of years behind the keys.
+            </p>
+            <p className="leading-relaxed" style={{ color: mutedFg }}>
+              Born in Portugal, based in the UK. Over 10 years of performing, composing, arranging,
+              and recording across genres — from rock clubs to symphony halls.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ STATS ═══ */}
+      <section id="analog-stats" className="grid grid-cols-2 md:grid-cols-4" style={{ borderTop: `1px solid ${muted}`, borderBottom: `1px solid ${muted}` }}>
+        {[
+          { value: "10+", label: "Years" },
+          { value: "200+", label: "Shows" },
+          { value: "50+", label: "Sessions" },
+          { value: "4", label: "Instruments" },
+        ].map((stat, i) => (
+          <div key={stat.label} className="flex flex-col items-center py-10 md:py-14" style={{ borderRight: i < 3 ? `1px solid ${muted}` : "none" }}>
+            <span className="text-3xl md:text-4xl" style={{ fontFamily: headingFont, color: primary }}>{stat.value}</span>
+            <span className="mt-2 text-[11px] uppercase" style={{ color: mutedFg, letterSpacing: "0.15em" }}>{stat.label}</span>
+          </div>
+        ))}
+      </section>
+
       {/* ═══ MEDIA — Dark breakout section ═══ */}
       <section id="analog-media" className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ background: fg, color: bg }}>
         <div className="mb-12 flex items-end justify-between">
@@ -161,6 +198,27 @@ export function HomeAnalog() {
             <p className="text-sm leading-relaxed" style={{ color: mutedFg }}>{w.desc}</p>
           </div>
         ))}
+      </section>
+
+      {/* ═══ SERVICES ═══ */}
+      <section id="analog-services" className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ background: card }}>
+        <div className="mx-auto max-w-5xl">
+          <p className="mb-2 text-xs uppercase" style={{ color: primary, letterSpacing: "0.2em" }}>Services</p>
+          <h2 className="mb-12" style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>What I do</h2>
+          <div className="grid gap-8 sm:grid-cols-2">
+            {[
+              { title: "Live Performance", desc: "Guitar and keys for any setting — from intimate jazz clubs to arena stages." },
+              { title: "Musical Direction", desc: "Leading bands, arranging setlists, and shaping the musical identity of any project." },
+              { title: "Production", desc: "Studio production, mixing, and arranging across rock, soul, jazz, and pop." },
+              { title: "Session Work", desc: "Reliable, versatile session musician for recordings, tours, and one-off gigs." },
+            ].map((s) => (
+              <div key={s.title} className="border-t py-6" style={{ borderColor: muted }}>
+                <h3 className="text-base font-medium">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed" style={{ color: mutedFg }}>{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ═══ EVENTS ═══ */}

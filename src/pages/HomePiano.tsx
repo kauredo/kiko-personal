@@ -237,6 +237,30 @@ export function HomePiano() {
         </div>
       </section>
 
+      {/* ═══ STATS ═══ */}
+      <section id="piano-stats" className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
+        <div className="mx-auto grid max-w-5xl grid-cols-2 gap-10 md:grid-cols-4 md:gap-16">
+          {[
+            { number: "10+", label: "Years" },
+            { number: "200+", label: "Shows" },
+            { number: "50+", label: "Sessions" },
+            { number: "4", label: "Instruments" },
+          ].map((stat) => (
+            <div key={stat.label} className="text-center">
+              <p
+                className="mb-2"
+                style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2.5rem, 5vw, 3.5rem)", lineHeight: 1, color: primary }}
+              >
+                {stat.number}
+              </p>
+              <p className="text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ═══ FEATURED IMAGE ═══ */}
       <div className="px-8 md:px-16 lg:px-24">
         <div
@@ -248,6 +272,62 @@ export function HomePiano() {
           </div>
         </div>
       </div>
+
+      {/* ═══ SERVICES ═══ */}
+      <section id="piano-services" className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
+        <div className="mx-auto max-w-5xl">
+          <p className="mb-3 text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>Services</p>
+          <h2 className="mb-12" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1 }}>
+            What I <span style={{ fontStyle: "italic" }}>do</span>
+          </h2>
+          <div className="grid gap-10 md:grid-cols-2 md:gap-12">
+            {[
+              { title: "Live Performance", description: "High-energy sets spanning rock, soul, funk, and jazz — tailored to any venue, from intimate clubs to festival stages." },
+              { title: "Musical Direction", description: "End-to-end direction for bands, ensembles, and live shows — from arrangement to stage performance." },
+              { title: "Production", description: "Full-service music production, from songwriting and arrangement to mixing, with a focus on authentic, organic sound." },
+              { title: "Session Work", description: "Versatile guitar and keys for studio recordings — bringing feel, precision, and creative ideas to every session." },
+            ].map((service) => (
+              <div key={service.title} className="py-6" style={{ borderTop: `1px solid ${muted}` }}>
+                <h3 className="mb-3" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "1.25rem" }}>
+                  {service.title}
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: mutedFg }}>
+                  {service.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ MEDIA ═══ */}
+      <section id="piano-media" className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
+        <div className="mx-auto max-w-5xl">
+          <p className="mb-3 text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>Media</p>
+          <h2 className="mb-12" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1 }}>
+            In the <span style={{ fontStyle: "italic" }}>moment</span>
+          </h2>
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
+            {[
+              { label: "Live Performance", span: "md:col-span-2 md:row-span-2" },
+              { label: "Studio Session", span: "" },
+              { label: "Backstage", span: "" },
+              { label: "Music Video", span: "" },
+              { label: "Album Art", span: "" },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className={`flex items-end overflow-hidden p-5 ${item.span}`}
+                style={{ background: muted, border: `1px solid ${muted}`, aspectRatio: item.span ? undefined : "1/1", minHeight: item.span ? 280 : undefined }}
+              >
+                <span className="text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>
+                  {item.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ═══ WORK ═══ */}
       <section id="piano-work" className="px-8 py-20 md:px-16 md:py-28 lg:px-24">
@@ -265,6 +345,41 @@ export function HomePiano() {
               <span className="text-sm" style={{ color: mutedFg }}>{w.year} —</span>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ═══ TESTIMONIALS ═══ */}
+      <section id="piano-testimonials" className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
+        <div className="mx-auto max-w-5xl">
+          <p className="mb-3 text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>Testimonials</p>
+          <h2 className="mb-12" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1 }}>
+            Kind <span style={{ fontStyle: "italic" }}>words</span>
+          </h2>
+          <div className="grid gap-12 md:grid-cols-2 md:gap-16">
+            {[
+              {
+                quote: "Francisco doesn't just play — he listens, reacts, and elevates everything around him. The best musician I've ever shared a stage with.",
+                name: "Milena Galasso",
+                role: "Vocalist & Collaborator",
+              },
+              {
+                quote: "His musical direction turned our project from good into something truly memorable. Meticulous, creative, and always in service of the song.",
+                name: "Ricardo Alves",
+                role: "Producer, Studio80",
+              },
+            ].map((t) => (
+              <div key={t.name}>
+                <blockquote
+                  className="mb-6 text-lg leading-relaxed md:text-xl"
+                  style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontStyle: "italic" }}
+                >
+                  "{t.quote}"
+                </blockquote>
+                <p className="text-sm font-medium">{t.name}</p>
+                <p className="mt-0.5 text-xs" style={{ color: mutedFg }}>{t.role}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

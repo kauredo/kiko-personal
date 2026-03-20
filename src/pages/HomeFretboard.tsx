@@ -23,6 +23,10 @@ const CHORDS: Record<string, { name: string; frets: (number | null)[]; barre?: n
   Am: { name: "Am", frets: [null, 0, 2, 2, 1, 0] },
   G:  { name: "G",  frets: [3, 2, 0, 0, 0, 3] },
   Dm: { name: "Dm", frets: [null, null, 0, 2, 3, 1] },
+  E:  { name: "E",  frets: [0, 2, 2, 1, 0, 0] },
+  D:  { name: "D",  frets: [null, null, 0, 2, 3, 2] },
+  Bm: { name: "Bm", frets: [null, 2, 4, 4, 3, 2], barre: 2 },
+  Em: { name: "Em", frets: [0, 2, 2, 0, 0, 0] },
 };
 
 // ── Background strings — 6 evenly spaced from 15% to 85% ──
@@ -411,6 +415,104 @@ export function HomeFretboard() {
         </div>
       </section>
 
+      {/* ═══ SERVICES — E Chord ═══ */}
+      <section id="fret-services" className="fret-section relative py-24 md:py-32">
+        <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
+        <div className="mx-auto flex max-w-5xl flex-col items-start gap-12 px-8 md:flex-row-reverse md:items-start md:gap-20 md:px-16 lg:px-24">
+          <div className="chord-diagram flex-shrink-0 md:mt-8">
+            <ChordDiagram chord="E" scale={2.5} showLabel />
+          </div>
+          <div className="flex-1">
+            <h2
+              className="fret-text mb-8 text-xl font-bold uppercase text-white md:text-2xl"
+              style={{ fontFamily: "'Syne', system-ui, sans-serif", letterSpacing: "0.05em" }}
+            >
+              Services
+            </h2>
+            {[
+              { title: "Live Performance", desc: "Guitar and keys for any setting." },
+              { title: "Musical Direction", desc: "Leading bands and shaping setlists." },
+              { title: "Production", desc: "Recording, mixing, and arranging." },
+              { title: "Session Work", desc: "Studio and live session musician." },
+            ].map((s, i) => (
+              <div key={i} className="fret-text border-t border-white/[0.08] py-4">
+                <p className="text-sm font-medium text-white">{s.title}</p>
+                <p className="mt-0.5 text-xs text-white/35">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ STATS — D Chord ═══ */}
+      <section id="fret-stats" className="fret-section relative py-16 md:py-24">
+        <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
+        <div className="mx-auto flex max-w-5xl flex-col items-center gap-12 px-8 md:flex-row md:gap-20 md:px-16 lg:px-24">
+          <div className="chord-diagram flex-shrink-0">
+            <ChordDiagram chord="D" scale={2.5} showLabel />
+          </div>
+          <div className="grid flex-1 grid-cols-2 gap-8 md:grid-cols-4">
+            {[
+              { value: "10+", label: "Years" },
+              { value: "200+", label: "Shows" },
+              { value: "50+", label: "Sessions" },
+              { value: "4", label: "Instruments" },
+            ].map((stat) => (
+              <div key={stat.label} className="fret-text text-center">
+                <p className="text-2xl font-bold text-white md:text-3xl" style={{ fontFamily: "'Syne', system-ui, sans-serif" }}>{stat.value}</p>
+                <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-white/30">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ TESTIMONIALS — Bm Chord ═══ */}
+      <section id="fret-testimonials" className="fret-section relative py-24 md:py-32">
+        <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
+        <div className="mx-auto flex max-w-5xl flex-col items-start gap-12 px-8 md:flex-row md:items-start md:gap-20 md:px-16 lg:px-24">
+          <div className="chord-diagram flex-shrink-0 md:mt-8">
+            <ChordDiagram chord="Bm" scale={2.5} showLabel />
+          </div>
+          <div className="flex-1 space-y-10">
+            {[
+              { quote: "One of the most versatile musicians I've worked with. He can go from a soulful ballad to a face-melting rock solo in the same set.", author: "Joao Silva", role: "Band Leader" },
+              { quote: "Francisco brings something rare — technical precision with genuine emotion. Every note has intention.", author: "Maria Santos", role: "Producer" },
+            ].map((t, i) => (
+              <div key={i} className="fret-text">
+                <p className="text-sm leading-relaxed text-white/60 italic">"{t.quote}"</p>
+                <p className="mt-3 text-xs text-white/30">— {t.author}, {t.role}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ MEDIA — Em Chord ═══ */}
+      <section id="fret-media" className="fret-section relative py-24 md:py-32">
+        <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
+        <div className="mx-auto flex max-w-5xl flex-col items-start gap-12 px-8 md:flex-row-reverse md:items-start md:gap-20 md:px-16 lg:px-24">
+          <div className="chord-diagram flex-shrink-0 md:mt-8">
+            <ChordDiagram chord="Em" scale={2.5} showLabel />
+          </div>
+          <div className="flex-1">
+            <h2
+              className="fret-text mb-8 text-xl font-bold uppercase text-white md:text-2xl"
+              style={{ fontFamily: "'Syne', system-ui, sans-serif", letterSpacing: "0.05em" }}
+            >
+              See &amp; Hear
+            </h2>
+            <div className="grid grid-cols-2 gap-3">
+              {["Live Performance", "Studio Session", "Backstage", "Music Video"].map((label) => (
+                <div key={label} className="fret-text flex aspect-[4/3] items-center justify-center border border-white/[0.08]" style={{ background: "rgba(255,255,255,0.03)" }}>
+                  <span className="text-[9px] uppercase tracking-[0.2em] text-white/15">{label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══ CTA — Dm Chord ═══ */}
       <section className="fret-section relative flex min-h-[60vh] flex-col items-center justify-center px-8">
         <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
@@ -436,7 +538,7 @@ export function HomeFretboard() {
       {/* ═══ FOOTER ═══ */}
       <footer className="relative z-10 flex items-center justify-between px-6 py-8 text-[10px] tracking-[0.15em] text-white/20 md:px-12 lg:px-24">
         <span>&copy; {new Date().getFullYear()} Francisco Catarro</span>
-        <span>F &middot; C &middot; Am &middot; G &middot; Dm</span>
+        <span>F &middot; C &middot; Am &middot; G &middot; E &middot; D &middot; Bm &middot; Em &middot; Dm</span>
       </footer>
     </div>
   );

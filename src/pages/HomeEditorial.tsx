@@ -200,6 +200,30 @@ export function HomeEditorial() {
         </div>
       </section>
 
+      {/* ═══ WORK / RESUME ═══ */}
+      <section id="editorial-work" className="px-6 md:px-12 lg:px-24 xl:px-32 py-16 md:px-16 md:py-24 lg:px-24" style={{ borderTop: `1px solid ${border}` }}>
+        <div className="mx-auto max-w-5xl">
+          <p className="mb-3 text-xs uppercase" style={{ color: primary, letterSpacing: "0.2em" }}>Resume</p>
+          <h2 className="mb-12" style={{ fontFamily: headingFont, fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1 }}>
+            The work so far
+          </h2>
+          {[
+            { title: "Lead Guitar", org: "Don Gabriel", period: "2020 —", desc: "Lead guitar for funk-soul band across UK and Europe." },
+            { title: "Function Duo", org: "with Milena Galasso", period: "2021 —", desc: "Guitar and vocals for private events, weddings, and corporate functions." },
+            { title: "Band Leader & Lead Guitar", org: "Studio80 Function Band", period: "2019 — 2020", desc: "Musical direction and lead guitar for 8-piece function band." },
+            { title: "Composer & Writer", org: "Tabora / Lucas Wild", period: "2017 — 2020", desc: "Original composition and songwriting for rock and soul projects." },
+          ].map((w, i) => (
+            <div key={i} className="flex items-baseline justify-between py-6" style={{ borderTop: `1px solid ${border}` }}>
+              <div>
+                <h3 style={{ fontFamily: headingFont }}>{w.title}</h3>
+                <p className="mt-0.5 text-sm" style={{ color: mutedFg }}>{w.org}</p>
+              </div>
+              <span className="text-sm" style={{ color: mutedFg }}>{w.period}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ═══ TESTIMONIALS ═══ */}
       <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:px-16 md:py-28 lg:px-24" style={{ background: card }}>
         <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2 md:gap-16">

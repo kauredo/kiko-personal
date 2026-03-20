@@ -108,8 +108,60 @@ export function HomeElectric() {
         </div>
       </section>
 
+      {/* ═══ STATS ═══ */}
+      <section id="electric-stats" className="border-t border-b border-white/10 px-8 py-16 md:px-16 md:py-24 lg:px-24">
+        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 md:grid-cols-4 md:gap-12">
+          {[
+            { value: "10+", label: "Years" },
+            { value: "200+", label: "Shows" },
+            { value: "50+", label: "Sessions" },
+            { value: "4", label: "Instruments" },
+          ].map((stat) => (
+            <div key={stat.label} className="text-center">
+              <p
+                className="text-4xl text-[oklch(0.62_0.25_28)] md:text-5xl"
+                style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 800 }}
+              >
+                {stat.value}
+              </p>
+              <p className="mt-2 text-xs uppercase text-white/40" style={{ letterSpacing: "0.25em" }}>
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══ SERVICES ═══ */}
+      <section id="electric-services" className="border-t border-white/10 px-8 py-16 md:px-16 md:py-24 lg:px-24">
+        <h2
+          className="mb-12 text-xs uppercase text-white/40"
+          style={{ letterSpacing: "0.25em" }}
+        >
+          Services
+        </h2>
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 sm:grid-cols-2">
+          {[
+            { title: "Live Performance", desc: "High-energy shows on guitar, keys, and bass — from intimate jazz clubs to festival stages." },
+            { title: "Musical Direction", desc: "Full band arrangement, rehearsal coordination, and on-stage leadership for live acts." },
+            { title: "Production", desc: "Recording, mixing, and sonic shaping for tracks that need edge and warmth." },
+            { title: "Session Work", desc: "Reliable, versatile studio musician available for remote and in-person sessions." },
+          ].map((service) => (
+            <div key={service.title} className="border border-white/10 p-8">
+              <h3
+                className="text-lg font-bold uppercase text-white"
+                style={{ fontFamily: "'Syne', system-ui, sans-serif", letterSpacing: "-0.01em" }}
+              >
+                {service.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/70">{service.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ═══ MEDIA STRIP ═══ */}
-      <section id="electric-work" className="border-t border-white/10 py-16 md:py-24">
+      <section className="border-t border-white/10 py-16 md:py-24">
         <div className="mb-10 flex items-end justify-between px-6 md:px-12 lg:px-24 xl:px-32">
           <h2
             className="text-xs uppercase text-white/40"
@@ -137,6 +189,77 @@ export function HomeElectric() {
                 <p className="text-sm font-medium text-white">{item.label}</p>
               </div>
             </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══ WORK / RESUME ═══ */}
+      <section id="electric-work" className="border-t border-white/10 px-8 py-16 md:px-16 md:py-24 lg:px-24">
+        <h2
+          className="mb-12 text-xs uppercase text-white/40"
+          style={{ letterSpacing: "0.25em" }}
+        >
+          Experience
+        </h2>
+        {[
+          { role: "Lead Guitar", project: "Don Gabriel", period: "2020 —" },
+          { role: "Function Duo", project: "with Milena Galasso", period: "2021 —" },
+          { role: "Band Leader", project: "Studio80", period: "2019 — 2020" },
+          { role: "Composer", project: "Tabora / Lucas Wild", period: "2017 — 2020" },
+        ].map((item, i) => (
+          <div
+            key={i}
+            className="flex items-baseline justify-between border-t border-white/10 py-5 md:py-6"
+          >
+            <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:gap-4">
+              <h3
+                className="text-lg font-bold uppercase text-white md:text-xl"
+                style={{ fontFamily: "'Syne', system-ui, sans-serif", letterSpacing: "-0.01em" }}
+              >
+                {item.role}
+              </h3>
+              <span className="text-sm text-white/40">— {item.project}</span>
+            </div>
+            <span className="text-xs text-white/30" style={{ letterSpacing: "0.15em" }}>
+              {item.period}
+            </span>
+          </div>
+        ))}
+      </section>
+
+      {/* ═══ TESTIMONIALS ═══ */}
+      <section id="electric-testimonials" className="border-t border-white/10 px-8 py-16 md:px-16 md:py-24 lg:px-24">
+        <h2
+          className="mb-12 text-xs uppercase text-white/40"
+          style={{ letterSpacing: "0.25em" }}
+        >
+          Testimonials
+        </h2>
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 md:grid-cols-2">
+          {[
+            {
+              quote: "One of the most versatile musicians I've worked with. He can go from a soulful ballad to a face-melting rock solo in the same set.",
+              name: "Joao Silva",
+              title: "Band Leader",
+            },
+            {
+              quote: "Francisco brings something rare — technical precision with genuine emotion. Every note has intention.",
+              name: "Maria Santos",
+              title: "Producer",
+            },
+          ].map((t) => (
+            <blockquote key={t.name} className="border-l-2 border-[oklch(0.62_0.25_28)] pl-6">
+              <p
+                className="text-lg leading-relaxed text-white/70 md:text-xl"
+                style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 400 }}
+              >
+                "{t.quote}"
+              </p>
+              <footer className="mt-4">
+                <span className="text-sm font-medium text-white">{t.name}</span>
+                <span className="ml-2 text-xs text-white/40">— {t.title}</span>
+              </footer>
+            </blockquote>
           ))}
         </div>
       </section>

@@ -180,7 +180,9 @@ export function HomeParallax() {
         <LogoMark size={32} />
         <div className="flex items-center gap-6">
           {[
+            { label: "About", id: "#parallax-about" },
             { label: "Portfolio", id: "#parallax-portfolio" },
+            { label: "Work", id: "#parallax-work" },
             { label: "Events", id: "#parallax-events" },
             { label: "Contact", id: "#parallax-contact" },
           ].map(({ label, id }) => (
@@ -268,6 +270,65 @@ export function HomeParallax() {
         ))}
       </section>
 
+      {/* ═══ ABOUT ═══ */}
+      <section id="parallax-about" className="px-8 py-24 md:px-16 md:py-32 lg:px-24">
+        <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-[1fr_2fr]">
+          <div>
+            <p className="reveal mb-3 text-[10px] tracking-[0.3em] uppercase text-white/30">Background</p>
+            <h2
+              className="reveal text-3xl md:text-5xl"
+              style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}
+            >
+              About
+            </h2>
+          </div>
+          <div className="space-y-6 text-white/70 leading-relaxed">
+            <p className="reveal">
+              Francisco Catarro is a guitarist, pianist, musical director, and producer whose playing
+              carries the raw energy of a live stage and the precision of years behind the keys.
+            </p>
+            <p className="reveal">
+              From rock clubs to symphony halls — he doesn't just show up, he transforms the room.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ SERVICES ═══ */}
+      <section id="parallax-services" className="px-8 py-24 md:px-16 md:py-32 lg:px-24">
+        <div className="mx-auto max-w-5xl">
+          <p className="reveal mb-3 text-[10px] tracking-[0.3em] uppercase text-white/30">What I do</p>
+          <h2
+            className="reveal mb-16 text-3xl md:text-5xl"
+            style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}
+          >
+            Services
+          </h2>
+          <div className="grid gap-px md:grid-cols-2" style={{ background: "rgba(255,255,255,0.1)" }}>
+            {[
+              { title: "Live Performance", desc: "High-energy sets on guitar, keys, and bass — from intimate venues to festival stages." },
+              { title: "Musical Direction", desc: "Shaping the sound, leading rehearsals, and running the show from first note to last." },
+              { title: "Production", desc: "Full-cycle music production — arrangement, recording, mixing, and creative direction." },
+              { title: "Session Work", desc: "Reliable, versatile session musician for studio recordings and live collaborations." },
+            ].map((service, i) => (
+              <div
+                key={i}
+                className="reveal p-8 md:p-10"
+                style={{ background: "oklch(0.05 0.005 260)" }}
+              >
+                <h3
+                  className="mb-3 text-lg font-bold uppercase md:text-xl"
+                  style={{ fontFamily: "'Syne', system-ui, sans-serif", letterSpacing: "-0.01em" }}
+                >
+                  {service.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-white/40">{service.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ═══ HORIZONTAL SCROLL GALLERY ═══ */}
       <section id="parallax-portfolio" className="h-scroll-section overflow-hidden">
         <div className="flex min-h-screen flex-col justify-center py-16">
@@ -303,6 +364,85 @@ export function HomeParallax() {
                   <p className="text-sm font-medium">{item.label}</p>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ WORK / RESUME ═══ */}
+      <section id="parallax-work" className="px-8 py-24 md:px-16 md:py-32 lg:px-24">
+        <div className="mx-auto max-w-5xl">
+          <p className="reveal mb-3 text-[10px] tracking-[0.3em] uppercase text-white/30">Experience</p>
+          <h2
+            className="reveal mb-16 text-3xl md:text-5xl"
+            style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}
+          >
+            Work
+          </h2>
+          {[
+            { role: "Lead Guitar", project: "Don Gabriel", period: "2020 —" },
+            { role: "Function Duo", project: "with Milena Galasso", period: "2021 —" },
+            { role: "Band Leader", project: "Studio80", period: "2019 — 2020" },
+            { role: "Composer", project: "Tabora / Lucas Wild", period: "2017 — 2020" },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="reveal flex items-center justify-between border-b border-white/10 py-8"
+            >
+              <div className="flex items-baseline gap-8 md:gap-12">
+                <span
+                  className="w-36 text-sm font-bold uppercase md:text-base"
+                  style={{ fontFamily: "'Syne', system-ui, sans-serif", letterSpacing: "-0.01em" }}
+                >
+                  {item.role}
+                </span>
+                <span className="text-white/40">{item.project}</span>
+              </div>
+              <span className="text-sm text-white/30">{item.period}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══ TESTIMONIALS ═══ */}
+      <section id="parallax-testimonials" className="px-8 py-24 md:px-16 md:py-32 lg:px-24">
+        <div className="mx-auto max-w-5xl">
+          <p className="reveal mb-3 text-[10px] tracking-[0.3em] uppercase text-white/30">Kind words</p>
+          <h2
+            className="reveal mb-16 text-3xl md:text-5xl"
+            style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}
+          >
+            Testimonials
+          </h2>
+          <div className="grid gap-8 md:grid-cols-2">
+            {[
+              {
+                quote: "One of the most versatile musicians I've worked with. He can go from a soulful ballad to a face-melting rock solo in the same set.",
+                name: "Joao Silva",
+                title: "Band Leader",
+              },
+              {
+                quote: "Francisco brings something rare — technical precision with genuine emotion. Every note has intention.",
+                name: "Maria Santos",
+                title: "Producer",
+              },
+            ].map((t, i) => (
+              <blockquote
+                key={i}
+                className="reveal border-l-2 py-2 pl-8"
+                style={{ borderColor: "oklch(0.62 0.25 28)" }}
+              >
+                <p className="mb-6 text-lg leading-relaxed text-white/70">"{t.quote}"</p>
+                <footer>
+                  <span
+                    className="text-sm font-bold uppercase"
+                    style={{ fontFamily: "'Syne', system-ui, sans-serif" }}
+                  >
+                    {t.name}
+                  </span>
+                  <span className="ml-2 text-sm text-white/30">— {t.title}</span>
+                </footer>
+              </blockquote>
             ))}
           </div>
         </div>
