@@ -7,16 +7,11 @@ import { requireAdmin } from "./auth";
 export const listExperiences = query({
   args: { category: v.optional(v.string()) },
   handler: async (ctx, { category }) => {
-    let q = ctx.db.query("experiences");
-    if (category) {
-      q = q.withIndex("by_category", (idx) =>
-        idx.eq(
-          "category",
-          category as "performance" | "directing" | "producing" | "teaching",
-        ),
-      );
-    }
-    const items = await q.collect();
+    const items = category
+      ? await ctx.db.query("experiences").withIndex("by_category", (idx) =>
+          idx.eq("category", category as "performance" | "directing" | "producing" | "teaching"),
+        ).collect()
+      : await ctx.db.query("experiences").collect();
     return items.sort((a, b) => a.order - b.order);
   },
 });
@@ -132,11 +127,9 @@ export const deleteEducation = mutation({
 export const listSkills = query({
   args: { category: v.optional(v.string()) },
   handler: async (ctx, { category }) => {
-    let q = ctx.db.query("skills");
-    if (category) {
-      q = q.withIndex("by_category", (idx) => idx.eq("category", category));
-    }
-    return await q.collect();
+    return category
+      ? await ctx.db.query("skills").withIndex("by_category", (idx) => idx.eq("category", category)).collect()
+      : await ctx.db.query("skills").collect();
   },
 });
 

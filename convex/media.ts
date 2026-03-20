@@ -33,11 +33,9 @@ export const list = query({
     featured: v.optional(v.boolean()),
   },
   handler: async (ctx, { type, featured }) => {
-    let q = ctx.db.query("media");
-    if (type) {
-      q = q.withIndex("by_type", (idx) => idx.eq("type", type));
-    }
-    const items = await q.collect();
+    const items = type
+      ? await ctx.db.query("media").withIndex("by_type", (idx) => idx.eq("type", type)).collect()
+      : await ctx.db.query("media").collect();
 
     let filtered = items;
     if (featured !== undefined) {
