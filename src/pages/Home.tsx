@@ -5,7 +5,7 @@ import { HomeAnalog } from "./HomeAnalog";
 import { HomeEditorial } from "./HomeEditorial";
 import { HomeParallax } from "./HomeParallax";
 import { HomePiano } from "./HomePiano";
-import { HomeGuitar } from "./HomeGuitar";
+import { HomeFretboard } from "./HomeFretboard";
 
 export function Home() {
   const { theme } = useTheme();
@@ -17,7 +17,7 @@ export function Home() {
       {theme === "hybrid" && <HomeEditorial />}
       {theme === "parallax" && <HomeParallax />}
       {theme === "piano" && <HomePiano />}
-      {theme === "guitar" && <HomeGuitar />}
+      {theme === "guitar" && <HomeFretboard />}
     </PageWrapper>
   );
 }

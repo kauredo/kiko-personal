@@ -10,6 +10,7 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
+import { LogoFull } from "@/components/ui/LogoFull";
 import { ArrowUpRight } from "lucide-react";
 
 const MEDIA = Array.from({ length: 5 }, (_, i) => ({
@@ -157,6 +158,21 @@ export function HomeParallax() {
       className="min-h-screen bg-[oklch(0.05_0.005_260)] text-white overflow-hidden"
       style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}
     >
+      {/* ═══ BACKGROUND STRINGS ═══ */}
+      <div className="pointer-events-none fixed inset-0 z-0">
+        {[15, 29, 43, 57, 71, 85].map((pct, i) => (
+          <div
+            key={i}
+            className="absolute top-0 bottom-0"
+            style={{
+              left: `${pct}%`,
+              width: [2.5, 2, 1.5, 1.2, 1, 0.8][i],
+              background: "linear-gradient(to bottom, rgba(255,255,255,0.03), rgba(255,255,255,0.07) 30%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.07) 70%, rgba(255,255,255,0.03))",
+            }}
+          />
+        ))}
+      </div>
+
       {/* ═══ NAV ═══ */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 mix-blend-difference md:px-16 lg:px-24">
         <LogoMark size={32} />
@@ -168,17 +184,6 @@ export function HomeParallax() {
       {/* ═══ HERO — Name scales down as you scroll ═══ */}
       <section className="relative flex min-h-[150vh] flex-col">
         <div className="sticky top-0 flex h-screen flex-col items-center justify-center">
-          {/* Background parallax layers */}
-          <div
-            className="absolute inset-0 opacity-[0.03]"
-            data-speed="-0.3"
-            style={{
-              backgroundImage: "url(/svg/soundwave.svg)",
-              backgroundSize: "100% auto",
-              backgroundRepeat: "repeat-y",
-              backgroundPosition: "center",
-            }}
-          />
 
           <div className="hero-name text-center" style={{ willChange: "transform" }}>
             <h1
@@ -186,7 +191,7 @@ export function HomeParallax() {
               style={{
                 fontFamily: "'Syne', system-ui, sans-serif",
                 fontWeight: 800,
-                fontSize: "clamp(5rem, 18vw, 20rem)",
+                fontSize: "clamp(3rem, 9vw, 10rem)",
                 letterSpacing: "-0.04em",
                 textTransform: "uppercase",
               }}
@@ -221,6 +226,13 @@ export function HomeParallax() {
             just show up, he{" "}
             <span style={{ color: "oklch(0.62 0.25 28)" }}>transforms</span> the room.
           </p>
+        </div>
+      </section>
+
+      {/* ═══ LOGO REVEAL ═══ */}
+      <section className="flex min-h-[50vh] items-center justify-center overflow-hidden">
+        <div className="reveal" data-speed="-0.1">
+          <LogoFull size={280} className="text-white/30" />
         </div>
       </section>
 
@@ -323,7 +335,6 @@ export function HomeParallax() {
 
       {/* ═══ CONTACT — Dramatic reveal ═══ */}
       <section className="relative flex min-h-[60vh] items-center justify-center overflow-hidden" style={{ background: "oklch(0.62 0.25 28)" }}>
-        <div className="absolute inset-0 opacity-10" data-speed="-0.15" style={{ backgroundImage: "url(/svg/soundwave.svg)", backgroundSize: "120% auto", backgroundPosition: "center", backgroundRepeat: "no-repeat" }} />
         <div className="reveal relative z-10 text-center px-8">
           <h2
             className="mb-6 text-4xl font-bold uppercase md:text-6xl"

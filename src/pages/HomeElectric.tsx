@@ -12,6 +12,7 @@ import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { HeroScene } from "@/components/three/HeroScene";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
+import { LogoFull } from "@/components/ui/LogoFull";
 import { ArrowUpRight, Mail } from "lucide-react";
 
 const MEDIA_ITEMS = Array.from({ length: 6 }, (_, i) => ({
@@ -59,7 +60,7 @@ export function HomeElectric() {
             style={{
               fontFamily: "'Syne', system-ui, sans-serif",
               fontWeight: 800,
-              fontSize: "clamp(4rem, 14vw, 14rem)",
+              fontSize: "clamp(3rem, 8vw, 8rem)",
               textTransform: "uppercase",
               letterSpacing: "-0.03em",
             }}
@@ -86,13 +87,16 @@ export function HomeElectric() {
 
       {/* ═══ STATEMENT ═══ */}
       <section className="border-t border-white/10 px-8 py-24 md:px-16 md:py-32 lg:px-24">
-        <p
-          className="max-w-4xl text-2xl leading-relaxed text-white/70 md:text-3xl lg:text-4xl"
-          style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 400 }}
-        >
-          Born in Portugal, based in the UK — over 10 years on guitar, keys, and bass.
-          He doesn't just show up, he <span className="text-[oklch(0.62_0.25_28)]">transforms the room</span>.
-        </p>
+        <div className="mx-auto flex max-w-6xl flex-col items-start gap-12 md:flex-row md:items-center md:gap-20">
+          <LogoFull size={200} className="flex-shrink-0 text-white/40" />
+          <p
+            className="text-2xl leading-relaxed text-white/70 md:text-3xl lg:text-4xl"
+            style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 400 }}
+          >
+            Born in Portugal, based in the UK — over 10 years on guitar, keys, and bass.
+            He doesn't just show up, he <span className="text-[oklch(0.62_0.25_28)]">transforms the room</span>.
+          </p>
+        </div>
       </section>
 
       {/* ═══ MEDIA STRIP ═══ */}

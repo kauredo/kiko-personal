@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { useLenis } from "@/hooks/useLenis";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
+import { LogoFull } from "@/components/ui/LogoFull";
 import { ArrowDown } from "lucide-react";
 
 const WORK = [
@@ -50,7 +51,7 @@ export function HomeAnalog() {
       <section className="grid min-h-screen md:grid-cols-2">
         {/* Left: Image */}
         <div style={{ background: card }} className="flex items-center justify-center">
-          <span className="text-sm uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>Portrait</span>
+          <LogoFull size={240} style={{ color: primary, opacity: 0.6 }} />
         </div>
 
         {/* Right: Name + Info */}
@@ -61,7 +62,7 @@ export function HomeAnalog() {
                 {l}
               </button>
             ))}
-            <ThemeSwitcher />
+            <ThemeSwitcher variant="dark" />
           </nav>
 
           <div>

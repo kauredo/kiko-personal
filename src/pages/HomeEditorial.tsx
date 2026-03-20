@@ -11,6 +11,7 @@ import { useLenis } from "@/hooks/useLenis";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
+import { LogoFull } from "@/components/ui/LogoFull";
 import { ArrowDown } from "lucide-react";
 
 const STATS = [
@@ -115,6 +116,19 @@ export function HomeEditorial() {
             <span className="mt-2 text-[11px] uppercase" style={{ color: mutedFg, letterSpacing: "0.15em" }}>{stat.label}</span>
           </motion.div>
         ))}
+      </section>
+
+      {/* ═══ BRAND ═══ */}
+      <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ borderTop: `1px solid ${border}` }}>
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 md:flex-row md:gap-20">
+          <LogoFull size={180} className="flex-shrink-0" style={{ color: primary, opacity: 0.5 }} />
+          <div>
+            <p className="text-xs uppercase" style={{ color: mutedFg, letterSpacing: "0.25em" }}>The FC chord diagram</p>
+            <p className="mt-3 text-xl leading-relaxed md:text-2xl" style={{ fontFamily: headingFont, lineHeight: 1.3 }}>
+              Two chords that spell a name.<br />One musician who fills a room.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* ═══ ABOUT ═══ */}
@@ -222,7 +236,6 @@ export function HomeEditorial() {
 
       {/* ═══ CONTACT CTA ═══ */}
       <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-24 text-center md:py-32" style={{ borderTop: `1px solid ${border}` }}>
-        <p className="mb-3 text-xs uppercase" style={{ color: primary, letterSpacing: "0.25em" }}>Contact</p>
         <h2 className="mb-6" style={{ fontFamily: headingFont, fontSize: "clamp(2.5rem, 6vw, 4.5rem)", lineHeight: 1.1 }}>
           Let's create together
         </h2>

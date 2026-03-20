@@ -1,6 +1,6 @@
 import { useTheme } from "@/hooks/useTheme";
 import { cn } from "@/lib/utils";
-import { Zap, Disc3, Blend, Layers, Piano, Guitar } from "lucide-react";
+import { Zap, Disc3, Blend, Layers, Piano, Music } from "lucide-react";
 import type { ThemeName } from "@/types/theme";
 
 const themes: { name: ThemeName; icon: typeof Zap; label: string }[] = [
@@ -9,10 +9,10 @@ const themes: { name: ThemeName; icon: typeof Zap; label: string }[] = [
   { name: "hybrid", icon: Blend, label: "Editorial" },
   { name: "parallax", icon: Layers, label: "Parallax" },
   { name: "piano", icon: Piano, label: "Piano" },
-  { name: "guitar", icon: Guitar, label: "Guitar 3D" },
+  { name: "guitar", icon: Music, label: "Fretboard" },
 ];
 
-export function ThemeSwitcher() {
+export function ThemeSwitcher({ variant = "light" }: { variant?: "light" | "dark" }) {
   const { theme, setTheme } = useTheme();
 
   return (
@@ -25,8 +25,12 @@ export function ThemeSwitcher() {
           className={cn(
             "rounded-full p-1.5 transition-all duration-200",
             theme === name
-              ? "bg-white/20 text-white scale-110"
-              : "text-white/40 hover:text-white/70",
+              ? variant === "light"
+                ? "bg-white/20 text-white scale-110"
+                : "bg-black/10 text-black scale-110"
+              : variant === "light"
+                ? "text-white/40 hover:text-white/70"
+                : "text-black/30 hover:text-black/60",
           )}
         >
           <Icon size={14} />

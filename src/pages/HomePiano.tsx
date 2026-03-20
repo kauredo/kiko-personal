@@ -8,6 +8,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
+import { LogoFull } from "@/components/ui/LogoFull";
 import { ArrowUpRight } from "lucide-react";
 
 // ── Web Audio Piano ──
@@ -169,7 +170,7 @@ export function HomePiano() {
           {["Work", "Events", "Contact"].map((l) => (
             <span key={l} className="hidden text-xs uppercase md:block" style={{ letterSpacing: "0.15em", color: mutedFg, cursor: "pointer" }}>{l}</span>
           ))}
-          <ThemeSwitcher />
+          <ThemeSwitcher variant="dark" />
         </div>
       </nav>
 
@@ -236,8 +237,8 @@ export function HomePiano() {
           className="mx-auto max-w-5xl overflow-hidden"
           style={{ aspectRatio: "21/9", background: muted, border: `1px solid ${muted}` }}
         >
-          <div className="flex h-full items-center justify-center" style={{ color: `${mutedFg}44` }}>
-            <span className="text-xs uppercase" style={{ letterSpacing: "0.2em" }}>Performance Photo</span>
+          <div className="flex h-full items-center justify-center">
+            <LogoFull size={260} style={{ color: fg, opacity: 0.35 }} />
           </div>
         </div>
       </div>
@@ -282,7 +283,6 @@ export function HomePiano() {
 
       {/* ═══ CONTACT ═══ */}
       <section className="px-8 py-24 text-center md:px-16 md:py-32 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
-        <p className="mb-3 text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>Contact</p>
         <h2 className="mb-6" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2.5rem, 6vw, 4rem)", lineHeight: 1.1 }}>
           Let's make <span style={{ fontStyle: "italic" }}>music</span>
         </h2>
