@@ -13,6 +13,7 @@ dist-ssr
 *.local
 .env
 convex/_generated/
+convex/README.md
 
 # Editor directories and files
 .vscode/*
