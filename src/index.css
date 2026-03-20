@@ -1,0 +1,214 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap');
+
+/* ============================================
+   THEME 1: ELECTRIC
+   Brutalist-modern. High contrast. Neon stage.
+   Syne (geometric bold) + sharp edges + red glow.
+   Think: concert poster meets brutalist web.
+   ============================================ */
+:root,
+[data-theme="dark-electric"] {
+  --background: oklch(0.07 0.005 260);
+  --foreground: oklch(0.97 0 0);
+  --card: oklch(0.13 0.005 260);
+  --card-foreground: oklch(0.97 0 0);
+  --primary: oklch(0.62 0.25 28);
+  --primary-foreground: oklch(0.97 0 0);
+  --accent: oklch(0.55 0.22 20);
+  --accent-foreground: oklch(0.97 0 0);
+  --muted: oklch(0.16 0.005 260);
+  --muted-foreground: oklch(0.55 0.005 260);
+  --border: oklch(0.25 0.005 260);
+  --ring: oklch(0.62 0.25 28);
+  --destructive: oklch(0.55 0.2 25);
+
+  --glow-color: oklch(0.62 0.25 28 / 0.25);
+  --grain-opacity: 0.03;
+  --nav-blur: 16px;
+  --text-shadow-glow: 0 0 80px oklch(0.62 0.25 28 / 0.3);
+  --radius: 0px;
+  --card-shadow: none;
+  --card-border: 1px solid oklch(0.28 0.005 260);
+
+  --font-heading: 'Syne', system-ui, sans-serif;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --heading-weight: 800;
+  --heading-style: normal;
+  --heading-transform: uppercase;
+  --heading-tracking: -0.02em;
+  --label-tracking: 0.2em;
+  --body-size: 1rem;
+  --section-gap: clamp(6rem, 12vh, 10rem);
+  --hero-align: left;
+  --card-hover: translateY(-2px);
+  --quote-size: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+/* ============================================
+   THEME 2: ANALOG
+   Zine / vinyl sleeve. Warm, textured, organic.
+   DM Serif Display + rough edges + heavy grain.
+   Think: worn record cover, indie print shop.
+   ============================================ */
+[data-theme="raw-textured"] {
+  --background: oklch(0.93 0.015 75);
+  --foreground: oklch(0.15 0.03 40);
+  --card: oklch(0.88 0.02 68);
+  --card-foreground: oklch(0.15 0.03 40);
+  --primary: oklch(0.38 0.14 28);
+  --primary-foreground: oklch(0.93 0.015 75);
+  --accent: oklch(0.48 0.10 55);
+  --accent-foreground: oklch(0.93 0.015 75);
+  --muted: oklch(0.83 0.025 68);
+  --muted-foreground: oklch(0.42 0.025 45);
+  --border: oklch(0.78 0.025 60);
+  --ring: oklch(0.38 0.14 28);
+  --destructive: oklch(0.50 0.18 25);
+
+  --glow-color: transparent;
+  --grain-opacity: 0.12;
+  --nav-blur: 6px;
+  --text-shadow-glow: none;
+  --radius: 3px;
+  --card-shadow: 3px 3px 0 oklch(0.15 0.03 40 / 0.1);
+  --card-border: 2px solid oklch(0.15 0.03 40 / 0.12);
+
+  --font-heading: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --heading-weight: 400;
+  --heading-style: italic;
+  --heading-transform: none;
+  --heading-tracking: -0.01em;
+  --label-tracking: 0.15em;
+  --body-size: 1.05rem;
+  --section-gap: clamp(5rem, 10vh, 8rem);
+  --hero-align: left;
+  --card-hover: translate(1px, 1px);
+  --quote-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+/* ============================================
+   THEME 3: EDITORIAL
+   Magazine / lookbook. Refined, intentional.
+   Instrument Serif + generous whitespace + warm dark.
+   Think: Monocle meets Blue Note album liner.
+   ============================================ */
+[data-theme="hybrid"] {
+  --background: oklch(0.10 0.01 55);
+  --foreground: oklch(0.90 0.015 65);
+  --card: oklch(0.15 0.01 55);
+  --card-foreground: oklch(0.90 0.015 65);
+  --primary: oklch(0.72 0.12 70);
+  --primary-foreground: oklch(0.10 0.01 55);
+  --accent: oklch(0.60 0.10 40);
+  --accent-foreground: oklch(0.10 0.01 55);
+  --muted: oklch(0.18 0.01 55);
+  --muted-foreground: oklch(0.55 0.01 55);
+  --border: oklch(0.28 0.01 55);
+  --ring: oklch(0.72 0.12 70);
+  --destructive: oklch(0.55 0.19 25);
+
+  --glow-color: oklch(0.72 0.12 70 / 0.08);
+  --grain-opacity: 0.05;
+  --nav-blur: 12px;
+  --text-shadow-glow: none;
+  --radius: 0px;
+  --card-shadow: none;
+  --card-border: 1px solid oklch(0.30 0.01 55);
+
+  --font-heading: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --heading-weight: 400;
+  --heading-style: normal;
+  --heading-transform: none;
+  --heading-tracking: -0.03em;
+  --label-tracking: 0.25em;
+  --body-size: 1rem;
+  --section-gap: clamp(8rem, 15vh, 12rem);
+  --hero-align: center;
+  --card-hover: none;
+  --quote-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+/* ============================================
+   Tailwind theme bridge
+   ============================================ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-glow: var(--glow-color);
+  --radius-theme: var(--radius);
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+}
+
+/* ============================================
+   Base styles
+   ============================================ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    box-sizing: border-box;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: auto;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+    overflow-x: hidden;
+    line-height: 1.65;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--heading-weight);
+    font-style: var(--heading-style);
+    text-transform: var(--heading-transform);
+    letter-spacing: var(--heading-tracking);
+    line-height: 1.05;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+
+/* ============================================
+   Reduced motion
+   ============================================ */
+@layer base {
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

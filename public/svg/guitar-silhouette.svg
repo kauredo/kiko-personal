@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 400" fill="currentColor">
+  <!-- Stylized electric guitar silhouette -->
+  <path d="M58 0 L62 0 L62 120 L70 125 L75 135 L78 150 L80 170 L82 190 L85 210 L88 225 L90 235 L92 248 Q95 265 92 280 Q88 300 80 315 Q72 330 60 340 Q48 330 40 315 Q32 300 28 280 Q25 265 28 248 L30 235 L32 225 L35 210 L38 190 L40 170 L42 150 L45 135 L50 125 L58 120 Z" opacity="0.15"/>
+  <!-- Headstock -->
+  <rect x="54" y="0" width="12" height="20" rx="2" opacity="0.2"/>
+  <!-- Tuning pegs -->
+  <circle cx="52" cy="5" r="3" opacity="0.1"/>
+  <circle cx="52" cy="12" r="3" opacity="0.1"/>
+  <circle cx="52" cy="19" r="3" opacity="0.1"/>
+  <circle cx="68" cy="5" r="3" opacity="0.1"/>
+  <circle cx="68" cy="12" r="3" opacity="0.1"/>
+  <circle cx="68" cy="19" r="3" opacity="0.1"/>
+  <!-- Strings -->
+  <line x1="56" y1="20" x2="56" y2="340" stroke="currentColor" stroke-width="0.5" opacity="0.08"/>
+  <line x1="58" y1="20" x2="58" y2="340" stroke="currentColor" stroke-width="0.5" opacity="0.08"/>
+  <line x1="60" y1="20" x2="60" y2="340" stroke="currentColor" stroke-width="0.5" opacity="0.08"/>
+  <line x1="62" y1="20" x2="62" y2="340" stroke="currentColor" stroke-width="0.5" opacity="0.08"/>
+  <line x1="64" y1="20" x2="64" y2="340" stroke="currentColor" stroke-width="0.5" opacity="0.08"/>
+  <!-- Sound hole -->
+  <circle cx="60" cy="270" r="15" fill="none" stroke="currentColor" stroke-width="1" opacity="0.1"/>
+  <!-- Bridge -->
+  <rect x="50" y="310" width="20" height="3" rx="1" opacity="0.12"/>
+</svg>
