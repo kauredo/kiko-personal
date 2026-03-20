@@ -10,9 +10,10 @@ import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { ArrowDown } from "lucide-react";
 
 const WORK = [
-  { title: "Musical Director", org: "National Tour", period: "2024 —", desc: "Leading a 12-piece band across national venues." },
-  { title: "Session Guitarist", org: "Various Studios", period: "2021 —", desc: "Rock, soul, and pop sessions across multiple studios." },
-  { title: "Producer & Arranger", org: "Independent", period: "2020 —", desc: "Blending genres from soul to electronic for emerging artists." },
+  { title: "Lead Guitar", org: "Don Gabriel", period: "2020 —", desc: "Lead guitar, composition and writing for Don Gabriel." },
+  { title: "Function Duo", org: "with Milena Galasso", period: "2021 —", desc: "Self-managed function duo performing across venues and events." },
+  { title: "Band Leader & Lead Guitar", org: "Studio80 Function Band", period: "2019 — 2020", desc: "Band leader and lead guitarist for events and private functions." },
+  { title: "Composer & Writer", org: "Tabora / Lucas Wild", period: "2017 — 2020", desc: "Original material across multiple projects. Recorded 3 EPs." },
 ];
 
 const MEDIA = [
@@ -68,8 +69,8 @@ export function HomeAnalog() {
               <span style={{ color: primary }}>Catarro</span>
             </h1>
             <p className="mt-6 max-w-sm text-sm leading-relaxed" style={{ color: mutedFg }}>
-              Guitarist, pianist, musical director &amp; producer. Rooted in rock,
-              shaped by soul, at home on any stage.
+              Guitarist, pianist &amp; multi-instrumentalist. Born in Portugal,
+              based in the UK. Over 10 years of live and studio experience.
             </p>
             <button
               onClick={() => lenis?.scrollTo("#analog-contact", { offset: -40, duration: 1.5 })}

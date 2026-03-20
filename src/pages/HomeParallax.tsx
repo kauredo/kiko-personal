@@ -216,7 +216,8 @@ export function HomeParallax() {
             className="text-3xl leading-snug md:text-5xl lg:text-6xl"
             style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 600, letterSpacing: "-0.02em" }}
           >
-            From rock clubs to symphony halls — a musician who doesn't just show up, he{" "}
+            Born in Portugal, based in the UK — over 10 years of guitar, keys, and bass. He doesn't
+            just show up, he{" "}
             <span style={{ color: "oklch(0.62 0.25 28)" }}>transforms</span> the room.
           </p>
         </div>

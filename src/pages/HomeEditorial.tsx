@@ -85,8 +85,8 @@ export function HomeEditorial() {
             <span style={{ color: primary }}>Catarro</span>
           </h1>
           <p className="hero-fade mx-auto mt-8 max-w-md text-sm leading-relaxed" style={{ color: mutedFg }}>
-            A versatile musician rooted in rock and soul, with a decade of performing,
-            directing, and producing across genres and stages.
+            A versatile musician born in Portugal, based in the UK. Over a decade of
+            performing, composing, arranging, and recording across genres and stages.
           </p>
           <button
             onClick={() => lenis?.scrollTo("#editorial-about", { offset: -40, duration: 1.5 })}

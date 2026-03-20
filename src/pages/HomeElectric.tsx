@@ -89,8 +89,8 @@ export function HomeElectric() {
           className="max-w-4xl text-2xl leading-relaxed text-white/70 md:text-3xl lg:text-4xl"
           style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 400 }}
         >
-          From rock clubs to symphony halls — a musician who doesn't just show up,
-          he <span className="text-[oklch(0.62_0.25_28)]">transforms the room</span>.
+          Born in Portugal, based in the UK — over 10 years on guitar, keys, and bass.
+          He doesn't just show up, he <span className="text-[oklch(0.62_0.25_28)]">transforms the room</span>.
         </p>
       </section>
 

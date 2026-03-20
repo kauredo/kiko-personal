@@ -118,9 +118,10 @@ function PianoKeyboard({ activeNote, onPlay }: { activeNote: string | null; onPl
 }
 
 const WORK = [
-  { title: "Musical Director", org: "National Tour", year: "2024" },
-  { title: "Session Guitarist", org: "Various Studios", year: "2021" },
-  { title: "Producer & Arranger", org: "Independent", year: "2020" },
+  { title: "Lead Guitar", org: "Don Gabriel", year: "2020" },
+  { title: "Function Duo", org: "with Milena Galasso", year: "2021" },
+  { title: "Band Leader & Lead Guitar", org: "Studio80 Function Band", year: "2019" },
+  { title: "Composer & Writer", org: "Tabora / Lucas Wild", year: "2017" },
 ];
 
 const EVENTS = [
