@@ -167,8 +167,14 @@ export function HomePiano() {
       <nav className="flex items-center justify-between px-8 py-6 md:px-16 lg:px-24">
         <LogoMark size={36} style={{ color: fg }} />
         <div className="flex items-center gap-6">
-          {["Work", "Events", "Contact"].map((l) => (
-            <span key={l} className="hidden text-xs uppercase md:block" style={{ letterSpacing: "0.15em", color: mutedFg, cursor: "pointer" }}>{l}</span>
+          {[
+            { label: "Work", id: "#piano-work" },
+            { label: "Events", id: "#piano-events" },
+            { label: "Contact", id: "#piano-contact" },
+          ].map(({ label, id }) => (
+            <button key={label} onClick={() => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })} className="hidden text-xs uppercase md:block" style={{ letterSpacing: "0.15em", color: mutedFg, cursor: "pointer" }}>
+              {label}
+            </button>
           ))}
           <ThemeSwitcher variant="dark" />
         </div>
@@ -244,7 +250,7 @@ export function HomePiano() {
       </div>
 
       {/* ═══ WORK ═══ */}
-      <section className="px-8 py-20 md:px-16 md:py-28 lg:px-24">
+      <section id="piano-work" className="px-8 py-20 md:px-16 md:py-28 lg:px-24">
         <div className="mx-auto max-w-5xl">
           <p className="mb-3 text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>Resume</p>
           <h2 className="mb-12" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1 }}>
@@ -263,7 +269,7 @@ export function HomePiano() {
       </section>
 
       {/* ═══ EVENTS ═══ */}
-      <section className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ background: primary, color: "white" }}>
+      <section id="piano-events" className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ background: primary, color: "white" }}>
         <div className="mx-auto max-w-5xl">
           <p className="mb-3 text-[10px] uppercase text-white/40" style={{ letterSpacing: "0.2em" }}>Live</p>
           <h2 className="mb-12" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1 }}>
@@ -282,7 +288,7 @@ export function HomePiano() {
       </section>
 
       {/* ═══ CONTACT ═══ */}
-      <section className="px-8 py-24 text-center md:px-16 md:py-32 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
+      <section id="piano-contact" className="px-8 py-24 text-center md:px-16 md:py-32 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
         <h2 className="mb-6" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2.5rem, 6vw, 4rem)", lineHeight: 1.1 }}>
           Let's make <span style={{ fontStyle: "italic" }}>music</span>
         </h2>

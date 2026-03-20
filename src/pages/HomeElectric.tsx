@@ -46,9 +46,13 @@ export function HomeElectric() {
       >
         <LogoMark size={36} className="text-white" />
         <div className="flex items-center gap-8">
-          {["Work", "Events", "Contact"].map((l) => (
-            <button key={l} onClick={() => lenis?.scrollTo(`#electric-${l.toLowerCase()}`, { offset: -40, duration: 1.5 })} className="hidden text-xs uppercase text-white/50 transition-colors hover:text-white md:block" style={{ letterSpacing: "0.15em" }}>
-              {l}
+          {[
+            { label: "Work", id: "#electric-work" },
+            { label: "Events", id: "#electric-events" },
+            { label: "Contact", id: "#electric-contact" },
+          ].map(({ label, id }) => (
+            <button key={label} onClick={() => lenis?.scrollTo(id, { offset: -60, duration: 1.5 })} className="hidden text-xs uppercase text-white/50 transition-colors hover:text-white md:block" style={{ letterSpacing: "0.15em" }}>
+              {label}
             </button>
           ))}
           <ThemeSwitcher />
@@ -105,7 +109,7 @@ export function HomeElectric() {
       </section>
 
       {/* ═══ MEDIA STRIP ═══ */}
-      <section className="border-t border-white/10 py-16 md:py-24">
+      <section id="electric-work" className="border-t border-white/10 py-16 md:py-24">
         <div className="mb-10 flex items-end justify-between px-6 md:px-12 lg:px-24 xl:px-32">
           <h2
             className="text-xs uppercase text-white/40"
@@ -138,7 +142,7 @@ export function HomeElectric() {
       </section>
 
       {/* ═══ EVENTS ═══ */}
-      <section className="border-t border-white/10 px-8 py-16 md:px-16 md:py-24 lg:px-24">
+      <section id="electric-events" className="border-t border-white/10 px-8 py-16 md:px-16 md:py-24 lg:px-24">
         <h2
           className="mb-12 text-xs uppercase text-white/40"
           style={{ letterSpacing: "0.25em" }}

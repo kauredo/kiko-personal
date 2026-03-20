@@ -179,8 +179,14 @@ export function HomeParallax() {
       >
         <LogoMark size={32} />
         <div className="flex items-center gap-6">
-          {["Portfolio", "Events", "Contact"].map((l) => (
-            <span key={l} className="hidden text-xs uppercase text-white/50 transition-colors hover:text-white md:block" style={{ letterSpacing: "0.15em", cursor: "pointer" }}>{l}</span>
+          {[
+            { label: "Portfolio", id: "#parallax-portfolio" },
+            { label: "Events", id: "#parallax-events" },
+            { label: "Contact", id: "#parallax-contact" },
+          ].map(({ label, id }) => (
+            <button key={label} onClick={() => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })} className="hidden text-xs uppercase text-white/50 transition-colors hover:text-white md:block" style={{ letterSpacing: "0.15em" }}>
+              {label}
+            </button>
           ))}
           <ThemeSwitcher />
         </div>
@@ -263,7 +269,7 @@ export function HomeParallax() {
       </section>
 
       {/* ═══ HORIZONTAL SCROLL GALLERY ═══ */}
-      <section className="h-scroll-section overflow-hidden">
+      <section id="parallax-portfolio" className="h-scroll-section overflow-hidden">
         <div className="flex min-h-screen flex-col justify-center py-16">
           <div className="mb-10 flex items-end justify-between px-8 md:px-16 lg:px-24">
             <div>
@@ -303,7 +309,7 @@ export function HomeParallax() {
       </section>
 
       {/* ═══ EVENTS with parallax offset ═══ */}
-      <section className="px-8 py-24 md:px-16 md:py-32 lg:px-24">
+      <section id="parallax-events" className="px-8 py-24 md:px-16 md:py-32 lg:px-24">
         <div className="mx-auto max-w-5xl">
           <p className="reveal mb-3 text-[10px] tracking-[0.3em] uppercase text-white/30">Upcoming</p>
           <h2
@@ -339,7 +345,7 @@ export function HomeParallax() {
       </section>
 
       {/* ═══ CONTACT — Dramatic reveal ═══ */}
-      <section className="relative flex min-h-[60vh] items-center justify-center overflow-hidden" style={{ background: "oklch(0.62 0.25 28)" }}>
+      <section id="parallax-contact" className="relative flex min-h-[60vh] items-center justify-center overflow-hidden" style={{ background: "oklch(0.62 0.25 28)" }}>
         <div className="reveal relative z-10 text-center px-8">
           <h2
             className="mb-6 text-4xl font-bold uppercase md:text-6xl"

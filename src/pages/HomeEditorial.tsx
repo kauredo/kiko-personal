@@ -69,8 +69,15 @@ export function HomeEditorial() {
       >
         <LogoMark size={36} style={{ color: fg }} />
         <div className="flex items-center gap-8">
-          {["About", "Services", "Events", "Contact"].map((l) => (
-            <span key={l} className="hidden text-xs uppercase md:block" style={{ color: mutedFg, letterSpacing: "0.15em", cursor: "pointer" }}>{l}</span>
+          {[
+            { label: "About", id: "#editorial-about" },
+            { label: "Services", id: "#editorial-services" },
+            { label: "Events", id: "#editorial-events" },
+            { label: "Contact", id: "#editorial-contact" },
+          ].map(({ label, id }) => (
+            <button key={label} onClick={() => lenis?.scrollTo(id, { offset: -60, duration: 1.5 })} className="hidden text-xs uppercase md:block" style={{ color: mutedFg, letterSpacing: "0.15em", cursor: "pointer" }}>
+              {label}
+            </button>
           ))}
           <ThemeSwitcher />
         </div>
@@ -168,7 +175,7 @@ export function HomeEditorial() {
       </section>
 
       {/* ═══ SERVICES ═══ */}
-      <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-16 md:px-16 md:py-24 lg:px-24" style={{ borderTop: `1px solid ${border}` }}>
+      <section id="editorial-services" className="px-6 md:px-12 lg:px-24 xl:px-32 py-16 md:px-16 md:py-24 lg:px-24" style={{ borderTop: `1px solid ${border}` }}>
         <div className="mx-auto max-w-6xl">
           <p className="mb-3 text-xs uppercase" style={{ color: primary, letterSpacing: "0.2em" }}>Services</p>
           <h2 className="mb-16" style={{ fontFamily: headingFont, fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1 }}>
@@ -214,7 +221,7 @@ export function HomeEditorial() {
       </section>
 
       {/* ═══ EVENTS ═══ */}
-      <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-16 md:px-16 md:py-24 lg:px-24">
+      <section id="editorial-events" className="px-6 md:px-12 lg:px-24 xl:px-32 py-16 md:px-16 md:py-24 lg:px-24">
         <div className="mx-auto max-w-5xl">
           <div className="mb-12 flex items-end justify-between">
             <div>
@@ -238,7 +245,7 @@ export function HomeEditorial() {
       </section>
 
       {/* ═══ CONTACT CTA ═══ */}
-      <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-24 text-center md:py-32" style={{ borderTop: `1px solid ${border}` }}>
+      <section id="editorial-contact" className="px-6 md:px-12 lg:px-24 xl:px-32 py-24 text-center md:py-32" style={{ borderTop: `1px solid ${border}` }}>
         <h2 className="mb-6" style={{ fontFamily: headingFont, fontSize: "clamp(2.5rem, 6vw, 4.5rem)", lineHeight: 1.1 }}>
           Let's create together
         </h2>

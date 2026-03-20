@@ -57,9 +57,14 @@ export function HomeAnalog() {
         {/* Right: Name + Info */}
         <div className="flex flex-col justify-between px-8 py-12 md:px-12 lg:px-16">
           <nav className="flex items-center justify-end gap-6">
-            {["Work", "Media", "Events", "Contact"].map((l) => (
-              <button key={l} className="hidden text-xs uppercase transition-colors hover:opacity-70 md:block" style={{ letterSpacing: "0.15em", color: mutedFg }}>
-                {l}
+            {[
+              { label: "Work", id: "#analog-work" },
+              { label: "Media", id: "#analog-media" },
+              { label: "Events", id: "#analog-events" },
+              { label: "Contact", id: "#analog-contact" },
+            ].map(({ label, id }) => (
+              <button key={label} onClick={() => lenis?.scrollTo(id, { offset: -40, duration: 1.5 })} className="hidden text-xs uppercase transition-colors hover:opacity-70 md:block" style={{ letterSpacing: "0.15em", color: mutedFg }}>
+                {label}
               </button>
             ))}
             <ThemeSwitcher variant="dark" />
@@ -105,7 +110,7 @@ export function HomeAnalog() {
       </section>
 
       {/* ═══ MEDIA — Dark breakout section ═══ */}
-      <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ background: fg, color: bg }}>
+      <section id="analog-media" className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ background: fg, color: bg }}>
         <div className="mb-12 flex items-end justify-between">
           <div>
             <p className="mb-2 text-xs uppercase" style={{ color: `${bg}88`, letterSpacing: "0.2em" }}>Portfolio</p>
@@ -141,7 +146,7 @@ export function HomeAnalog() {
       </section>
 
       {/* ═══ WORK / RESUME ═══ */}
-      <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ borderTop: `1px solid ${muted}` }}>
+      <section id="analog-work" className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ borderTop: `1px solid ${muted}` }}>
         <div className="mb-12">
           <p className="mb-2 text-xs uppercase" style={{ color: primary, letterSpacing: "0.2em" }}>Resume</p>
           <h2 style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>The work so far</h2>
@@ -159,7 +164,7 @@ export function HomeAnalog() {
       </section>
 
       {/* ═══ EVENTS ═══ */}
-      <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ borderTop: `1px solid ${muted}` }}>
+      <section id="analog-events" className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ borderTop: `1px solid ${muted}` }}>
         <div className="mb-12 flex items-end justify-between">
           <div>
             <p className="mb-2 text-xs uppercase" style={{ color: primary, letterSpacing: "0.2em" }}>Live</p>

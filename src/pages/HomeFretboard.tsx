@@ -292,8 +292,14 @@ export function HomeFretboard() {
       >
         <LogoMark size={32} className="text-white" />
         <div className="flex items-center gap-6">
-          {["About", "Experience", "Events"].map((l) => (
-            <span key={l} className="hidden text-xs uppercase text-white/40 transition-colors hover:text-white/70 md:block" style={{ letterSpacing: "0.15em", cursor: "pointer" }}>{l}</span>
+          {[
+            { label: "About", id: "#fret-about" },
+            { label: "Experience", id: "#fret-experience" },
+            { label: "Events", id: "#fret-events" },
+          ].map(({ label, id }) => (
+            <button key={label} onClick={() => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })} className="hidden text-xs uppercase text-white/40 transition-colors hover:text-white/70 md:block" style={{ letterSpacing: "0.15em" }}>
+              {label}
+            </button>
           ))}
           <ThemeSwitcher />
         </div>
@@ -325,7 +331,7 @@ export function HomeFretboard() {
       </section>
 
       {/* ═══ ABOUT — C Chord ═══ */}
-      <section className="fret-section relative py-24 md:py-32">
+      <section id="fret-about" className="fret-section relative py-24 md:py-32">
         <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
         <div className="mx-auto flex max-w-5xl flex-col items-start gap-12 px-8 md:flex-row md:items-center md:gap-20 md:px-16 lg:px-24">
           <div className="chord-diagram flex-shrink-0">
@@ -348,7 +354,7 @@ export function HomeFretboard() {
       </section>
 
       {/* ═══ EXPERIENCE — Am Chord ═══ */}
-      <section className="fret-section relative py-24 md:py-32">
+      <section id="fret-experience" className="fret-section relative py-24 md:py-32">
         <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
         <div className="mx-auto flex max-w-5xl flex-col items-start gap-12 px-8 md:flex-row-reverse md:items-start md:gap-20 md:px-16 lg:px-24">
           <div className="chord-diagram flex-shrink-0 md:mt-8">
@@ -372,7 +378,7 @@ export function HomeFretboard() {
       </section>
 
       {/* ═══ EVENTS — G Chord ═══ */}
-      <section className="fret-section relative py-24 md:py-32">
+      <section id="fret-events" className="fret-section relative py-24 md:py-32">
         <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
         <div className="mx-auto flex max-w-5xl flex-col items-start gap-12 px-8 md:flex-row md:items-start md:gap-20 md:px-16 lg:px-24">
           <div className="chord-diagram flex-shrink-0 md:mt-8">
