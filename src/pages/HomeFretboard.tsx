@@ -291,7 +291,12 @@ export function HomeFretboard() {
         style={{ background: "linear-gradient(to bottom, oklch(0.065 0.008 40) 0%, oklch(0.065 0.008 40 / 0.8) 60%, transparent 100%)" }}
       >
         <LogoMark size={32} className="text-white" />
-        <ThemeSwitcher />
+        <div className="flex items-center gap-6">
+          {["About", "Experience", "Events"].map((l) => (
+            <span key={l} className="hidden text-xs uppercase text-white/40 transition-colors hover:text-white/70 md:block" style={{ letterSpacing: "0.15em", cursor: "pointer" }}>{l}</span>
+          ))}
+          <ThemeSwitcher />
+        </div>
       </nav>
 
       {/* ═══ HERO — FC Logo Chord Diagram ═══ */}

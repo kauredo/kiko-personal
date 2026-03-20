@@ -174,9 +174,14 @@ export function HomeParallax() {
       </div>
 
       {/* ═══ NAV ═══ */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 mix-blend-difference md:px-16 lg:px-24">
+      <nav
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 mix-blend-difference md:px-16 lg:px-24"
+      >
         <LogoMark size={32} />
         <div className="flex items-center gap-6">
+          {["Portfolio", "Events", "Contact"].map((l) => (
+            <span key={l} className="hidden text-xs uppercase text-white/50 transition-colors hover:text-white md:block" style={{ letterSpacing: "0.15em", cursor: "pointer" }}>{l}</span>
+          ))}
           <ThemeSwitcher />
         </div>
       </nav>
@@ -191,7 +196,7 @@ export function HomeParallax() {
               style={{
                 fontFamily: "'Syne', system-ui, sans-serif",
                 fontWeight: 800,
-                fontSize: "clamp(3rem, 9vw, 10rem)",
+                fontSize: "clamp(2.2rem, 9vw, 10rem)",
                 letterSpacing: "-0.04em",
                 textTransform: "uppercase",
               }}

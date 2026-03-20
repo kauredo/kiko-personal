@@ -40,12 +40,17 @@ export function HomeElectric() {
   return (
     <div className="min-h-screen bg-[oklch(0.06_0.005_260)] text-white" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
       {/* ═══ NAV ═══ */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 md:px-16 lg:px-24">
+      <nav
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 md:px-16 lg:px-24"
+        style={{ background: "linear-gradient(to bottom, oklch(0.06 0.005 260) 0%, oklch(0.06 0.005 260 / 0.8) 60%, transparent 100%)" }}
+      >
         <LogoMark size={36} className="text-white" />
         <div className="flex items-center gap-8">
-          <button onClick={() => lenis?.scrollTo("#electric-contact", { offset: -40, duration: 1.5 })} className="text-xs uppercase text-white/50 transition-colors hover:text-white" style={{ letterSpacing: "0.15em" }}>
-            Contact
-          </button>
+          {["Work", "Events", "Contact"].map((l) => (
+            <button key={l} onClick={() => lenis?.scrollTo(`#electric-${l.toLowerCase()}`, { offset: -40, duration: 1.5 })} className="hidden text-xs uppercase text-white/50 transition-colors hover:text-white md:block" style={{ letterSpacing: "0.15em" }}>
+              {l}
+            </button>
+          ))}
           <ThemeSwitcher />
         </div>
       </nav>
@@ -60,7 +65,7 @@ export function HomeElectric() {
             style={{
               fontFamily: "'Syne', system-ui, sans-serif",
               fontWeight: 800,
-              fontSize: "clamp(3rem, 8vw, 8rem)",
+              fontSize: "clamp(2rem, 8vw, 8rem)",
               textTransform: "uppercase",
               letterSpacing: "-0.03em",
             }}

@@ -63,7 +63,10 @@ export function HomeEditorial() {
   return (
     <div className="min-h-screen" style={{ background: bg, color: fg, fontFamily: bodyFont }}>
       {/* ═══ NAV ═══ */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 lg:px-24 xl:px-32 py-5 md:px-16 lg:px-24">
+      <nav
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 lg:px-24 xl:px-32 py-5"
+        style={{ background: `linear-gradient(to bottom, ${bg} 0%, ${bg}cc 60%, transparent 100%)` }}
+      >
         <LogoMark size={36} style={{ color: fg }} />
         <div className="flex items-center gap-8">
           {["About", "Services", "Events", "Contact"].map((l) => (
@@ -158,8 +161,8 @@ export function HomeEditorial() {
           className="mx-auto mt-16 max-w-6xl overflow-hidden"
           style={{ aspectRatio: "21/9", background: card, border: `1px solid ${border}` }}
         >
-          <div className="flex h-full items-center justify-center" style={{ color: `${mutedFg}44` }}>
-            <span className="text-xs uppercase" style={{ letterSpacing: "0.2em" }}>Featured Photo</span>
+          <div className="flex h-full items-center justify-center">
+            <LogoFull size={200} style={{ color: primary, opacity: 0.2 }} />
           </div>
         </div>
       </section>
