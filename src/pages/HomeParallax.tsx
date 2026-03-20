@@ -10,7 +10,6 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
-import { LogoFull } from "@/components/ui/LogoFull";
 import { ArrowUpRight } from "lucide-react";
 
 const MEDIA = Array.from({ length: 5 }, (_, i) => ({
@@ -245,13 +244,6 @@ export function HomeParallax() {
         </div>
       </section>
 
-      {/* ═══ LOGO REVEAL ═══ */}
-      <section className="flex items-center justify-center overflow-hidden py-20 md:py-28">
-        <div className="reveal" data-speed="-0.1">
-          <LogoFull size={240} className="text-white/30" />
-        </div>
-      </section>
-
       {/* ═══ STATS — Counters animate on scroll ═══ */}
       <section className="grid grid-cols-2 border-t border-b border-white/10 md:grid-cols-4">
         {[
@@ -275,23 +267,22 @@ export function HomeParallax() {
 
       {/* ═══ ABOUT ═══ */}
       <section id="parallax-about" className="px-8 py-24 md:px-16 md:py-32 lg:px-24">
-        <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-[1fr_2fr]">
-          <div>
-            <p className="reveal mb-3 text-[10px] tracking-[0.3em] uppercase text-white/30">Background</p>
-            <h2
-              className="reveal text-3xl md:text-5xl"
-              style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}
-            >
-              About
-            </h2>
-          </div>
-          <div className="space-y-6 text-white/70 leading-relaxed">
-            <p className="reveal">
-              Francisco Catarro is a guitarist, pianist, musical director, and producer whose playing
-              carries the raw energy of a live stage and the precision of years behind the keys.
+        <div className="mx-auto max-w-5xl">
+          <h2
+            className="reveal mb-16"
+            data-speed="-0.05"
+            style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.03em", fontSize: "clamp(2.5rem, 6vw, 5rem)", lineHeight: 1.1 }}
+          >
+            A guitarist, pianist &amp;<br />
+            <span style={{ color: "oklch(0.62 0.25 28)" }}>musical director</span><br />
+            based in the UK.
+          </h2>
+          <div className="grid gap-8 md:grid-cols-2 md:gap-16">
+            <p className="reveal text-white/60 leading-relaxed">
+              Born in Portugal, Francisco carries the raw energy of a live stage and the precision of years behind the keys. Over 10 years of performing, composing, arranging, and recording across genres.
             </p>
-            <p className="reveal">
-              From rock clubs to symphony halls — he doesn't just show up, he transforms the room.
+            <p className="reveal text-white/40 leading-relaxed">
+              From rock clubs to symphony halls — he doesn't just show up, he transforms the room. Every performance is a statement, every note has purpose.
             </p>
           </div>
         </div>
@@ -307,7 +298,7 @@ export function HomeParallax() {
           >
             Services
           </h2>
-          <div className="grid gap-px md:grid-cols-2" style={{ background: "rgba(255,255,255,0.1)" }}>
+          <div className="grid gap-6 md:grid-cols-2">
             {[
               { title: "Live Performance", desc: "High-energy sets on guitar, keys, and bass — from intimate venues to festival stages." },
               { title: "Musical Direction", desc: "Shaping the sound, leading rehearsals, and running the show from first note to last." },
@@ -316,8 +307,8 @@ export function HomeParallax() {
             ].map((service, i) => (
               <div
                 key={i}
-                className="reveal p-8 md:p-10"
-                style={{ background: "oklch(0.05 0.005 260)" }}
+                className="reveal border border-white/10 p-8 md:p-10"
+                data-speed={i % 2 === 0 ? "0.02" : "-0.02"}
               >
                 <h3
                   className="mb-3 text-lg font-bold uppercase md:text-xl"
@@ -391,6 +382,7 @@ export function HomeParallax() {
             <div
               key={i}
               className="reveal flex items-center justify-between border-b border-white/10 py-8"
+              data-speed={0.01 * (i + 1)}
             >
               <div className="flex items-baseline gap-8 md:gap-12">
                 <span
@@ -407,17 +399,10 @@ export function HomeParallax() {
         </div>
       </section>
 
-      {/* ═══ TESTIMONIALS ═══ */}
-      <section id="parallax-testimonials" className="px-8 py-24 md:px-16 md:py-32 lg:px-24">
+      {/* ═══ TESTIMONIALS — Accent break ═══ */}
+      <section id="parallax-testimonials" className="relative overflow-hidden px-8 py-24 md:px-16 md:py-32 lg:px-24" style={{ background: "oklch(0.62 0.25 28)" }}>
         <div className="mx-auto max-w-5xl">
-          <p className="reveal mb-3 text-[10px] tracking-[0.3em] uppercase text-white/30">Kind words</p>
-          <h2
-            className="reveal mb-16 text-3xl md:text-5xl"
-            style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}
-          >
-            Testimonials
-          </h2>
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-12 md:grid-cols-2 md:gap-16">
             {[
               {
                 quote: "One of the most versatile musicians I've worked with. He can go from a soulful ballad to a face-melting rock solo in the same set.",
@@ -430,20 +415,16 @@ export function HomeParallax() {
                 title: "Producer",
               },
             ].map((t, i) => (
-              <blockquote
-                key={i}
-                className="reveal border-l-2 py-2 pl-8"
-                style={{ borderColor: "oklch(0.62 0.25 28)" }}
-              >
-                <p className="mb-6 text-lg leading-relaxed text-white/70">"{t.quote}"</p>
+              <blockquote key={i} className="reveal" data-speed={i === 0 ? "0.03" : "-0.03"}>
+                <p
+                  className="mb-6 text-xl leading-relaxed text-white md:text-2xl"
+                  style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 400 }}
+                >
+                  "{t.quote}"
+                </p>
                 <footer>
-                  <span
-                    className="text-sm font-bold uppercase"
-                    style={{ fontFamily: "'Syne', system-ui, sans-serif" }}
-                  >
-                    {t.name}
-                  </span>
-                  <span className="ml-2 text-sm text-white/30">— {t.title}</span>
+                  <span className="text-sm font-bold text-white">{t.name}</span>
+                  <span className="ml-2 text-sm text-white/60">— {t.title}</span>
                 </footer>
               </blockquote>
             ))}
