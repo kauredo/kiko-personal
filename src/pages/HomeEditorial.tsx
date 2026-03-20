@@ -169,7 +169,7 @@ export function HomeEditorial() {
           style={{ aspectRatio: "21/9", background: card, border: `1px solid ${border}` }}
         >
           <div className="flex h-full items-center justify-center">
-            <LogoFull size={200} style={{ color: primary, opacity: 0.2 }} />
+            <LogoFull size={200} style={{ color: primary, opacity: 0.5 }} />
           </div>
         </div>
       </section>
@@ -181,7 +181,7 @@ export function HomeEditorial() {
           <h2 className="mb-16" style={{ fontFamily: headingFont, fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1 }}>
             What I do
           </h2>
-          <div className="grid gap-px md:grid-cols-2" style={{ background: border }}>
+          <div className="grid gap-6 md:grid-cols-2">
             {SERVICES.map((s, i) => (
               <motion.div
                 key={i}
@@ -190,7 +190,7 @@ export function HomeEditorial() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 className="p-8 md:p-10"
-                style={{ background: bg }}
+                style={{ background: card, border: `1px solid ${border}` }}
               >
                 <h3 className="mb-3 text-lg" style={{ fontFamily: headingFont }}>{s.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: `${fg}cc` }}>{s.desc}</p>

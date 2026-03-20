@@ -8,7 +8,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
-import { LogoFull } from "@/components/ui/LogoFull";
 import { ArrowUpRight } from "lucide-react";
 
 // ── Web Audio Piano ──
@@ -260,18 +259,6 @@ export function HomePiano() {
           ))}
         </div>
       </section>
-
-      {/* ═══ FEATURED IMAGE ═══ */}
-      <div className="px-8 md:px-16 lg:px-24">
-        <div
-          className="mx-auto max-w-5xl overflow-hidden"
-          style={{ aspectRatio: "21/9", background: muted, border: `1px solid ${muted}` }}
-        >
-          <div className="flex h-full items-center justify-center">
-            <LogoFull size={260} style={{ color: fg, opacity: 0.35 }} />
-          </div>
-        </div>
-      </div>
 
       {/* ═══ SERVICES ═══ */}
       <section id="piano-services" className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>

@@ -243,9 +243,9 @@ export function HomeParallax() {
       </section>
 
       {/* ═══ LOGO REVEAL ═══ */}
-      <section className="flex min-h-[50vh] items-center justify-center overflow-hidden">
+      <section className="flex items-center justify-center overflow-hidden py-20 md:py-28">
         <div className="reveal" data-speed="-0.1">
-          <LogoFull size={280} className="text-white/30" />
+          <LogoFull size={240} className="text-white/30" />
         </div>
       </section>
 
