@@ -1,22 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <rect width="64" height="64" rx="8" fill="#111" />
-  <!-- Nut -->
-  <line x1="4" y1="8" x2="60" y2="8" stroke="white" stroke-width="3" opacity="0.6" />
-  <!-- Frets -->
-  <line x1="4" y1="22" x2="60" y2="22" stroke="white" stroke-width="0.75" opacity="0.25" />
-  <line x1="4" y1="36" x2="60" y2="36" stroke="white" stroke-width="0.75" opacity="0.25" />
-  <line x1="4" y1="50" x2="60" y2="50" stroke="white" stroke-width="0.75" opacity="0.25" />
-  <!-- Strings -->
-  <line x1="8" y1="8" x2="8" y2="58" stroke="white" stroke-width="0.75" opacity="0.25" />
-  <line x1="16" y1="8" x2="16" y2="58" stroke="white" stroke-width="0.75" opacity="0.25" />
-  <line x1="24" y1="8" x2="24" y2="58" stroke="white" stroke-width="0.75" opacity="0.25" />
-  <line x1="40" y1="8" x2="40" y2="58" stroke="white" stroke-width="0.75" opacity="0.25" />
-  <line x1="48" y1="8" x2="48" y2="58" stroke="white" stroke-width="0.75" opacity="0.25" />
-  <line x1="56" y1="8" x2="56" y2="58" stroke="white" stroke-width="0.75" opacity="0.25" />
-  <!-- F bold -->
-  <rect x="6" y="14" width="4" height="38" rx="1" fill="white" opacity="0.9" />
-  <rect x="6" y="14" width="22" height="3.5" rx="1" fill="white" opacity="0.9" />
-  <rect x="6" y="30" width="16" height="3" rx="1" fill="white" opacity="0.9" />
-  <!-- C bold -->
-  <path d="M58 22 C58 16 52 13 46 13 C39 13 35 18 35 25 L35 41 C35 48 39 53 46 53 C52 53 58 50 58 44" stroke="white" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.9" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 56" fill="none">
+  <rect x="-2" y="-2" width="56" height="60" rx="8" fill="#111" />
+  <text x="4" y="10" font-family="Georgia, serif" font-size="9" font-weight="700" fill="white" opacity="0.7">F</text>
+  <text x="42" y="10" font-family="Georgia, serif" font-size="9" font-weight="700" fill="white" opacity="0.7">C</text>
+  <circle cx="16" cy="7" r="2" stroke="white" stroke-width="1" fill="none" opacity="0.45" />
+  <circle cx="24" cy="7" r="2" stroke="white" stroke-width="1" fill="none" opacity="0.45" />
+  <line x1="2" y1="14" x2="50" y2="14" stroke="white" stroke-width="2.5" opacity="0.65" />
+  <line x1="2" y1="24" x2="50" y2="24" stroke="white" stroke-width="0.6" opacity="0.18" />
+  <line x1="2" y1="34" x2="50" y2="34" stroke="white" stroke-width="0.6" opacity="0.18" />
+  <line x1="2" y1="44" x2="50" y2="44" stroke="white" stroke-width="0.6" opacity="0.18" />
+  <line x1="2" y1="54" x2="50" y2="54" stroke="white" stroke-width="0.6" opacity="0.18" />
+  <line x1="4" y1="14" x2="4" y2="54" stroke="white" stroke-width="0.6" opacity="0.18" />
+  <line x1="14" y1="14" x2="14" y2="54" stroke="white" stroke-width="0.6" opacity="0.18" />
+  <line x1="24" y1="14" x2="24" y2="54" stroke="white" stroke-width="0.6" opacity="0.18" />
+  <line x1="34" y1="14" x2="34" y2="54" stroke="white" stroke-width="0.6" opacity="0.18" />
+  <line x1="44" y1="14" x2="44" y2="54" stroke="white" stroke-width="0.6" opacity="0.18" />
+  <rect x="2" y="16" width="44" height="5" rx="2.5" fill="white" opacity="0.08" />
+  <circle cx="4" cy="19" r="2.8" fill="white" opacity="0.85" />
+  <circle cx="44" cy="19" r="2.8" fill="white" opacity="0.85" />
+  <circle cx="24" cy="29" r="3" fill="white" opacity="0.85" />
+  <circle cx="14" cy="39" r="3" fill="white" opacity="0.85" />
+  <circle cx="34" cy="39" r="3" fill="white" opacity="0.85" />
+  <circle cx="44" cy="49" r="3" fill="white" opacity="0.85" />
 </svg>

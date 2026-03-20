@@ -294,7 +294,10 @@ export function HomeFretboard() {
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-5 md:px-12 lg:px-24"
         style={{ background: "linear-gradient(to bottom, oklch(0.065 0.008 40) 0%, oklch(0.065 0.008 40 / 0.8) 60%, transparent 100%)" }}
       >
-        <LogoMark size={32} className="text-white" />
+        <div className="flex items-center gap-3">
+          <LogoMark size={26} className="text-white" />
+          <span className="hidden text-xs font-bold uppercase tracking-wider text-white sm:block" style={{ fontFamily: "'Syne', system-ui, sans-serif" }}>Francisco Catarro</span>
+        </div>
         <div className="flex items-center gap-6">
           {[
             { label: "About", id: "#fret-about" },

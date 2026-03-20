@@ -44,7 +44,10 @@ export function HomeElectric() {
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 md:px-16 lg:px-24"
         style={{ background: "linear-gradient(to bottom, oklch(0.06 0.005 260) 0%, oklch(0.06 0.005 260 / 0.8) 60%, transparent 100%)" }}
       >
-        <LogoMark size={36} className="text-white" />
+        <div className="flex items-center gap-3">
+          <LogoMark size={28} className="text-white" />
+          <span className="hidden text-xs font-bold uppercase tracking-wider text-white sm:block" style={{ fontFamily: "'Syne', system-ui, sans-serif" }}>Francisco Catarro</span>
+        </div>
         <div className="flex items-center gap-8">
           {[
             { label: "Work", id: "#electric-work" },

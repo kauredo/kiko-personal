@@ -56,18 +56,24 @@ export function HomeAnalog() {
 
         {/* Right: Name + Info */}
         <div className="flex flex-col justify-between px-8 py-12 md:px-12 lg:px-16">
-          <nav className="flex items-center justify-end gap-6">
-            {[
-              { label: "Work", id: "#analog-work" },
-              { label: "Media", id: "#analog-media" },
-              { label: "Events", id: "#analog-events" },
-              { label: "Contact", id: "#analog-contact" },
-            ].map(({ label, id }) => (
-              <button key={label} onClick={() => lenis?.scrollTo(id, { offset: -40, duration: 1.5 })} className="hidden text-xs uppercase transition-colors hover:opacity-70 md:block" style={{ letterSpacing: "0.15em", color: mutedFg }}>
-                {label}
-              </button>
-            ))}
-            <ThemeSwitcher variant="dark" />
+          <nav className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <LogoMark size={24} style={{ color: fg }} />
+              <span className="hidden text-xs sm:block" style={{ fontFamily: headingFont, fontStyle: "italic", color: fg }}>Francisco Catarro</span>
+            </div>
+            <div className="flex items-center gap-6">
+              {[
+                { label: "Work", id: "#analog-work" },
+                { label: "Media", id: "#analog-media" },
+                { label: "Events", id: "#analog-events" },
+                { label: "Contact", id: "#analog-contact" },
+              ].map(({ label, id }) => (
+                <button key={label} onClick={() => lenis?.scrollTo(id, { offset: -40, duration: 1.5 })} className="hidden text-xs uppercase transition-colors hover:opacity-70 md:block" style={{ letterSpacing: "0.15em", color: mutedFg }}>
+                  {label}
+                </button>
+              ))}
+              <ThemeSwitcher variant="dark" />
+            </div>
           </nav>
 
           <div>

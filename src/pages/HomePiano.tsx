@@ -164,7 +164,10 @@ export function HomePiano() {
     <div className="min-h-screen" style={{ background: bg, color: fg, fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
       {/* ═══ NAV ═══ */}
       <nav className="flex items-center justify-between px-8 py-6 md:px-16 lg:px-24">
-        <LogoMark size={36} style={{ color: fg }} />
+        <div className="flex items-center gap-3">
+          <LogoMark size={28} style={{ color: fg }} />
+          <span className="hidden text-sm sm:block" style={{ fontFamily: "'DM Serif Display', Georgia, serif", color: fg }}>Francisco Catarro</span>
+        </div>
         <div className="flex items-center gap-6">
           {[
             { label: "Work", id: "#piano-work" },

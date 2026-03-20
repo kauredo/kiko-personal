@@ -67,7 +67,10 @@ export function HomeEditorial() {
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 lg:px-24 xl:px-32 py-5"
         style={{ background: `linear-gradient(to bottom, ${bg} 0%, ${bg}cc 60%, transparent 100%)` }}
       >
-        <LogoMark size={36} style={{ color: fg }} />
+        <div className="flex items-center gap-3">
+          <LogoMark size={28} style={{ color: fg }} />
+          <span className="hidden text-sm sm:block" style={{ fontFamily: headingFont, color: fg }}>Francisco Catarro</span>
+        </div>
         <div className="flex items-center gap-8">
           {[
             { label: "About", id: "#editorial-about" },

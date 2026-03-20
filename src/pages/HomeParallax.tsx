@@ -177,7 +177,10 @@ export function HomeParallax() {
       <nav
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 mix-blend-difference md:px-16 lg:px-24"
       >
-        <LogoMark size={32} />
+        <div className="flex items-center gap-3">
+          <LogoMark size={26} />
+          <span className="hidden text-xs font-bold uppercase tracking-wider sm:block" style={{ fontFamily: "'Syne', system-ui, sans-serif" }}>Francisco Catarro</span>
+        </div>
         <div className="flex items-center gap-6">
           {[
             { label: "About", id: "#parallax-about" },

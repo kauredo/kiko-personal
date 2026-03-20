@@ -4,40 +4,42 @@ export function LogoMark({ size = 36, className, style }: { size?: number; class
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 64 64"
+      viewBox="0 0 52 56"
       fill="none"
       width={size}
-      height={size}
+      height={size * (56 / 52)}
       className={className}
       style={style}
     >
-      {/* FC Logo Mark — bold F and C on a fretboard grid */}
-      {/* Nut (thick top line) */}
-      <line x1="4" y1="8" x2="60" y2="8" stroke="currentColor" strokeWidth="3" opacity="0.6" />
+      {/* FC Logo Mark — compact chord diagram with both F and C */}
+      {/* Labels */}
+      <text x="4" y="10" fontFamily="Georgia, serif" fontSize="9" fontWeight="700" fill="currentColor" opacity="0.7">F</text>
+      <text x="42" y="10" fontFamily="Georgia, serif" fontSize="9" fontWeight="700" fill="currentColor" opacity="0.7">C</text>
+      {/* Open string markers (for C chord) */}
+      <circle cx="16" cy="7" r="2" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.45" />
+      <circle cx="24" cy="7" r="2" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.45" />
+      {/* Nut */}
+      <line x1="2" y1="14" x2="50" y2="14" stroke="currentColor" strokeWidth="2.5" opacity="0.65" />
       {/* Fret lines */}
-      <line x1="4" y1="22" x2="60" y2="22" stroke="currentColor" strokeWidth="0.75" opacity="0.25" />
-      <line x1="4" y1="36" x2="60" y2="36" stroke="currentColor" strokeWidth="0.75" opacity="0.25" />
-      <line x1="4" y1="50" x2="60" y2="50" stroke="currentColor" strokeWidth="0.75" opacity="0.25" />
+      <line x1="2" y1="24" x2="50" y2="24" stroke="currentColor" strokeWidth="0.6" opacity="0.18" />
+      <line x1="2" y1="34" x2="50" y2="34" stroke="currentColor" strokeWidth="0.6" opacity="0.18" />
+      <line x1="2" y1="44" x2="50" y2="44" stroke="currentColor" strokeWidth="0.6" opacity="0.18" />
+      <line x1="2" y1="54" x2="50" y2="54" stroke="currentColor" strokeWidth="0.6" opacity="0.18" />
       {/* 6 strings */}
-      <line x1="8" y1="8" x2="8" y2="58" stroke="currentColor" strokeWidth="0.75" opacity="0.25" />
-      <line x1="16" y1="8" x2="16" y2="58" stroke="currentColor" strokeWidth="0.75" opacity="0.25" />
-      <line x1="24" y1="8" x2="24" y2="58" stroke="currentColor" strokeWidth="0.75" opacity="0.25" />
-      <line x1="40" y1="8" x2="40" y2="58" stroke="currentColor" strokeWidth="0.75" opacity="0.25" />
-      <line x1="48" y1="8" x2="48" y2="58" stroke="currentColor" strokeWidth="0.75" opacity="0.25" />
-      <line x1="56" y1="8" x2="56" y2="58" stroke="currentColor" strokeWidth="0.75" opacity="0.25" />
-      {/* F — bold */}
-      <rect x="6" y="14" width="4" height="38" rx="1" fill="currentColor" opacity="0.9" />
-      <rect x="6" y="14" width="22" height="3.5" rx="1" fill="currentColor" opacity="0.9" />
-      <rect x="6" y="30" width="16" height="3" rx="1" fill="currentColor" opacity="0.9" />
-      {/* C — bold */}
-      <path
-        d="M58 22 C58 16 52 13 46 13 C39 13 35 18 35 25 L35 41 C35 48 39 53 46 53 C52 53 58 50 58 44"
-        stroke="currentColor"
-        strokeWidth="4"
-        strokeLinecap="round"
-        fill="none"
-        opacity="0.9"
-      />
+      <line x1="4" y1="14" x2="4" y2="54" stroke="currentColor" strokeWidth="0.6" opacity="0.18" />
+      <line x1="14" y1="14" x2="14" y2="54" stroke="currentColor" strokeWidth="0.6" opacity="0.18" />
+      <line x1="24" y1="14" x2="24" y2="54" stroke="currentColor" strokeWidth="0.6" opacity="0.18" />
+      <line x1="34" y1="14" x2="34" y2="54" stroke="currentColor" strokeWidth="0.6" opacity="0.18" />
+      <line x1="44" y1="14" x2="44" y2="54" stroke="currentColor" strokeWidth="0.6" opacity="0.18" />
+      {/* F chord — barre fret 1 + dots */}
+      <rect x="2" y="16" width="44" height="5" rx="2.5" fill="currentColor" opacity="0.08" />
+      <circle cx="4" cy="19" r="2.8" fill="currentColor" opacity="0.85" />
+      <circle cx="44" cy="19" r="2.8" fill="currentColor" opacity="0.85" />
+      <circle cx="24" cy="29" r="3" fill="currentColor" opacity="0.85" />
+      {/* C chord — dots in lower frets */}
+      <circle cx="14" cy="39" r="3" fill="currentColor" opacity="0.85" />
+      <circle cx="34" cy="39" r="3" fill="currentColor" opacity="0.85" />
+      <circle cx="44" cy="49" r="3" fill="currentColor" opacity="0.85" />
     </svg>
   );
 }
