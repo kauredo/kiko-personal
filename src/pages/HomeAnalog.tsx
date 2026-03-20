@@ -7,6 +7,7 @@
 import { motion } from "framer-motion";
 import { useLenis } from "@/hooks/useLenis";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
+import { LogoMark } from "@/components/ui/LogoMark";
 import { ArrowDown } from "lucide-react";
 
 const WORK = [

@@ -9,6 +9,7 @@ import { useRef, useEffect } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
+import { LogoMark } from "@/components/ui/LogoMark";
 import { ArrowUpRight } from "lucide-react";
 
 const MEDIA = Array.from({ length: 5 }, (_, i) => ({
@@ -158,7 +159,7 @@ export function HomeParallax() {
     >
       {/* ═══ NAV ═══ */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 mix-blend-difference md:px-16 lg:px-24">
-        <span className="text-sm font-bold tracking-widest uppercase">FC</span>
+        <LogoMark size={32} />
         <div className="flex items-center gap-6">
           <ThemeSwitcher />
         </div>

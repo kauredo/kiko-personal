@@ -7,6 +7,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
+import { LogoMark } from "@/components/ui/LogoMark";
 import { ArrowUpRight } from "lucide-react";
 
 // ── Web Audio Piano ──
@@ -163,7 +164,7 @@ export function HomePiano() {
     <div className="min-h-screen" style={{ background: bg, color: fg, fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
       {/* ═══ NAV ═══ */}
       <nav className="flex items-center justify-between px-8 py-6 md:px-16 lg:px-24">
-        <span className="text-lg" style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}>FC</span>
+        <LogoMark size={36} style={{ color: fg }} />
         <div className="flex items-center gap-6">
           {["Work", "Events", "Contact"].map((l) => (
             <span key={l} className="hidden text-xs uppercase md:block" style={{ letterSpacing: "0.15em", color: mutedFg, cursor: "pointer" }}>{l}</span>

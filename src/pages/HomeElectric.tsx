@@ -11,6 +11,7 @@ import { useLenis } from "@/hooks/useLenis";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { HeroScene } from "@/components/three/HeroScene";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
+import { LogoMark } from "@/components/ui/LogoMark";
 import { ArrowUpRight, Mail } from "lucide-react";
 
 const MEDIA_ITEMS = Array.from({ length: 6 }, (_, i) => ({
@@ -39,7 +40,7 @@ export function HomeElectric() {
     <div className="min-h-screen bg-[oklch(0.06_0.005_260)] text-white" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
       {/* ═══ NAV ═══ */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 md:px-16 lg:px-24">
-        <span className="text-lg font-bold text-white" style={{ fontFamily: "'Syne', system-ui, sans-serif" }}>FC</span>
+        <LogoMark size={36} className="text-white" />
         <div className="flex items-center gap-8">
           <button onClick={() => lenis?.scrollTo("#electric-contact", { offset: -40, duration: 1.5 })} className="text-xs uppercase text-white/50 transition-colors hover:text-white" style={{ letterSpacing: "0.15em" }}>
             Contact

@@ -10,6 +10,7 @@ import { Float, Environment, MeshDistortMaterial } from "@react-three/drei";
 import * as THREE from "three";
 import { motion } from "framer-motion";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
+import { LogoMark } from "@/components/ui/LogoMark";
 import { ArrowUpRight } from "lucide-react";
 
 // ── 3D Guitar from primitives ──
@@ -160,7 +161,7 @@ export function HomeGuitar() {
     <div className="min-h-screen bg-[oklch(0.07_0.005_260)] text-white" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
       {/* ═══ NAV ═══ */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 md:px-16 lg:px-24">
-        <span className="text-lg font-bold" style={{ fontFamily: "'Instrument Serif', Georgia, serif", color: fg }}>FC</span>
+        <LogoMark size={36} style={{ color: fg }} />
         <div className="flex items-center gap-6">
           {["Work", "Events", "Contact"].map((l) => (
             <span key={l} className="hidden text-xs uppercase md:block" style={{ letterSpacing: "0.15em", color: mutedFg, cursor: "pointer" }}>{l}</span>

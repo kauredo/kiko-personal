@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FC Logo — Final</title>
+  <style>
+    * { margin: 0; box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; }
+    h1 { padding: 2rem 3rem; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: #666; }
+    .row { display: flex; }
+    .row > div { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .label { margin-top: 1.5rem; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.35; }
+    h2 { padding: 2rem 3rem 0.5rem; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: #999; }
+  </style>
+</head>
+<body>
+
+<h1>Francisco Catarro — Final Logo System</h1>
+
+<h2>Full Logo — Chord Diagram (for hero, about, print)</h2>
+<div class="row" id="row-full"></div>
+
+<h2>Logo Mark — FC + Strings + Dots (for nav, favicon, small use)</h2>
+<div class="row" id="row-mark"></div>
+
+<h2>Mark at actual nav size (40px)</h2>
+<div class="row" id="row-tiny"></div>
+
+<script>
+  const bgs = [
+    { bg: '#0a0a0a', fg: 'white', label: 'Dark' },
+    { bg: '#f5f0eb', fg: '#111', label: 'Light' },
+    { bg: '#1a1210', fg: '#e8ddd0', label: 'Warm' },
+  ];
+
+  async function load(rowId, url, size) {
+    const row = document.getElementById(rowId);
+    const resp = await fetch(url);
+    const svgText = await resp.text();
+    for (const { bg, fg, label } of bgs) {
+      const div = document.createElement('div');
+      div.style.background = bg;
+      div.style.color = fg;
+      const wrap = document.createElement('div');
+      wrap.style.width = size + 'px';
+      wrap.style.height = size + 'px';
+      wrap.innerHTML = svgText.replace(/currentColor/g, fg);
+      wrap.querySelector('svg').style.cssText = 'width:100%;height:100%';
+      const lbl = document.createElement('div');
+      lbl.className = 'label';
+      lbl.textContent = label;
+      div.appendChild(wrap);
+      div.appendChild(lbl);
+      row.appendChild(div);
+    }
+  }
+
+  load('row-full', '/svg/logo.svg', 300);
+  load('row-mark', '/svg/logo-mark.svg', 200);
+  load('row-tiny', '/svg/logo-mark.svg', 40);
+</script>
+</body>
+</html>

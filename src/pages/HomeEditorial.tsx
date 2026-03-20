@@ -10,6 +10,7 @@ import { gsap } from "@/lib/gsap";
 import { useLenis } from "@/hooks/useLenis";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
+import { LogoMark } from "@/components/ui/LogoMark";
 import { ArrowDown } from "lucide-react";
 
 const STATS = [
@@ -62,7 +63,7 @@ export function HomeEditorial() {
     <div className="min-h-screen" style={{ background: bg, color: fg, fontFamily: bodyFont }}>
       {/* ═══ NAV ═══ */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 lg:px-24 xl:px-32 py-5 md:px-16 lg:px-24">
-        <span style={{ fontFamily: headingFont, color: fg, fontSize: "1.25rem" }}>FC</span>
+        <LogoMark size={36} style={{ color: fg }} />
         <div className="flex items-center gap-8">
           {["About", "Services", "Events", "Contact"].map((l) => (
             <span key={l} className="hidden text-xs uppercase md:block" style={{ color: mutedFg, letterSpacing: "0.15em", cursor: "pointer" }}>{l}</span>
