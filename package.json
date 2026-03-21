@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vp dev",
-    "build": "npx convex codegen && vp build",
+    "build": "vp build",
     "lint": "vp lint",
     "fmt": "vp fmt",
     "check": "vp check",

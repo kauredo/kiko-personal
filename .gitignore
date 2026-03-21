@@ -12,7 +12,7 @@ dist
 dist-ssr
 *.local
 .env
-convex/_generated/
+
 convex/README.md
 
 # Seed media (binary files downloaded from Instagram)
