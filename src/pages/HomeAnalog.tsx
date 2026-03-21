@@ -6,32 +6,11 @@
  */
 import { motion } from "framer-motion";
 import { useLenis } from "@/hooks/useLenis";
+import { useHomeData } from "@/hooks/useHomeData";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { LogoFull } from "@/components/ui/LogoFull";
 import { ArrowDown } from "lucide-react";
-
-const WORK = [
-  { title: "Lead Guitar", org: "Don Gabriel", period: "2020 —", desc: "Lead guitar, composition and writing for Don Gabriel." },
-  { title: "Function Duo", org: "with Milena Galasso", period: "2021 —", desc: "Self-managed function duo performing across venues and events." },
-  { title: "Band Leader & Lead Guitar", org: "Studio80 Function Band", period: "2019 — 2020", desc: "Band leader and lead guitarist for events and private functions." },
-  { title: "Composer & Writer", org: "Tabora / Lucas Wild", period: "2017 — 2020", desc: "Original material across multiple projects. Recorded 3 EPs." },
-];
-
-const MEDIA = [
-  { id: "1", label: "Live at Coliseu", type: "photo", tall: true },
-  { id: "2", label: "Studio Session", type: "video", tall: false },
-  { id: "3", label: "Backstage", type: "photo", tall: false },
-  { id: "4", label: "Music Video", type: "video", tall: true },
-  { id: "5", label: "Album Recording", type: "music", tall: false },
-  { id: "6", label: "Rehearsal", type: "photo", tall: false },
-];
-
-const EVENTS = [
-  { date: "Apr 15", title: "Rock Soul Night", venue: "Coliseu de Lisboa" },
-  { date: "May 02", title: "Jazz & Soul Session", venue: "Hot Clube" },
-  { date: "Jun 20", title: "Summer Festival", venue: "Parque das Nacoes" },
-];
 
 const bg = "oklch(0.93 0.015 75)";
 const fg = "oklch(0.15 0.03 40)";
@@ -44,6 +23,7 @@ const bodyFont = "'Space Grotesk', system-ui, sans-serif";
 
 export function HomeAnalog() {
   const lenis = useLenis();
+  const { events, experiences, testimonials, stats, services, settings, media, bio } = useHomeData();
 
   return (
     <div className="min-h-screen" style={{ background: bg, color: fg, fontFamily: bodyFont }}>
@@ -59,7 +39,7 @@ export function HomeAnalog() {
           <nav className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <LogoMark size={24} style={{ color: fg }} />
-              <span className="hidden text-xs sm:block" style={{ fontFamily: headingFont, fontStyle: "italic", color: fg }}>Francisco Catarro</span>
+              <span className="hidden text-xs sm:block" style={{ fontFamily: headingFont, fontStyle: "italic", color: fg }}>{bio.name}</span>
             </div>
             <div className="flex items-center gap-6">
               {[
@@ -78,8 +58,8 @@ export function HomeAnalog() {
 
           <div>
             <h1 style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(3rem, 8vw, 7rem)", lineHeight: 1, letterSpacing: "-0.02em" }}>
-              Francisco<br />
-              <span style={{ color: primary }}>Catarro</span>
+              {bio.firstName}<br />
+              <span style={{ color: primary }}>{bio.lastName}</span>
             </h1>
             <p className="mt-6 max-w-sm text-sm leading-relaxed" style={{ color: mutedFg }}>
               Guitarist, pianist &amp; multi-instrumentalist. Born in Portugal,
@@ -104,15 +84,19 @@ export function HomeAnalog() {
 
       {/* ═══ QUOTE BREAK ═══ */}
       <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ borderTop: `1px solid ${muted}` }}>
-        <blockquote
-          className="mx-auto max-w-3xl text-center text-xl leading-relaxed md:text-2xl lg:text-3xl"
-          style={{ fontFamily: headingFont, fontStyle: "italic", color: fg }}
-        >
-          "One of the most versatile musicians I've worked with. He can go from a soulful ballad to a face-melting rock solo in the same set."
-        </blockquote>
-        <p className="mt-6 text-center text-xs" style={{ color: mutedFg, letterSpacing: "0.15em" }}>
-          — JOAO SILVA, BAND LEADER
-        </p>
+        {testimonials[0] && (
+          <>
+            <blockquote
+              className="mx-auto max-w-3xl text-center text-xl leading-relaxed md:text-2xl lg:text-3xl"
+              style={{ fontFamily: headingFont, fontStyle: "italic", color: fg }}
+            >
+              "{testimonials[0].quote}"
+            </blockquote>
+            <p className="mt-6 text-center text-xs" style={{ color: mutedFg, letterSpacing: "0.15em" }}>
+              — {testimonials[0].authorName.toUpperCase()}{testimonials[0].authorRole ? `, ${testimonials[0].authorRole.toUpperCase()}` : ""}
+            </p>
+          </>
+        )}
       </section>
 
       {/* ═══ ABOUT ═══ */}
@@ -139,13 +123,8 @@ export function HomeAnalog() {
 
       {/* ═══ STATS ═══ */}
       <section id="analog-stats" className="grid grid-cols-2 md:grid-cols-4" style={{ borderTop: `1px solid ${muted}`, borderBottom: `1px solid ${muted}` }}>
-        {[
-          { value: "10+", label: "Years" },
-          { value: "200+", label: "Shows" },
-          { value: "50+", label: "Sessions" },
-          { value: "4", label: "Instruments" },
-        ].map((stat, i) => (
-          <div key={stat.label} className="flex flex-col items-center py-10 md:py-14" style={{ borderRight: i < 3 ? `1px solid ${muted}` : "none" }}>
+        {stats.map((stat, i) => (
+          <div key={stat.label} className="flex flex-col items-center py-10 md:py-14" style={{ borderRight: i < stats.length - 1 ? `1px solid ${muted}` : "none" }}>
             <span className="text-3xl md:text-4xl" style={{ fontFamily: headingFont, color: primary }}>{stat.value}</span>
             <span className="mt-2 text-[11px] uppercase" style={{ color: mutedFg, letterSpacing: "0.15em" }}>{stat.label}</span>
           </div>
@@ -162,26 +141,30 @@ export function HomeAnalog() {
           <span className="text-xs uppercase cursor-pointer" style={{ color: `${bg}88`, letterSpacing: "0.15em" }}>View all</span>
         </div>
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
-          {MEDIA.map((item, i) => (
+          {media.map((item, i) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: i * 0.06, duration: 0.5 }}
-              className={`group relative cursor-pointer overflow-hidden ${item.tall ? "row-span-2" : ""}`}
+              className="group relative cursor-pointer overflow-hidden"
               style={{
                 background: `${fg}dd`,
-                aspectRatio: item.tall ? "3/5" : "4/5",
+                aspectRatio: "4/5",
                 borderRadius: "3px",
                 border: `1px solid ${bg}15`,
               }}
             >
-              <div className="flex h-full items-center justify-center" style={{ color: `${bg}33` }}>
-                <span className="text-[10px] uppercase" style={{ letterSpacing: "0.2em" }}>{item.type}</span>
-              </div>
+              {item.imageUrl ? (
+                <img src={item.imageUrl} alt={item.title} className="h-full w-full object-cover" />
+              ) : (
+                <div className="flex h-full items-center justify-center" style={{ color: `${bg}33` }}>
+                  <span className="text-[10px] uppercase" style={{ letterSpacing: "0.2em" }}>{item.type}</span>
+                </div>
+              )}
               <div className="absolute inset-x-0 bottom-0 p-3 translate-y-full transition-transform duration-300 group-hover:translate-y-0" style={{ background: fg }}>
-                <p className="text-xs font-medium" style={{ color: bg }}>{item.label}</p>
+                <p className="text-xs font-medium" style={{ color: bg }}>{item.title}</p>
               </div>
             </motion.div>
           ))}
@@ -194,14 +177,14 @@ export function HomeAnalog() {
           <p className="mb-2 text-xs uppercase" style={{ color: primary, letterSpacing: "0.2em" }}>Resume</p>
           <h2 style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>The work so far</h2>
         </div>
-        {WORK.map((w, i) => (
+        {experiences.map((w, i) => (
           <div key={i} className="grid gap-2 py-6 md:grid-cols-[120px_1fr_1.5fr] md:gap-8" style={{ borderTop: `1px solid ${muted}` }}>
             <span className="text-xs" style={{ color: mutedFg, letterSpacing: "0.1em" }}>{w.period}</span>
             <div>
               <h3 className="text-base font-medium">{w.title}</h3>
-              <p className="text-sm" style={{ color: primary }}>{w.org}</p>
+              <p className="text-sm" style={{ color: primary }}>{w.organization}</p>
             </div>
-            <p className="text-sm leading-relaxed" style={{ color: mutedFg }}>{w.desc}</p>
+            <p className="text-sm leading-relaxed" style={{ color: mutedFg }}>{w.description}</p>
           </div>
         ))}
       </section>
@@ -212,15 +195,10 @@ export function HomeAnalog() {
           <p className="mb-2 text-xs uppercase" style={{ color: primary, letterSpacing: "0.2em" }}>Services</p>
           <h2 className="mb-12" style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>What I do</h2>
           <div className="grid gap-8 sm:grid-cols-2">
-            {[
-              { title: "Live Performance", desc: "Guitar and keys for any setting — from intimate jazz clubs to arena stages." },
-              { title: "Musical Direction", desc: "Leading bands, arranging setlists, and shaping the musical identity of any project." },
-              { title: "Production", desc: "Studio production, mixing, and arranging across rock, soul, jazz, and pop." },
-              { title: "Session Work", desc: "Reliable, versatile session musician for recordings, tours, and one-off gigs." },
-            ].map((s) => (
+            {services.map((s) => (
               <div key={s.title} className="border-t py-6" style={{ borderColor: muted }}>
                 <h3 className="text-base font-medium">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: mutedFg }}>{s.desc}</p>
+                <p className="mt-2 text-sm leading-relaxed" style={{ color: mutedFg }}>{s.description}</p>
               </div>
             ))}
           </div>
@@ -235,10 +213,10 @@ export function HomeAnalog() {
             <h2 style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>Catch me live</h2>
           </div>
         </div>
-        {EVENTS.map((e, i) => (
+        {events.map((e, i) => (
           <div key={i} className="flex items-center justify-between py-5" style={{ borderTop: `1px solid ${muted}` }}>
             <div className="flex items-baseline gap-6">
-              <span className="text-sm" style={{ color: mutedFg }}>{e.date}</span>
+              <span className="text-sm" style={{ color: mutedFg }}>{e.dateFormatted}</span>
               <h3 className="font-medium">{e.title}</h3>
             </div>
             <span className="text-sm" style={{ color: mutedFg }}>{e.venue}</span>
@@ -277,7 +255,7 @@ export function HomeAnalog() {
       {/* ═══ FOOTER ═══ */}
       <footer className="flex flex-col items-center gap-4 px-6 md:px-12 lg:px-24 xl:px-32 py-12 text-center md:flex-row md:justify-between" style={{ borderTop: `1px solid ${muted}` }}>
         <p className="text-[11px] uppercase" style={{ color: mutedFg, letterSpacing: "0.15em" }}>
-          &copy; {new Date().getFullYear()} Francisco Catarro
+          &copy; {new Date().getFullYear()} {bio.name}
         </p>
         <p className="text-sm" style={{ fontFamily: headingFont, fontStyle: "italic", color: `${fg}99` }}>
           Music is the only language that doesn't need translation.

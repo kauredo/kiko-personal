@@ -13,6 +13,7 @@ import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { LogoFull } from "@/components/ui/LogoFull";
 import { ArrowUpRight } from "lucide-react";
+import { useHomeData } from "@/hooks/useHomeData";
 
 // ── Chord Data ──
 // Standard guitar chord voicings: [lowE, A, D, G, B, highE]
@@ -174,21 +175,8 @@ function ChordDiagram({
   );
 }
 
-// ── Content Data ──
-const EXPERIENCE = [
-  { title: "Lead Guitar — Don Gabriel", period: "2020 —" },
-  { title: "Function Duo — with Milena Galasso", period: "2021 —" },
-  { title: "Band Leader — Studio80", period: "2019 — 2020" },
-  { title: "Composer — Tabora / Lucas Wild", period: "2017 — 2020" },
-];
-
-const EVENTS = [
-  { date: "APR 15", title: "Rock Soul Night", venue: "Coliseu de Lisboa" },
-  { date: "MAY 02", title: "Jazz & Soul Session", venue: "Hot Clube" },
-  { date: "JUN 20", title: "Summer Festival", venue: "Parque das Nacoes" },
-];
-
 export function HomeFretboard() {
+  const { events, experiences, testimonials, stats, services, settings, media, bio } = useHomeData();
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -324,7 +312,7 @@ export function HomeFretboard() {
                 lineHeight: 1,
               }}
             >
-              Francisco<br />Catarro
+              {bio.firstName}<br />{bio.lastName}
             </h1>
             <p className="fret-text text-xs tracking-[0.3em] uppercase text-white/40">
               Guitar &middot; Keys &middot; Bass &middot; Live Performance
@@ -370,9 +358,9 @@ export function HomeFretboard() {
             >
               Experience
             </h2>
-            {EXPERIENCE.map((item, i) => (
+            {experiences.map((item, i) => (
               <div key={i} className="fret-text border-t border-white/[0.08] py-4 transition-colors hover:bg-white/[0.02]">
-                <p className="text-sm font-medium text-white">{item.title}</p>
+                <p className="text-sm font-medium text-white">{item.title} — {item.organization}</p>
                 <p className="mt-0.5 text-xs text-white/35">{item.period}</p>
               </div>
             ))}
@@ -394,7 +382,7 @@ export function HomeFretboard() {
             >
               Catch me live
             </h2>
-            {EVENTS.map((event, i) => (
+            {events.map((event, i) => (
               <div key={i} className="fret-text border-t border-white/[0.08] py-5 transition-colors hover:bg-white/[0.02]">
                 <div className="flex items-baseline justify-between gap-8">
                   <div>
@@ -405,7 +393,7 @@ export function HomeFretboard() {
                     className="text-sm font-bold text-white/40"
                     style={{ fontFamily: "'Syne', system-ui, sans-serif" }}
                   >
-                    {event.date}
+                    {event.dateShort}
                   </span>
                 </div>
               </div>
@@ -425,15 +413,10 @@ export function HomeFretboard() {
             Services
           </h2>
           <div className="grid gap-6 sm:grid-cols-2">
-            {[
-              { title: "Live Performance", desc: "Guitar and keys for any setting — from intimate jazz clubs to arena stages." },
-              { title: "Musical Direction", desc: "Leading bands, arranging setlists, and shaping the musical identity of any project." },
-              { title: "Production", desc: "Recording, mixing, and arranging across rock, soul, jazz, and pop." },
-              { title: "Session Work", desc: "Reliable, versatile session musician for studio and live collaborations." },
-            ].map((s, i) => (
+            {services.map((s, i) => (
               <div key={i} className="fret-text border-t border-white/[0.08] py-5">
                 <p className="text-sm font-bold uppercase text-white" style={{ fontFamily: "'Syne', system-ui, sans-serif" }}>{s.title}</p>
-                <p className="mt-2 text-xs leading-relaxed text-white/40">{s.desc}</p>
+                <p className="mt-2 text-xs leading-relaxed text-white/40">{s.description}</p>
               </div>
             ))}
           </div>
@@ -444,12 +427,7 @@ export function HomeFretboard() {
       <section id="fret-stats" className="fret-section relative py-20 md:py-28">
         <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
         <div className="mx-auto grid max-w-3xl grid-cols-2 gap-10 px-8 md:grid-cols-4 md:gap-8 md:px-16 lg:px-24">
-          {[
-            { value: "10+", label: "Years" },
-            { value: "200+", label: "Shows" },
-            { value: "50+", label: "Sessions" },
-            { value: "4", label: "Instruments" },
-          ].map((stat) => (
+          {stats.map((stat) => (
             <div key={stat.label} className="fret-text flex flex-col items-center">
               <div
                 className="flex h-20 w-20 items-center justify-center rounded-full md:h-24 md:w-24"
@@ -467,13 +445,10 @@ export function HomeFretboard() {
       <section id="fret-testimonials" className="fret-section relative py-24 md:py-32">
         <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
         <div className="mx-auto grid max-w-5xl gap-12 px-8 md:grid-cols-2 md:gap-16 md:px-16 lg:px-24">
-          {[
-            { quote: "One of the most versatile musicians I've worked with. He can go from a soulful ballad to a face-melting rock solo in the same set.", author: "Joao Silva", role: "Band Leader" },
-            { quote: "Francisco brings something rare — technical precision with genuine emotion. Every note has intention.", author: "Maria Santos", role: "Producer" },
-          ].map((t, i) => (
+          {testimonials.map((t, i) => (
             <blockquote key={i} className="fret-text">
               <p className="text-base leading-relaxed text-white/50 italic md:text-lg">"{t.quote}"</p>
-              <footer className="mt-4 text-xs text-white/30">— {t.author}, {t.role}</footer>
+              <footer className="mt-4 text-xs text-white/30">— {t.authorName}, {t.authorRole}</footer>
             </blockquote>
           ))}
         </div>
@@ -490,13 +465,17 @@ export function HomeFretboard() {
             See &amp; Hear
           </h2>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-            {["Live Performance", "Studio Session", "Backstage", "Music Video", "Album Art"].map((label, i) => (
+            {media.slice(0, 5).map((item, i) => (
               <div
-                key={label}
-                className={`fret-text flex items-center justify-center border border-white/[0.06] ${i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-[4/3]"}`}
+                key={item.id}
+                className={`fret-text relative flex items-center justify-center overflow-hidden border border-white/[0.06] ${i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-[4/3]"}`}
                 style={{ background: "rgba(255,255,255,0.03)" }}
               >
-                <span className="text-[9px] uppercase tracking-[0.2em] text-white/15">{label}</span>
+                {item.imageUrl ? (
+                  <img src={item.imageUrl} alt={item.title} className="absolute inset-0 h-full w-full object-cover" />
+                ) : (
+                  <span className="text-[9px] uppercase tracking-[0.2em] text-white/15">{item.title}</span>
+                )}
               </div>
             ))}
           </div>
@@ -517,7 +496,7 @@ export function HomeFretboard() {
         </h2>
         <p className="fret-text mb-10 text-xs text-white/40">Booking &middot; Collaboration &middot; Sessions</p>
         <a
-          href="mailto:contact@franciscocatarro.com"
+          href={`mailto:${settings.contactEmail}`}
           className="fret-text inline-flex items-center gap-3 bg-white px-10 py-4 text-xs font-bold uppercase tracking-widest transition-opacity hover:opacity-85"
           style={{ color: "oklch(0.065 0.008 40)" }}
         >

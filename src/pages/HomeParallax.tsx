@@ -8,22 +8,13 @@
 import { useRef, useEffect } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import { useHomeData } from "@/hooks/useHomeData";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { ArrowUpRight } from "lucide-react";
 
-const MEDIA = Array.from({ length: 5 }, (_, i) => ({
-  id: String(i),
-  label: ["Live Performance", "Studio Session", "Backstage", "Music Video", "Album Art"][i],
-}));
-
-const EVENTS = [
-  { date: "APR 15", title: "Rock Soul Night", venue: "Coliseu de Lisboa" },
-  { date: "MAY 02", title: "Jazz & Soul Session", venue: "Hot Clube" },
-  { date: "JUN 20", title: "Summer Festival", venue: "Parque das Nacoes" },
-];
-
 export function HomeParallax() {
+  const { events, experiences, testimonials, stats, services, settings, media, bio } = useHomeData();
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -211,8 +202,8 @@ export function HomeParallax() {
                 textTransform: "uppercase",
               }}
             >
-              <span className="block">Francisco</span>
-              <span className="block" style={{ color: "oklch(0.62 0.25 28)" }}>Catarro</span>
+              <span className="block">{bio.firstName}</span>
+              <span className="block" style={{ color: "oklch(0.62 0.25 28)" }}>{bio.lastName}</span>
             </h1>
           </div>
 
@@ -246,16 +237,11 @@ export function HomeParallax() {
 
       {/* ═══ STATS — Counters animate on scroll ═══ */}
       <section className="grid grid-cols-2 border-t border-b border-white/10 md:grid-cols-4">
-        {[
-          { target: 10, label: "Years" },
-          { target: 200, label: "Shows" },
-          { target: 50, label: "Sessions" },
-          { target: 4, label: "Instruments" },
-        ].map((stat, i) => (
-          <div key={i} className="flex flex-col items-center py-16 md:py-20" style={{ borderRight: i < 3 ? "1px solid rgba(255,255,255,0.1)" : "none" }}>
+        {stats.map((stat, i) => (
+          <div key={i} className="flex flex-col items-center py-16 md:py-20" style={{ borderRight: i < stats.length - 1 ? "1px solid rgba(255,255,255,0.1)" : "none" }}>
             <span
               className="counter text-4xl md:text-5xl"
-              data-target={stat.target}
+              data-target={stat.numericTarget}
               style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700 }}
             >
               0+
@@ -299,12 +285,7 @@ export function HomeParallax() {
             Services
           </h2>
           <div className="grid gap-6 md:grid-cols-2">
-            {[
-              { title: "Live Performance", desc: "High-energy sets on guitar, keys, and bass — from intimate venues to festival stages." },
-              { title: "Musical Direction", desc: "Shaping the sound, leading rehearsals, and running the show from first note to last." },
-              { title: "Production", desc: "Full-cycle music production — arrangement, recording, mixing, and creative direction." },
-              { title: "Session Work", desc: "Reliable, versatile session musician for studio recordings and live collaborations." },
-            ].map((service, i) => (
+            {services.map((service, i) => (
               <div
                 key={i}
                 className="reveal border border-white/10 p-8 md:p-10"
@@ -316,7 +297,7 @@ export function HomeParallax() {
                 >
                   {service.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-white/40">{service.desc}</p>
+                <p className="text-sm leading-relaxed text-white/40">{service.description}</p>
               </div>
             ))}
           </div>
@@ -339,7 +320,7 @@ export function HomeParallax() {
           </div>
 
           <div className="h-scroll-track flex gap-4 px-8 md:px-16 lg:px-24">
-            {MEDIA.map((item, i) => (
+            {media.map((item, i) => (
               <div
                 key={item.id}
                 className="group relative flex-shrink-0 cursor-pointer overflow-hidden"
@@ -351,11 +332,15 @@ export function HomeParallax() {
                 }}
                 data-speed={i % 2 === 0 ? "0.05" : "-0.05"}
               >
-                <div className="flex h-full items-center justify-center text-white/10">
-                  <span className="text-[10px] tracking-[0.2em] uppercase">{item.label}</span>
-                </div>
+                {item.imageUrl ? (
+                  <img src={item.imageUrl} alt={item.title} className="h-full w-full object-cover" />
+                ) : (
+                  <div className="flex h-full items-center justify-center text-white/10">
+                    <span className="text-[10px] tracking-[0.2em] uppercase">{item.title}</span>
+                  </div>
+                )}
                 <div className="absolute inset-x-0 bottom-0 bg-black/80 p-5 translate-y-full transition-transform duration-500 group-hover:translate-y-0">
-                  <p className="text-sm font-medium">{item.label}</p>
+                  <p className="text-sm font-medium">{item.title}</p>
                 </div>
               </div>
             ))}
@@ -373,12 +358,7 @@ export function HomeParallax() {
           >
             Work
           </h2>
-          {[
-            { role: "Lead Guitar", project: "Don Gabriel", period: "2020 —" },
-            { role: "Function Duo", project: "with Milena Galasso", period: "2021 —" },
-            { role: "Band Leader", project: "Studio80", period: "2019 — 2020" },
-            { role: "Composer", project: "Tabora / Lucas Wild", period: "2017 — 2020" },
-          ].map((item, i) => (
+          {experiences.map((item, i) => (
             <div
               key={i}
               className="reveal flex items-center justify-between border-b border-white/10 py-8"
@@ -389,9 +369,9 @@ export function HomeParallax() {
                   className="w-36 text-sm font-bold uppercase md:text-base"
                   style={{ fontFamily: "'Syne', system-ui, sans-serif", letterSpacing: "-0.01em" }}
                 >
-                  {item.role}
+                  {item.title}
                 </span>
-                <span className="text-white/40">{item.project}</span>
+                <span className="text-white/40">{item.organization}</span>
               </div>
               <span className="text-sm text-white/30">{item.period}</span>
             </div>
@@ -403,18 +383,7 @@ export function HomeParallax() {
       <section id="parallax-testimonials" className="relative overflow-hidden px-8 py-24 md:px-16 md:py-32 lg:px-24" style={{ background: "oklch(0.62 0.25 28)" }}>
         <div className="mx-auto max-w-5xl">
           <div className="grid gap-12 md:grid-cols-2 md:gap-16">
-            {[
-              {
-                quote: "One of the most versatile musicians I've worked with. He can go from a soulful ballad to a face-melting rock solo in the same set.",
-                name: "Joao Silva",
-                title: "Band Leader",
-              },
-              {
-                quote: "Francisco brings something rare — technical precision with genuine emotion. Every note has intention.",
-                name: "Maria Santos",
-                title: "Producer",
-              },
-            ].map((t, i) => (
+            {testimonials.map((t, i) => (
               <blockquote key={i} className="reveal" data-speed={i === 0 ? "0.03" : "-0.03"}>
                 <p
                   className="mb-6 text-xl leading-relaxed text-white md:text-2xl"
@@ -423,8 +392,8 @@ export function HomeParallax() {
                   "{t.quote}"
                 </p>
                 <footer>
-                  <span className="text-sm font-bold text-white">{t.name}</span>
-                  <span className="ml-2 text-sm text-white/60">— {t.title}</span>
+                  <span className="text-sm font-bold text-white">{t.authorName}</span>
+                  <span className="ml-2 text-sm text-white/60">— {t.authorRole}</span>
                 </footer>
               </blockquote>
             ))}
@@ -442,7 +411,7 @@ export function HomeParallax() {
           >
             Catch me live
           </h2>
-          {EVENTS.map((event, i) => (
+          {events.map((event, i) => (
             <div key={i} className="reveal group flex items-center justify-between border-b border-white/10 py-8 transition-colors hover:bg-white/[0.02]">
               <div className="flex items-baseline gap-8 md:gap-12">
                 <span
@@ -450,7 +419,7 @@ export function HomeParallax() {
                   style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700 }}
                   data-speed="0.02"
                 >
-                  {event.date}
+                  {event.dateShort}
                 </span>
                 <div>
                   <h3
@@ -479,7 +448,7 @@ export function HomeParallax() {
           </h2>
           <p className="mb-10 text-white/70">Booking, collaboration, sessions, or just say hi.</p>
           <a
-            href="mailto:contact@franciscocatarro.com"
+            href={`mailto:${settings.contactEmail}`}
             className="inline-flex items-center gap-3 border-2 border-white px-12 py-5 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-black"
           >
             Get in touch

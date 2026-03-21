@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { ArrowUpRight } from "lucide-react";
+import { useHomeData } from "@/hooks/useHomeData";
 
 // ── Web Audio Piano ──
 const NOTE_FREQS: Record<string, number> = {
@@ -118,20 +119,8 @@ function PianoKeyboard({ activeNote, onPlay }: { activeNote: string | null; onPl
   );
 }
 
-const WORK = [
-  { title: "Lead Guitar", org: "Don Gabriel", year: "2020" },
-  { title: "Function Duo", org: "with Milena Galasso", year: "2021" },
-  { title: "Band Leader & Lead Guitar", org: "Studio80 Function Band", year: "2019" },
-  { title: "Composer & Writer", org: "Tabora / Lucas Wild", year: "2017" },
-];
-
-const EVENTS = [
-  { date: "Apr 15", title: "Rock Soul Night", venue: "Coliseu de Lisboa" },
-  { date: "May 02", title: "Jazz & Soul", venue: "Hot Clube" },
-  { date: "Jun 20", title: "Summer Festival", venue: "Parque das Nacoes" },
-];
-
 export function HomePiano() {
+  const { events, experiences, testimonials, stats, services, settings, media, bio } = useHomeData();
   const play = useAudioContext();
   const [activeNote, setActiveNote] = useState<string | null>(null);
   const [playedNotes, setPlayedNotes] = useState<string[]>([]);
@@ -189,7 +178,7 @@ export function HomePiano() {
             className="mb-4"
             style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(3rem, 8vw, 6rem)", lineHeight: 1, letterSpacing: "-0.02em" }}
           >
-            Francisco <span style={{ fontStyle: "italic" }}>Catarro</span>
+            {bio.firstName} <span style={{ fontStyle: "italic" }}>{bio.lastName}</span>
           </h1>
           <p className="text-sm leading-relaxed" style={{ color: mutedFg }}>
             Guitarist, pianist, musical director & producer.<br />
@@ -242,18 +231,13 @@ export function HomePiano() {
       {/* ═══ STATS ═══ */}
       <section id="piano-stats" className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
         <div className="mx-auto grid max-w-5xl grid-cols-2 gap-10 md:grid-cols-4 md:gap-16">
-          {[
-            { number: "10+", label: "Years" },
-            { number: "200+", label: "Shows" },
-            { number: "50+", label: "Sessions" },
-            { number: "4", label: "Instruments" },
-          ].map((stat) => (
+          {stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <p
                 className="mb-2"
                 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2.5rem, 5vw, 3.5rem)", lineHeight: 1, color: primary }}
               >
-                {stat.number}
+                {stat.value}
               </p>
               <p className="text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>
                 {stat.label}
@@ -271,12 +255,7 @@ export function HomePiano() {
             What I <span style={{ fontStyle: "italic" }}>do</span>
           </h2>
           <div className="grid gap-10 md:grid-cols-2 md:gap-12">
-            {[
-              { title: "Live Performance", description: "High-energy sets spanning rock, soul, funk, and jazz — tailored to any venue, from intimate clubs to festival stages." },
-              { title: "Musical Direction", description: "End-to-end direction for bands, ensembles, and live shows — from arrangement to stage performance." },
-              { title: "Production", description: "Full-service music production, from songwriting and arrangement to mixing, with a focus on authentic, organic sound." },
-              { title: "Session Work", description: "Versatile guitar and keys for studio recordings — bringing feel, precision, and creative ideas to every session." },
-            ].map((service) => (
+            {services.map((service) => (
               <div key={service.title} className="py-6" style={{ borderTop: `1px solid ${muted}` }}>
                 <h3 className="mb-3" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "1.25rem" }}>
                   {service.title}
@@ -298,21 +277,19 @@ export function HomePiano() {
             In the <span style={{ fontStyle: "italic" }}>moment</span>
           </h2>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
-            {[
-              { label: "Live Performance", span: "md:col-span-2 md:row-span-2" },
-              { label: "Studio Session", span: "" },
-              { label: "Backstage", span: "" },
-              { label: "Music Video", span: "" },
-              { label: "Album Art", span: "" },
-            ].map((item) => (
+            {media.slice(0, 5).map((item, i) => (
               <div
-                key={item.label}
-                className={`flex items-end overflow-hidden p-5 ${item.span}`}
-                style={{ background: muted, border: `1px solid ${muted}`, aspectRatio: item.span ? undefined : "1/1", minHeight: item.span ? 280 : undefined }}
+                key={item.id}
+                className={`flex items-end overflow-hidden p-5 ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
+                style={{ background: muted, border: `1px solid ${muted}`, aspectRatio: i === 0 ? undefined : "1/1", minHeight: i === 0 ? 280 : undefined }}
               >
-                <span className="text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>
-                  {item.label}
-                </span>
+                {item.imageUrl ? (
+                  <img src={item.imageUrl} alt={item.title} className="absolute inset-0 h-full w-full object-cover" />
+                ) : (
+                  <span className="text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>
+                    {item.title}
+                  </span>
+                )}
               </div>
             ))}
           </div>
@@ -326,13 +303,13 @@ export function HomePiano() {
           <h2 className="mb-12" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1 }}>
             The work so far
           </h2>
-          {WORK.map((w, i) => (
+          {experiences.map((w, i) => (
             <div key={i} className="flex items-baseline justify-between py-5" style={{ borderTop: `1px solid ${muted}` }}>
               <div>
                 <h3 className="text-base font-medium">{w.title}</h3>
-                <p className="mt-0.5 text-sm" style={{ color: mutedFg }}>{w.org}</p>
+                <p className="mt-0.5 text-sm" style={{ color: mutedFg }}>{w.organization}</p>
               </div>
-              <span className="text-sm" style={{ color: mutedFg }}>{w.year} —</span>
+              <span className="text-sm" style={{ color: mutedFg }}>{w.startYear} —</span>
             </div>
           ))}
         </div>
@@ -346,27 +323,16 @@ export function HomePiano() {
             Kind <span style={{ fontStyle: "italic" }}>words</span>
           </h2>
           <div className="grid gap-12 md:grid-cols-2 md:gap-16">
-            {[
-              {
-                quote: "Francisco doesn't just play — he listens, reacts, and elevates everything around him. The best musician I've ever shared a stage with.",
-                name: "Milena Galasso",
-                role: "Vocalist & Collaborator",
-              },
-              {
-                quote: "His musical direction turned our project from good into something truly memorable. Meticulous, creative, and always in service of the song.",
-                name: "Ricardo Alves",
-                role: "Producer, Studio80",
-              },
-            ].map((t) => (
-              <div key={t.name}>
+            {testimonials.map((t) => (
+              <div key={t.authorName}>
                 <blockquote
                   className="mb-6 text-lg leading-relaxed md:text-xl"
                   style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontStyle: "italic" }}
                 >
                   "{t.quote}"
                 </blockquote>
-                <p className="text-sm font-medium">{t.name}</p>
-                <p className="mt-0.5 text-xs" style={{ color: mutedFg }}>{t.role}</p>
+                <p className="text-sm font-medium">{t.authorName}</p>
+                <p className="mt-0.5 text-xs" style={{ color: mutedFg }}>{t.authorRole}</p>
               </div>
             ))}
           </div>
@@ -380,10 +346,10 @@ export function HomePiano() {
           <h2 className="mb-12" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1 }}>
             Catch me live
           </h2>
-          {EVENTS.map((e, i) => (
+          {events.map((e, i) => (
             <div key={i} className="flex items-center justify-between border-t border-white/10 py-6">
               <div className="flex items-baseline gap-6">
-                <span className="text-sm text-white/40">{e.date}</span>
+                <span className="text-sm text-white/40">{e.dateFormatted}</span>
                 <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}>{e.title}</h3>
               </div>
               <span className="text-sm text-white/40">{e.venue}</span>
@@ -401,7 +367,7 @@ export function HomePiano() {
           Available for booking, collaboration, session work, and musical direction.
         </p>
         <a
-          href="mailto:contact@franciscocatarro.com"
+          href={`mailto:${settings.contactEmail}`}
           className="inline-flex items-center gap-2 border-2 px-10 py-4 text-xs font-medium uppercase transition-colors"
           style={{ borderColor: primary, color: primary, letterSpacing: "0.15em" }}
         >

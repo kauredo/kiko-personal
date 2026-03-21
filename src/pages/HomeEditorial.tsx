@@ -9,35 +9,11 @@ import { motion } from "framer-motion";
 import { gsap } from "@/lib/gsap";
 import { useLenis } from "@/hooks/useLenis";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import { useHomeData } from "@/hooks/useHomeData";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { LogoFull } from "@/components/ui/LogoFull";
 import { ArrowDown } from "lucide-react";
-
-const STATS = [
-  { number: "10+", label: "Years performing" },
-  { number: "200+", label: "Live shows" },
-  { number: "50+", label: "Studio sessions" },
-  { number: "4", label: "Instruments" },
-];
-
-const SERVICES = [
-  { title: "Live Performance", desc: "Guitar and keys for any setting — from intimate jazz clubs to arena stages." },
-  { title: "Musical Direction", desc: "Arranging, rehearsing, and leading bands for tours, shows, and recordings." },
-  { title: "Production", desc: "Full studio production from arrangement to final mix, across genres." },
-  { title: "Session Work", desc: "Available for studio sessions — rock, soul, jazz, latin, classical." },
-];
-
-const TESTIMONIALS = [
-  { quote: "Francisco brings an energy to the stage that's impossible to ignore.", author: "Maria Santos", role: "Producer" },
-  { quote: "Every arrangement was thoughtful, dynamic, and perfectly suited to the moment.", author: "Ana Costa", role: "Theater Director" },
-];
-
-const EVENTS = [
-  { date: "15 Apr", title: "Rock Soul Night", venue: "Coliseu de Lisboa", year: "2026" },
-  { date: "02 May", title: "Jazz & Soul Session", venue: "Hot Clube", year: "2026" },
-  { date: "20 Jun", title: "Summer Festival", venue: "Parque das Nacoes", year: "2026" },
-];
 
 const bg = "oklch(0.10 0.01 55)";
 const fg = "oklch(0.90 0.015 65)";
@@ -53,6 +29,7 @@ export function HomeEditorial() {
   const heroRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const lenis = useLenis();
+  const { events, experiences, testimonials, stats, services, settings, media, bio } = useHomeData();
 
   useEffect(() => {
     if (prefersReducedMotion || !heroRef.current) return;
@@ -96,8 +73,8 @@ export function HomeEditorial() {
             className="hero-fade"
             style={{ fontFamily: headingFont, fontSize: "clamp(3.5rem, 10vw, 9rem)", lineHeight: 1, letterSpacing: "-0.03em" }}
           >
-            Francisco<br />
-            <span style={{ color: primary }}>Catarro</span>
+            {bio.firstName}<br />
+            <span style={{ color: primary }}>{bio.lastName}</span>
           </h1>
           <p className="hero-fade mx-auto mt-8 max-w-md text-sm leading-relaxed" style={{ color: mutedFg }}>
             A versatile musician born in Portugal, based in the UK. Over a decade of
@@ -115,7 +92,7 @@ export function HomeEditorial() {
 
       {/* ═══ STATS BAR ═══ */}
       <section className="grid grid-cols-2 md:grid-cols-4" style={{ borderTop: `1px solid ${border}`, borderBottom: `1px solid ${border}` }}>
-        {STATS.map((stat, i) => (
+        {stats.map((stat, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 20 }}
@@ -125,7 +102,7 @@ export function HomeEditorial() {
             className="flex flex-col items-center py-10 md:py-14"
             style={{ borderRight: i < 3 ? `1px solid ${border}` : "none" }}
           >
-            <span className="text-3xl md:text-4xl" style={{ fontFamily: headingFont, color: primary }}>{stat.number}</span>
+            <span className="text-3xl md:text-4xl" style={{ fontFamily: headingFont, color: primary }}>{stat.value}</span>
             <span className="mt-2 text-[11px] uppercase" style={{ color: mutedFg, letterSpacing: "0.15em" }}>{stat.label}</span>
           </motion.div>
         ))}
@@ -185,7 +162,7 @@ export function HomeEditorial() {
             What I do
           </h2>
           <div className="grid gap-6 md:grid-cols-2">
-            {SERVICES.map((s, i) => (
+            {services.map((s, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0 }}
@@ -196,7 +173,7 @@ export function HomeEditorial() {
                 style={{ background: card, border: `1px solid ${border}` }}
               >
                 <h3 className="mb-3 text-lg" style={{ fontFamily: headingFont }}>{s.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: `${fg}cc` }}>{s.desc}</p>
+                <p className="text-sm leading-relaxed" style={{ color: `${fg}cc` }}>{s.description}</p>
               </motion.div>
             ))}
           </div>
@@ -210,16 +187,11 @@ export function HomeEditorial() {
           <h2 className="mb-12" style={{ fontFamily: headingFont, fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1 }}>
             The work so far
           </h2>
-          {[
-            { title: "Lead Guitar", org: "Don Gabriel", period: "2020 —", desc: "Lead guitar for funk-soul band across UK and Europe." },
-            { title: "Function Duo", org: "with Milena Galasso", period: "2021 —", desc: "Guitar and vocals for private events, weddings, and corporate functions." },
-            { title: "Band Leader & Lead Guitar", org: "Studio80 Function Band", period: "2019 — 2020", desc: "Musical direction and lead guitar for 8-piece function band." },
-            { title: "Composer & Writer", org: "Tabora / Lucas Wild", period: "2017 — 2020", desc: "Original composition and songwriting for rock and soul projects." },
-          ].map((w, i) => (
+          {experiences.map((w, i) => (
             <div key={i} className="flex items-baseline justify-between py-6" style={{ borderTop: `1px solid ${border}` }}>
               <div>
                 <h3 style={{ fontFamily: headingFont }}>{w.title}</h3>
-                <p className="mt-0.5 text-sm" style={{ color: mutedFg }}>{w.org}</p>
+                <p className="mt-0.5 text-sm" style={{ color: mutedFg }}>{w.organization}</p>
               </div>
               <span className="text-sm" style={{ color: mutedFg }}>{w.period}</span>
             </div>
@@ -230,7 +202,7 @@ export function HomeEditorial() {
       {/* ═══ TESTIMONIALS ═══ */}
       <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:px-16 md:py-28 lg:px-24" style={{ background: card }}>
         <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2 md:gap-16">
-          {TESTIMONIALS.map((t, i) => (
+          {testimonials.map((t, i) => (
             <div key={i}>
               <blockquote className="mb-6 text-xl leading-relaxed md:text-2xl" style={{ fontFamily: headingFont }}>
                 "{t.quote}"
@@ -238,8 +210,8 @@ export function HomeEditorial() {
               <div className="flex items-center gap-3">
                 <div className="h-px w-8" style={{ background: `${primary}66` }} />
                 <div>
-                  <p className="text-sm font-medium">{t.author}</p>
-                  <p className="text-xs" style={{ color: mutedFg }}>{t.role}</p>
+                  <p className="text-sm font-medium">{t.authorName}</p>
+                  <p className="text-xs" style={{ color: mutedFg }}>{t.authorRole}</p>
                 </div>
               </div>
             </div>
@@ -256,10 +228,10 @@ export function HomeEditorial() {
               <h2 style={{ fontFamily: headingFont, fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1 }}>Upcoming</h2>
             </div>
           </div>
-          {EVENTS.map((e, i) => (
+          {events.map((e, i) => (
             <div key={i} className="flex items-center justify-between py-6" style={{ borderTop: `1px solid ${border}` }}>
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="w-16 text-sm" style={{ color: mutedFg }}>{e.date}</span>
+                <span className="w-16 text-sm" style={{ color: mutedFg }}>{e.dateFormatted}</span>
                 <div>
                   <h3 style={{ fontFamily: headingFont }}>{e.title}</h3>
                   <p className="mt-0.5 text-sm" style={{ color: mutedFg }}>{e.venue}</p>
@@ -280,7 +252,7 @@ export function HomeEditorial() {
           Available for booking, collaboration, session work, and musical direction.
         </p>
         <a
-          href="mailto:contact@franciscocatarro.com"
+          href={`mailto:${settings.contactEmail}`}
           className="inline-flex items-center gap-2 border px-10 py-4 text-xs uppercase transition-colors"
           style={{ borderColor: primary, color: primary, letterSpacing: "0.2em" }}
           onMouseEnter={(e) => { e.currentTarget.style.background = primary; e.currentTarget.style.color = bg; }}
