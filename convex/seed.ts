@@ -27,7 +27,7 @@ export const init = mutation({
       heroSubtitle: "Guitar | Keys | Musical Direction | Production",
       siteTitle: "Francisco Catarro — Musician",
       metaDescription:
-        "Francisco Catarro — versatile musician specializing in guitar, keys, bass, and live performance. Born in Portugal, based in the UK. Over 10 years of experience.",
+        "Francisco Catarro — guitarist, pianist, and musical director. Born in Portugal, based in the UK. Live performance, session work, and production across Europe.",
       contactEmail: "contact@franciscocatarro.com",
       socialLinks: [
         { platform: "instagram", url: "https://www.instagram.com/francisco.catarro/" },
@@ -41,7 +41,7 @@ export const init = mutation({
       name: "Francisco Catarro",
       title: "Musician — Guitar, Keys, Bass & Production",
       content:
-        "<p>Versatile musician and university graduate, specializing in guitar, keys, bass, recording and live performance. Born in Portugal, now based in the UK.</p><p>Highly driven and motivated by all types of genres and instruments. Over 10 years of experience in guitar along with several years of arranging music for live scenarios — bands, duos and trios. From rock clubs to symphony halls, from the studio console to center stage.</p><p>Good communication skills and highly professional. Available for session work, live performance, musical direction, composition, and arranging.</p>",
+        "<p>Born in Portugal, based in the UK. Francisco Catarro is a guitarist, pianist, and musical director with over a decade of live and studio experience across Europe.</p><p>He's opened for Westlife at Scarborough, played Festival Iminente in Lisbon with Carla Prata, toured with Kevin Davy White across Hungary and the UK, and held down residencies across London's live circuit — from The Half Moon to Jazz Cafe to The Troubadour.</p><p>Available for session work, live performance, musical direction, and production.</p>",
       socialLinks: [
         { platform: "instagram", url: "https://www.instagram.com/francisco.catarro/" },
         { platform: "linkedin", url: "https://www.linkedin.com/in/francisco-catarro-64a65b1a6/" },
@@ -153,31 +153,7 @@ export const init = mutation({
       await ctx.db.insert("skills", skill);
     }
 
-    // ── Events (placeholder upcoming) ──
-    const events = [
-      {
-        title: "Live Session",
-        date: "2026-04-15",
-        venue: "TBA",
-        city: "London",
-        type: "upcoming" as const,
-        featured: true,
-        description: "Upcoming live performance.",
-      },
-    ];
-
-    for (const event of events) {
-      await ctx.db.insert("events", event);
-    }
-
-    // ── Testimonials (placeholder — to be updated via admin) ──
-    await ctx.db.insert("testimonials", {
-      quote: "One of the most versatile musicians I've worked with. He can go from a soulful ballad to a face-melting rock solo in the same set.",
-      authorName: "Collaborator",
-      authorRole: "Musician",
-      featured: true,
-      order: 0,
-    });
+    // Events and testimonials are managed via admin panel — no placeholders seeded.
 
     return "Seeded with Francisco Catarro's real data. Admin: admin@franciscocatarro.com / changeme123";
   },
