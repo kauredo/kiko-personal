@@ -28,6 +28,7 @@ export const upsert = mutation({
       v.object({ platform: v.string(), url: v.string() }),
     ),
     heroImage: v.optional(v.id("_storage")),
+    ogStyle: v.optional(v.string()),
   },
   handler: async (ctx, { token, ...data }) => {
     await requireAdmin(ctx, token);

@@ -59,16 +59,15 @@ export function HomeAnalog() {
       {/* ═══ HERO — Split screen ═══ */}
       <section className="grid md:min-h-screen md:grid-cols-2">
         {/* Left: Image */}
-        <div style={{ background: card }} className="flex items-center justify-center py-16 md:py-0">
+        <div style={{ background: card }} className="hidden items-center justify-center md:flex">
           <LogoFull size={240} style={{ color: primary, opacity: 0.6 }} />
         </div>
 
         {/* Right: Name + Info */}
-        <div className="flex flex-col justify-between px-8 py-12 md:px-12 lg:px-16">
+        <div className="flex min-h-[85vh] flex-col justify-between px-8 py-8 md:min-h-0 md:px-12 md:py-12 lg:px-16">
           <nav className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
+            <div>
               <LogoMark size={24} style={{ color: fg }} />
-              <span className="hidden text-xs sm:block" style={{ fontFamily: headingFont, fontStyle: "italic", color: fg }}>{bio.name}</span>
             </div>
             <div className="flex items-center gap-6">
               {NAV_LINKS.map(({ label, id }) => (
@@ -183,8 +182,8 @@ export function HomeAnalog() {
                     <span className="text-[10px] uppercase" style={{ letterSpacing: "0.2em" }}>photo</span>
                   </div>
                 )}
-                <div className="absolute inset-x-0 bottom-0 p-3 translate-y-0 md:translate-y-full transition-transform duration-300 md:group-hover:translate-y-0" style={{ background: fg }}>
-                  <p className="text-xs font-medium" style={{ color: bg }}>{item.title}</p>
+                <div className="absolute inset-x-0 bottom-0 p-2.5 opacity-100 md:translate-y-full md:opacity-0 md:transition-all md:duration-300 md:group-hover:translate-y-0 md:group-hover:opacity-100" style={{ background: `linear-gradient(to top, ${fg}, transparent)` }}>
+                  <p className="text-[11px] font-medium" style={{ color: bg }}>{item.title}</p>
                 </div>
               </motion.div>
             ))}

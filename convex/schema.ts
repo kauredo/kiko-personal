@@ -162,5 +162,6 @@ export default defineSchema({
       }),
     ),
     heroImage: v.optional(v.id("_storage")),
+    ogStyle: v.optional(v.string()),
   }),
 });

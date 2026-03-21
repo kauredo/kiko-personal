@@ -116,6 +116,28 @@ export const me = query({
   },
 });
 
+export const changePassword = mutation({
+  args: {
+    token: v.string(),
+    currentPassword: v.string(),
+    newPassword: v.string(),
+  },
+  handler: async (ctx, { token, currentPassword, newPassword }) => {
+    const user = await requireAdmin(ctx, token);
+
+    const currentHash = await hashPassword(currentPassword, user.salt);
+    if (currentHash !== user.passwordHash) {
+      throw new Error("Current password is incorrect");
+    }
+
+    const salt = generateSalt();
+    const passwordHash = await hashPassword(newPassword, salt);
+    await ctx.db.patch(user._id, { passwordHash, salt });
+
+    return "Password updated";
+  },
+});
+
 // Used by seed to create the initial admin
 export const createAdmin = mutation({
   args: { email: v.string(), password: v.string(), name: v.string() },

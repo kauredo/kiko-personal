@@ -16,6 +16,19 @@ export const get = query({
   },
 });
 
+export const updateProfilePhoto = mutation({
+  args: {
+    token: v.string(),
+    photoStorageId: v.id("_storage"),
+  },
+  handler: async (ctx, { token, photoStorageId }) => {
+    await requireAdmin(ctx, token);
+    const bio = await ctx.db.query("bio").first();
+    if (!bio) throw new Error("Bio not found");
+    await ctx.db.patch(bio._id, { profilePhoto: photoStorageId });
+  },
+});
+
 export const upsert = mutation({
   args: {
     token: v.string(),
