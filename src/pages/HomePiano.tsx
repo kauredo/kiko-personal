@@ -150,6 +150,14 @@ function getSocialIcon(platform: string) {
   return Mail;
 }
 
+const NAV_LINKS = [
+  { label: "About", id: "#piano-about" },
+  { label: "Portfolio", id: "#piano-media" },
+  { label: "Work", id: "#piano-work" },
+  { label: "Events", id: "#piano-events" },
+  { label: "Contact", id: "#piano-contact" },
+];
+
 export function HomePiano() {
   const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
   const openGallery = useGallery();
@@ -191,26 +199,14 @@ export function HomePiano() {
           <span className="hidden text-sm sm:block" style={{ fontFamily: "'DM Serif Display', Georgia, serif", color: fg }}>{bio.name}</span>
         </div>
         <div className="flex items-center gap-6">
-          {[
-            { label: "About", id: "#piano-about" },
-            { label: "Portfolio", id: "#piano-media" },
-            { label: "Work", id: "#piano-work" },
-            { label: "Events", id: "#piano-events" },
-            { label: "Contact", id: "#piano-contact" },
-          ].map(({ label, id }) => (
+          {NAV_LINKS.map(({ label, id }) => (
             <button key={label} onClick={() => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })} className="hidden text-xs uppercase transition-colors hover:opacity-70 focus-visible:underline md:block" style={{ letterSpacing: "0.15em", color: mutedFg }}>
               {label}
             </button>
           ))}
           <ThemeSwitcher variant="dark" />
           <MobileMenu
-            links={[
-              { label: "About", id: "#piano-about" },
-              { label: "Portfolio", id: "#piano-media" },
-              { label: "Work", id: "#piano-work" },
-              { label: "Events", id: "#piano-events" },
-              { label: "Contact", id: "#piano-contact" },
-            ]}
+            links={NAV_LINKS}
             scrollTo={(id) => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
             color={fg}
             bgColor={bg}
@@ -334,7 +330,7 @@ export function HomePiano() {
                 key={item.id}
                 className={`relative flex items-end overflow-hidden p-5 text-left focus-visible:ring-2 focus-visible:ring-[oklch(0.55_0.15_45)] ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
                 onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))}
-                style={{ background: muted, border: `1px solid ${muted}`, aspectRatio: i === 0 ? undefined : "1/1", minHeight: i === 0 ? 280 : undefined }}
+                style={{ background: muted, border: `1px solid ${muted}`, aspectRatio: i === 0 ? "4/3" : "1/1" }}
               >
                 {item.imageUrl ? (
                   <img src={item.imageUrl} alt={item.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
@@ -441,7 +437,7 @@ export function HomePiano() {
       {events.length > 0 && (
       <section id="piano-events" className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ background: fg, color: bg, borderTop: `3px solid ${primary}` }}>
         <div className="mx-auto max-w-5xl">
-          <p className="mb-3 text-[10px] uppercase text-white/40" style={{ letterSpacing: "0.2em" }}>Live</p>
+          <p className="mb-3 text-[10px] uppercase text-white/50" style={{ letterSpacing: "0.2em" }}>Live</p>
           <h2 className="mb-12" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1 }}>
             Catch me live
           </h2>
@@ -468,7 +464,7 @@ export function HomePiano() {
         </p>
         <a
           href={`mailto:${settings.contactEmail}`}
-          className="inline-flex items-center gap-2 border-2 px-10 py-4 text-xs font-medium uppercase transition-colors focus-visible:ring-2 focus-visible:ring-[oklch(0.55_0.15_45)] focus-visible:ring-offset-2"
+          className="inline-flex items-center gap-2 border-2 px-10 py-4 text-xs font-medium uppercase transition-colors hover:bg-[oklch(0.55_0.15_45)] hover:text-white focus-visible:ring-2 focus-visible:ring-[oklch(0.55_0.15_45)] focus-visible:ring-offset-2"
           style={{ borderColor: primary, color: primary, letterSpacing: "0.15em" }}
         >
           Get in touch <ArrowUpRight size={14} />
@@ -484,7 +480,7 @@ export function HomePiano() {
           {settings.socialLinks.map((link) => {
             const Icon = getSocialIcon(link.platform);
             return (
-              <a key={link.platform} href={link.url} target="_blank" rel="noopener noreferrer" aria-label={link.platform} className="flex h-10 w-10 items-center justify-center transition-opacity hover:opacity-70" style={{ color: mutedFg }}>
+              <a key={link.platform} href={link.url} target="_blank" rel="noopener noreferrer" aria-label={link.platform} className="flex h-10 w-10 items-center justify-center transition-opacity hover:opacity-70 focus-visible:opacity-100 focus-visible:underline" style={{ color: mutedFg }}>
                 <Icon size={16} />
               </a>
             );
