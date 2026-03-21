@@ -11,10 +11,11 @@ import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { useHomeData } from "@/hooks/useHomeData";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
+import { AudioCard } from "@/components/ui/AudioCard";
 import { ArrowUpRight } from "lucide-react";
 
 export function HomeParallax() {
-  const { events, experiences, testimonials, stats, services, settings, media, bio } = useHomeData();
+  const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -86,7 +87,7 @@ export function HomeParallax() {
           scrollTrigger: {
             trigger: hSection,
             start: "top top",
-            end: () => `+=${totalWidth * 0.7}`,
+            end: () => `+=${totalWidth}`,
             scrub: 1,
             pin: true,
             anticipatePin: 1,
@@ -140,7 +141,7 @@ export function HomeParallax() {
     }, container);
 
     return () => ctx.revert();
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, media.length]);
 
   return (
     <div
@@ -320,7 +321,7 @@ export function HomeParallax() {
           </div>
 
           <div className="h-scroll-track flex gap-4 px-8 md:px-16 lg:px-24">
-            {media.map((item, i) => (
+            {photos.map((item, i) => (
               <div
                 key={item.id}
                 className="group relative flex-shrink-0 cursor-pointer overflow-hidden"
@@ -332,7 +333,9 @@ export function HomeParallax() {
                 }}
                 data-speed={i % 2 === 0 ? "0.05" : "-0.05"}
               >
-                {item.imageUrl ? (
+                {item.imageUrl && item.type === "video" ? (
+                  <video src={item.imageUrl} className="h-full w-full object-cover" muted loop playsInline onMouseEnter={e => (e.target as HTMLVideoElement).play()} onMouseLeave={e => (e.target as HTMLVideoElement).pause()} />
+                ) : item.imageUrl ? (
                   <img src={item.imageUrl} alt={item.title} className="h-full w-full object-cover" />
                 ) : (
                   <div className="flex h-full items-center justify-center text-white/10">
@@ -347,6 +350,49 @@ export function HomeParallax() {
           </div>
         </div>
       </section>
+
+      {/* ═══ VIDEOS ═══ */}
+      {videos.length > 0 && (
+        <section className="px-8 py-24 md:px-16 md:py-32 lg:px-24" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+          <p className="mb-2 text-[10px] tracking-[0.3em] uppercase text-white/30">Videos</p>
+          <h2 className="mb-12 text-3xl md:text-4xl" style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}>
+            In Motion
+          </h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            {videos.map((item) => (
+              <div key={item.id} className="group relative overflow-hidden" style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                {item.imageUrl ? (
+                  <video src={item.imageUrl} className="h-full w-full object-cover" muted loop playsInline
+                    onMouseEnter={e => (e.target as HTMLVideoElement).play()}
+                    onMouseLeave={e => (e.target as HTMLVideoElement).pause()} />
+                ) : (
+                  <div className="flex h-full items-center justify-center text-white/10">
+                    <span className="text-[10px] tracking-[0.2em] uppercase">video</span>
+                  </div>
+                )}
+                <div className="absolute inset-x-0 bottom-0 bg-black/80 p-5 translate-y-full transition-transform duration-500 group-hover:translate-y-0">
+                  <p className="text-sm font-medium">{item.title}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ═══ MUSIC ═══ */}
+      {music.length > 0 && (
+        <section className="px-8 py-24 md:px-16 md:py-32 lg:px-24" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+          <p className="mb-2 text-[10px] tracking-[0.3em] uppercase text-white/30">Music</p>
+          <h2 className="mb-12 text-3xl md:text-4xl" style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}>
+            Listen
+          </h2>
+          <div className="mx-auto max-w-3xl">
+            {music.map((item) => (
+              <AudioCard key={item.id} item={item} accentColor="oklch(0.62 0.25 28)" bgColor="oklch(0.05 0.005 260)" fgColor="white" mutedColor="rgba(255,255,255,0.4)" />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ═══ WORK / RESUME ═══ */}
       <section id="parallax-work" className="px-8 py-24 md:px-16 md:py-32 lg:px-24">

@@ -8,6 +8,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
+import { AudioCard } from "@/components/ui/AudioCard";
 import { ArrowUpRight } from "lucide-react";
 import { useHomeData } from "@/hooks/useHomeData";
 
@@ -120,7 +121,7 @@ function PianoKeyboard({ activeNote, onPlay }: { activeNote: string | null; onPl
 }
 
 export function HomePiano() {
-  const { events, experiences, testimonials, stats, services, settings, media, bio } = useHomeData();
+  const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
   const play = useAudioContext();
   const [activeNote, setActiveNote] = useState<string | null>(null);
   const [playedNotes, setPlayedNotes] = useState<string[]>([]);
@@ -277,10 +278,10 @@ export function HomePiano() {
             In the <span style={{ fontStyle: "italic" }}>moment</span>
           </h2>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
-            {media.slice(0, 5).map((item, i) => (
+            {photos.slice(0, 5).map((item, i) => (
               <div
                 key={item.id}
-                className={`flex items-end overflow-hidden p-5 ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
+                className={`relative flex items-end overflow-hidden p-5 ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
                 style={{ background: muted, border: `1px solid ${muted}`, aspectRatio: i === 0 ? undefined : "1/1", minHeight: i === 0 ? 280 : undefined }}
               >
                 {item.imageUrl ? (
@@ -295,6 +296,51 @@ export function HomePiano() {
           </div>
         </div>
       </section>
+
+      {/* ═══ VIDEOS ═══ */}
+      {videos.length > 0 && (
+        <section className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
+          <div className="mx-auto max-w-5xl">
+            <p className="mb-3 text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>Videos</p>
+            <h2 className="mb-12" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1 }}>
+              In <span style={{ fontStyle: "italic" }}>motion</span>
+            </h2>
+            <div className="grid gap-4 md:grid-cols-2">
+              {videos.map((item) => (
+                <div key={item.id} className="group relative overflow-hidden" style={{ aspectRatio: "16/9", background: muted, border: `1px solid ${muted}` }}>
+                  {item.imageUrl ? (
+                    <video src={item.imageUrl} className="h-full w-full object-cover" muted loop playsInline
+                      onMouseEnter={e => (e.target as HTMLVideoElement).play()}
+                      onMouseLeave={e => (e.target as HTMLVideoElement).pause()} />
+                  ) : (
+                    <div className="flex h-full items-center justify-center" style={{ color: mutedFg }}>
+                      <span className="text-[10px] uppercase" style={{ letterSpacing: "0.2em" }}>video</span>
+                    </div>
+                  )}
+                  <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full transition-transform duration-300 group-hover:translate-y-0" style={{ background: `${bg}ee` }}>
+                    <p className="text-sm" style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}>{item.title}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ═══ MUSIC ═══ */}
+      {music.length > 0 && (
+        <section className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
+          <div className="mx-auto max-w-4xl">
+            <p className="mb-3 text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>Music</p>
+            <h2 className="mb-12" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1 }}>
+              On <span style={{ fontStyle: "italic" }}>record</span>
+            </h2>
+            {music.map((item) => (
+              <AudioCard key={item.id} item={item} accentColor={primary} bgColor={bg} fgColor={fg} mutedColor={mutedFg} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ═══ WORK ═══ */}
       <section id="piano-work" className="px-8 py-20 md:px-16 md:py-28 lg:px-24">

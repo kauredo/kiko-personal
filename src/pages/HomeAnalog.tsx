@@ -11,6 +11,7 @@ import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { LogoFull } from "@/components/ui/LogoFull";
 import { ArrowDown } from "lucide-react";
+import { AudioCard } from "@/components/ui/AudioCard";
 
 const bg = "oklch(0.93 0.015 75)";
 const fg = "oklch(0.15 0.03 40)";
@@ -23,7 +24,7 @@ const bodyFont = "'Space Grotesk', system-ui, sans-serif";
 
 export function HomeAnalog() {
   const lenis = useLenis();
-  const { events, experiences, testimonials, stats, services, settings, media, bio } = useHomeData();
+  const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
 
   return (
     <div className="min-h-screen" style={{ background: bg, color: fg, fontFamily: bodyFont }}>
@@ -131,17 +132,17 @@ export function HomeAnalog() {
         ))}
       </section>
 
-      {/* ═══ MEDIA — Dark breakout section ═══ */}
+      {/* ═══ PHOTOS — Dark breakout section ═══ */}
       <section id="analog-media" className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ background: fg, color: bg }}>
         <div className="mb-12 flex items-end justify-between">
           <div>
             <p className="mb-2 text-xs uppercase" style={{ color: `${bg}88`, letterSpacing: "0.2em" }}>Portfolio</p>
-            <h2 style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)", color: bg }}>See &amp; Hear</h2>
+            <h2 style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)", color: bg }}>Photos</h2>
           </div>
           <span className="text-xs uppercase cursor-pointer" style={{ color: `${bg}88`, letterSpacing: "0.15em" }}>View all</span>
         </div>
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
-          {media.map((item, i) => (
+          {photos.map((item, i) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, y: 20 }}
@@ -160,7 +161,7 @@ export function HomeAnalog() {
                 <img src={item.imageUrl} alt={item.title} className="h-full w-full object-cover" />
               ) : (
                 <div className="flex h-full items-center justify-center" style={{ color: `${bg}33` }}>
-                  <span className="text-[10px] uppercase" style={{ letterSpacing: "0.2em" }}>{item.type}</span>
+                  <span className="text-[10px] uppercase" style={{ letterSpacing: "0.2em" }}>photo</span>
                 </div>
               )}
               <div className="absolute inset-x-0 bottom-0 p-3 translate-y-full transition-transform duration-300 group-hover:translate-y-0" style={{ background: fg }}>
@@ -170,6 +171,58 @@ export function HomeAnalog() {
           ))}
         </div>
       </section>
+
+      {/* ═══ VIDEOS ═══ */}
+      {videos.length > 0 && (
+        <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ background: fg, color: bg }}>
+          <div className="mb-12">
+            <p className="mb-2 text-xs uppercase" style={{ color: `${bg}88`, letterSpacing: "0.2em" }}>Portfolio</p>
+            <h2 style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)", color: bg }}>Videos</h2>
+          </div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {videos.map((item) => (
+              <div
+                key={item.id}
+                className="group relative cursor-pointer overflow-hidden"
+                style={{
+                  background: `${fg}dd`,
+                  aspectRatio: "16/9",
+                  borderRadius: "3px",
+                  border: `1px solid ${bg}15`,
+                }}
+              >
+                {item.imageUrl ? (
+                  <video src={item.imageUrl} className="h-full w-full object-cover" muted loop playsInline
+                    onMouseEnter={e => (e.target as HTMLVideoElement).play()}
+                    onMouseLeave={e => (e.target as HTMLVideoElement).pause()} />
+                ) : (
+                  <div className="flex h-full items-center justify-center" style={{ color: `${bg}33` }}>
+                    <span className="text-[10px] uppercase" style={{ letterSpacing: "0.2em" }}>video</span>
+                  </div>
+                )}
+                <div className="absolute inset-x-0 bottom-0 p-3 translate-y-full transition-transform duration-300 group-hover:translate-y-0" style={{ background: fg }}>
+                  <p className="text-xs font-medium" style={{ color: bg }}>{item.title}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ═══ MUSIC ═══ */}
+      {music.length > 0 && (
+        <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ borderTop: `1px solid ${muted}` }}>
+          <div className="mb-12">
+            <p className="mb-2 text-xs uppercase" style={{ color: primary, letterSpacing: "0.2em" }}>Listen</p>
+            <h2 style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>Music</h2>
+          </div>
+          <div className="mx-auto max-w-3xl">
+            {music.map((item) => (
+              <AudioCard key={item.id} item={item} accentColor={primary} bgColor={bg} fgColor={fg} mutedColor={mutedFg} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ═══ WORK / RESUME ═══ */}
       <section id="analog-work" className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ borderTop: `1px solid ${muted}` }}>

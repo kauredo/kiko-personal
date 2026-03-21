@@ -31,9 +31,13 @@ export type HomeMedia = {
   id: string;
   type: "photo" | "video" | "music";
   title: string;
+  description: string | null;
   imageUrl: string | null;
   thumbnailUrl: string | null;
   videoUrl: string | null;
+  audioUrl: string | null;
+  album: string | null;
+  year: number | null;
 };
 
 export type HomeStat = {
@@ -103,9 +107,13 @@ export const FALLBACK_MEDIA: HomeMedia[] = Array.from({ length: 6 }, (_, i) => (
   id: String(i),
   type: (["photo", "video", "music"] as const)[i % 3],
   title: ["Live at Coliseu", "Studio Session", "Album Track", "Backstage", "Music Video", "Rehearsal"][i],
+  description: null,
   imageUrl: null,
   thumbnailUrl: null,
   videoUrl: null,
+  audioUrl: null,
+  album: null,
+  year: null,
 }));
 
 export const FALLBACK_BIO: HomeBio = {

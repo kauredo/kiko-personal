@@ -13,6 +13,7 @@ import { useHomeData } from "@/hooks/useHomeData";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { LogoFull } from "@/components/ui/LogoFull";
+import { AudioCard } from "@/components/ui/AudioCard";
 import { ArrowDown } from "lucide-react";
 
 const bg = "oklch(0.10 0.01 55)";
@@ -29,7 +30,7 @@ export function HomeEditorial() {
   const heroRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const lenis = useLenis();
-  const { events, experiences, testimonials, stats, services, settings, media, bio } = useHomeData();
+  const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
 
   useEffect(() => {
     if (prefersReducedMotion || !heroRef.current) return;
@@ -51,7 +52,7 @@ export function HomeEditorial() {
         <div className="flex items-center gap-8">
           {[
             { label: "About", id: "#editorial-about" },
-            { label: "Services", id: "#editorial-services" },
+            { label: "Portfolio", id: "#editorial-portfolio" },
             { label: "Events", id: "#editorial-events" },
             { label: "Contact", id: "#editorial-contact" },
           ].map(({ label, id }) => (
@@ -179,6 +180,81 @@ export function HomeEditorial() {
           </div>
         </div>
       </section>
+
+      {/* ═══ PORTFOLIO ═══ */}
+      <section id="editorial-portfolio" className="px-6 md:px-12 lg:px-24 xl:px-32 py-16 md:py-24" style={{ borderTop: `1px solid ${border}` }}>
+        <div className="mx-auto max-w-6xl">
+          <p className="mb-3 text-xs uppercase" style={{ color: primary, letterSpacing: "0.2em" }}>Portfolio</p>
+          <h2 className="mb-16" style={{ fontFamily: headingFont, fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1 }}>
+            In the moment
+          </h2>
+          <div className="columns-2 gap-4 md:columns-3">
+            {photos.map((item, i) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05, duration: 0.5 }}
+                className="group relative mb-4 overflow-hidden break-inside-avoid"
+                style={{ border: `1px solid ${border}` }}
+              >
+                {item.imageUrl ? (
+                  <img src={item.imageUrl} alt={item.title} className="w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                ) : (
+                  <div className="flex aspect-[3/4] items-center justify-center" style={{ background: card }}>
+                    <span className="text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>{item.title}</span>
+                  </div>
+                )}
+                <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full transition-transform duration-300 group-hover:translate-y-0" style={{ background: `${bg}ee` }}>
+                  <p className="text-sm" style={{ fontFamily: headingFont }}>{item.title}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ VIDEOS ═══ */}
+      {videos.length > 0 && (
+        <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-16 md:py-24" style={{ borderTop: `1px solid oklch(0.24 0.01 55)` }}>
+          <div className="mx-auto max-w-6xl">
+            <p className="mb-3 text-xs uppercase" style={{ color: "oklch(0.72 0.12 70)", letterSpacing: "0.2em" }}>Videos</p>
+            <h2 className="mb-16" style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1 }}>Watch</h2>
+            <div className="grid gap-4 md:grid-cols-2">
+              {videos.map((item) => (
+                <div key={item.id} className="group relative overflow-hidden" style={{ aspectRatio: "16/9", background: "oklch(0.14 0.01 55)", border: "1px solid oklch(0.24 0.01 55)" }}>
+                  {item.imageUrl ? (
+                    <video src={item.imageUrl} className="h-full w-full object-cover" muted loop playsInline
+                      onMouseEnter={e => (e.target as HTMLVideoElement).play()}
+                      onMouseLeave={e => (e.target as HTMLVideoElement).pause()} />
+                  ) : (
+                    <div className="flex h-full items-center justify-center" style={{ color: "oklch(0.50 0.01 55)" }}>
+                      <span className="text-[10px] uppercase" style={{ letterSpacing: "0.2em" }}>video</span>
+                    </div>
+                  )}
+                  <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full transition-transform duration-300 group-hover:translate-y-0" style={{ background: "oklch(0.10 0.01 55 / 0.9)" }}>
+                    <p className="text-sm" style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}>{item.title}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ═══ MUSIC ═══ */}
+      {music.length > 0 && (
+        <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-16 md:py-24" style={{ borderTop: "1px solid oklch(0.24 0.01 55)" }}>
+          <div className="mx-auto max-w-4xl">
+            <p className="mb-3 text-xs uppercase" style={{ color: "oklch(0.72 0.12 70)", letterSpacing: "0.2em" }}>Music</p>
+            <h2 className="mb-12" style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1 }}>Listen</h2>
+            {music.map((item) => (
+              <AudioCard key={item.id} item={item} accentColor="oklch(0.72 0.12 70)" bgColor="oklch(0.10 0.01 55)" fgColor="oklch(0.90 0.015 65)" mutedColor="oklch(0.50 0.01 55)" />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ═══ WORK / RESUME ═══ */}
       <section id="editorial-work" className="px-6 md:px-12 lg:px-24 xl:px-32 py-16 md:px-16 md:py-24 lg:px-24" style={{ borderTop: `1px solid ${border}` }}>

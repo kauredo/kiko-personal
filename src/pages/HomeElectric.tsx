@@ -15,9 +15,10 @@ import { LogoMark } from "@/components/ui/LogoMark";
 import { LogoFull } from "@/components/ui/LogoFull";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { useHomeData } from "@/hooks/useHomeData";
+import { AudioCard } from "@/components/ui/AudioCard";
 
 export function HomeElectric() {
-  const { events, experiences, testimonials, stats, services, settings, media, bio } = useHomeData();
+  const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
   const nameRef = useRef<HTMLHeadingElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const lenis = useLenis();
@@ -143,21 +144,21 @@ export function HomeElectric() {
         </div>
       </section>
 
-      {/* ═══ MEDIA STRIP ═══ */}
+      {/* ═══ PHOTOS ═══ */}
       <section className="border-t border-white/10 py-16 md:py-24">
         <div className="mb-10 flex items-end justify-between px-6 md:px-12 lg:px-24 xl:px-32">
           <h2
             className="text-xs uppercase text-white/40"
             style={{ letterSpacing: "0.25em" }}
           >
-            Portfolio
+            Photos
           </h2>
           <span className="text-xs uppercase text-[oklch(0.62_0.25_28)]" style={{ letterSpacing: "0.2em" }}>
             View all
           </span>
         </div>
         <div className="flex gap-3 overflow-x-auto px-8 pb-4 md:px-16 lg:px-24">
-          {media.map((item, i) => (
+          {photos.map((item, i) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, x: 30 }}
@@ -169,7 +170,7 @@ export function HomeElectric() {
                 <img src={item.imageUrl} alt={item.title} className="h-full w-full object-cover" />
               ) : (
                 <div className="flex h-full items-center justify-center text-white/15">
-                  <span className="text-[10px] uppercase" style={{ letterSpacing: "0.2em" }}>{item.type}</span>
+                  <span className="text-[10px] uppercase" style={{ letterSpacing: "0.2em" }}>photo</span>
                 </div>
               )}
               <div className="absolute inset-x-0 bottom-0 bg-[oklch(0.06_0.005_260)] p-4 translate-y-full transition-transform duration-300 group-hover:translate-y-0">
@@ -179,6 +180,45 @@ export function HomeElectric() {
           ))}
         </div>
       </section>
+
+      {/* ═══ VIDEOS ═══ */}
+      {videos.length > 0 && (
+        <section className="border-t border-white/10 py-16 md:py-24">
+          <div className="mb-10 px-8 md:px-16 lg:px-24">
+            <h2 className="text-xs uppercase text-white/40" style={{ letterSpacing: "0.25em" }}>Videos</h2>
+          </div>
+          <div className="flex gap-3 overflow-x-auto px-8 pb-4 md:px-16 lg:px-24">
+            {videos.map((item, i) => (
+              <div key={item.id} className="group relative aspect-[16/9] w-80 flex-shrink-0 cursor-pointer overflow-hidden bg-white/[0.10] md:w-96">
+                {item.imageUrl ? (
+                  <video src={item.imageUrl} className="h-full w-full object-cover" muted loop playsInline
+                    onMouseEnter={e => (e.target as HTMLVideoElement).play()}
+                    onMouseLeave={e => (e.target as HTMLVideoElement).pause()} />
+                ) : (
+                  <div className="flex h-full items-center justify-center text-white/15">
+                    <span className="text-[10px] uppercase" style={{ letterSpacing: "0.2em" }}>video</span>
+                  </div>
+                )}
+                <div className="absolute inset-x-0 bottom-0 bg-[oklch(0.06_0.005_260)] p-4 translate-y-full transition-transform duration-300 group-hover:translate-y-0">
+                  <p className="text-sm font-medium text-white">{item.title}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ═══ MUSIC ═══ */}
+      {music.length > 0 && (
+        <section className="border-t border-white/10 px-8 py-16 md:px-16 md:py-24 lg:px-24">
+          <h2 className="mb-8 text-xs uppercase text-white/40" style={{ letterSpacing: "0.25em" }}>Music</h2>
+          <div className="mx-auto max-w-3xl">
+            {music.map((item) => (
+              <AudioCard key={item.id} item={item} accentColor="oklch(0.62 0.25 28)" bgColor="oklch(0.06 0.005 260)" fgColor="white" mutedColor="rgba(255,255,255,0.4)" />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ═══ WORK / RESUME ═══ */}
       <section id="electric-work" className="border-t border-white/10 px-8 py-16 md:px-16 md:py-24 lg:px-24">

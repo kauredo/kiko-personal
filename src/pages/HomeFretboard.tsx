@@ -12,6 +12,7 @@ import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { LogoFull } from "@/components/ui/LogoFull";
+import { AudioCard } from "@/components/ui/AudioCard";
 import { ArrowUpRight } from "lucide-react";
 import { useHomeData } from "@/hooks/useHomeData";
 
@@ -176,7 +177,7 @@ function ChordDiagram({
 }
 
 export function HomeFretboard() {
-  const { events, experiences, testimonials, stats, services, settings, media, bio } = useHomeData();
+  const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -465,7 +466,7 @@ export function HomeFretboard() {
             See &amp; Hear
           </h2>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-            {media.slice(0, 5).map((item, i) => (
+            {photos.map((item, i) => (
               <div
                 key={item.id}
                 className={`fret-text relative flex items-center justify-center overflow-hidden border border-white/[0.06] ${i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-[4/3]"}`}
@@ -481,6 +482,51 @@ export function HomeFretboard() {
           </div>
         </div>
       </section>
+
+      {/* ═══ VIDEOS ═══ */}
+      {videos.length > 0 && (
+        <section className="fret-section relative py-24 md:py-32">
+          <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
+          <div className="mx-auto max-w-5xl px-8 md:px-16 lg:px-24">
+            <h2 className="fret-text mb-10 text-xl font-bold uppercase text-white md:text-2xl" style={{ fontFamily: "'Syne', system-ui, sans-serif", letterSpacing: "0.05em" }}>
+              Videos
+            </h2>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              {videos.map((item) => (
+                <div key={item.id} className="fret-text group relative overflow-hidden border border-white/[0.06]" style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.03)" }}>
+                  {item.imageUrl ? (
+                    <video src={item.imageUrl} className="h-full w-full object-cover" muted loop playsInline
+                      onMouseEnter={e => (e.target as HTMLVideoElement).play()}
+                      onMouseLeave={e => (e.target as HTMLVideoElement).pause()} />
+                  ) : (
+                    <div className="flex h-full items-center justify-center">
+                      <span className="text-[9px] uppercase tracking-[0.2em] text-white/15">video</span>
+                    </div>
+                  )}
+                  <div className="absolute inset-x-0 bottom-0 bg-black/80 p-4 translate-y-full transition-transform duration-300 group-hover:translate-y-0">
+                    <p className="text-sm font-medium text-white">{item.title}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ═══ MUSIC ═══ */}
+      {music.length > 0 && (
+        <section className="fret-section relative py-24 md:py-32">
+          <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
+          <div className="mx-auto max-w-4xl px-8 md:px-16 lg:px-24">
+            <h2 className="fret-text mb-10 text-xl font-bold uppercase text-white md:text-2xl" style={{ fontFamily: "'Syne', system-ui, sans-serif", letterSpacing: "0.05em" }}>
+              Music
+            </h2>
+            {music.map((item) => (
+              <AudioCard key={item.id} item={item} accentColor="white" bgColor="oklch(0.065 0.008 40)" fgColor="white" mutedColor="rgba(255,255,255,0.3)" />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ═══ CTA — Dm Chord ═══ */}
       <section className="fret-section relative flex min-h-[60vh] flex-col items-center justify-center px-8">

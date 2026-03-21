@@ -72,10 +72,18 @@ export function useHomeData() {
         id: m._id,
         type: m.type,
         title: m.title,
+        description: m.description ?? null,
         imageUrl: (m as Record<string, unknown>).imageUrl as string | null ?? null,
         thumbnailUrl: (m as Record<string, unknown>).thumbnailUrl as string | null ?? null,
         videoUrl: m.videoUrl ?? null,
+        audioUrl: (m as Record<string, unknown>).audioFileUrl as string | null ?? null,
+        album: m.album ?? null,
+        year: m.year ?? null,
       }));
+
+  const photos = media.filter((m) => m.type === "photo");
+  const videos = media.filter((m) => m.type === "video");
+  const music = media.filter((m) => m.type === "music");
 
   const name = rawBio?.name ?? FALLBACK_BIO.name;
   const nameParts = name.split(" ");
@@ -104,6 +112,9 @@ export function useHomeData() {
     experiences,
     testimonials,
     media,
+    photos,
+    videos,
+    music,
     bio,
     settings,
     stats: STATS,
