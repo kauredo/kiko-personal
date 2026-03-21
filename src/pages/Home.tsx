@@ -1,23 +1,32 @@
+import { lazy, Suspense } from "react";
 import { useTheme } from "@/hooks/useTheme";
 import { PageWrapper } from "@/components/layout/PageWrapper";
-import { HomeElectric } from "./HomeElectric";
-import { HomeAnalog } from "./HomeAnalog";
-import { HomeEditorial } from "./HomeEditorial";
-import { HomeParallax } from "./HomeParallax";
-import { HomePiano } from "./HomePiano";
-import { HomeFretboard } from "./HomeFretboard";
+
+const HomeElectric = lazy(() => import("./HomeElectric").then(m => ({ default: m.HomeElectric })));
+const HomeAnalog = lazy(() => import("./HomeAnalog").then(m => ({ default: m.HomeAnalog })));
+const HomeEditorial = lazy(() => import("./HomeEditorial").then(m => ({ default: m.HomeEditorial })));
+const HomeParallax = lazy(() => import("./HomeParallax").then(m => ({ default: m.HomeParallax })));
+const HomePiano = lazy(() => import("./HomePiano").then(m => ({ default: m.HomePiano })));
+const HomeFretboard = lazy(() => import("./HomeFretboard").then(m => ({ default: m.HomeFretboard })));
+
+const THEMES = {
+  "dark-electric": HomeElectric,
+  "raw-textured": HomeAnalog,
+  hybrid: HomeEditorial,
+  parallax: HomeParallax,
+  piano: HomePiano,
+  guitar: HomeFretboard,
+} as const;
 
 export function Home() {
   const { theme } = useTheme();
+  const Component = THEMES[theme];
 
   return (
     <PageWrapper>
-      {theme === "dark-electric" && <HomeElectric />}
-      {theme === "raw-textured" && <HomeAnalog />}
-      {theme === "hybrid" && <HomeEditorial />}
-      {theme === "parallax" && <HomeParallax />}
-      {theme === "piano" && <HomePiano />}
-      {theme === "guitar" && <HomeFretboard />}
+      <Suspense fallback={null}>
+        <Component />
+      </Suspense>
     </PageWrapper>
   );
 }
