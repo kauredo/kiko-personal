@@ -14,7 +14,8 @@ import { LogoMark } from "@/components/ui/LogoMark";
 import { LogoFull } from "@/components/ui/LogoFull";
 import { AudioCard } from "@/components/ui/AudioCard";
 import { VideoCard } from "@/components/ui/VideoCard";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Mail, Instagram, Youtube, Music2, Linkedin } from "lucide-react";
+import { MobileMenu } from "@/components/ui/MobileMenu";
 import { useHomeData } from "@/hooks/useHomeData";
 import { useGallery } from "@/context/GalleryContext";
 
@@ -178,6 +179,15 @@ function ChordDiagram({
   );
 }
 
+function getSocialIcon(platform: string) {
+  const p = platform.toLowerCase();
+  if (p.includes("instagram")) return Instagram;
+  if (p.includes("youtube")) return Youtube;
+  if (p.includes("spotify") || p.includes("music")) return Music2;
+  if (p.includes("linkedin")) return Linkedin;
+  return Mail;
+}
+
 export function HomeFretboard() {
   const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
   const openGallery = useGallery();
@@ -290,14 +300,29 @@ export function HomeFretboard() {
         <div className="flex items-center gap-6">
           {[
             { label: "About", id: "#fret-about" },
-            { label: "Experience", id: "#fret-experience" },
+            { label: "Portfolio", id: "#fret-media" },
+            { label: "Work", id: "#fret-experience" },
             { label: "Events", id: "#fret-events" },
+            { label: "Contact", id: "#fret-contact" },
           ].map(({ label, id }) => (
             <button key={label} onClick={() => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })} className="hidden text-xs uppercase text-white/40 transition-colors hover:text-white/70 md:block" style={{ letterSpacing: "0.15em" }}>
               {label}
             </button>
           ))}
           <ThemeSwitcher />
+          <MobileMenu
+            links={[
+              { label: "About", id: "#fret-about" },
+              { label: "Portfolio", id: "#fret-media" },
+              { label: "Work", id: "#fret-experience" },
+              { label: "Events", id: "#fret-events" },
+              { label: "Contact", id: "#fret-contact" },
+            ]}
+            scrollTo={(id) => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+            color="white"
+            bgColor="oklch(0.065 0.008 40)"
+            headingFont="'Syne', system-ui, sans-serif"
+          />
         </div>
       </nav>
 
@@ -350,6 +375,7 @@ export function HomeFretboard() {
       </section>
 
       {/* ═══ EXPERIENCE — Am Chord ═══ */}
+      {experiences.length > 0 && (
       <section id="fret-experience" className="fret-section relative py-24 md:py-32">
         <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
         <div className="mx-auto flex max-w-5xl flex-col items-start gap-12 px-8 md:flex-row-reverse md:items-start md:gap-20 md:px-16 lg:px-24">
@@ -372,8 +398,10 @@ export function HomeFretboard() {
           </div>
         </div>
       </section>
+      )}
 
       {/* ═══ EVENTS — Large "G" Typography ═══ */}
+      {events.length > 0 && (
       <section id="fret-events" className="fret-section relative py-24 md:py-32">
         <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
         <div className="mx-auto flex max-w-5xl flex-col items-start gap-8 px-8 md:flex-row md:items-start md:gap-16 md:px-16 lg:px-24">
@@ -389,7 +417,7 @@ export function HomeFretboard() {
             </h2>
             {events.map((event, i) => (
               <div key={i} className="fret-text border-t border-white/[0.08] py-5 transition-colors hover:bg-white/[0.02]">
-                <div className="flex items-baseline justify-between gap-8">
+                <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between md:gap-8">
                   <div>
                     <p className="text-sm font-medium text-white">{event.title}</p>
                     <p className="mt-0.5 text-xs text-white/35">{event.venue}</p>
@@ -406,6 +434,7 @@ export function HomeFretboard() {
           </div>
         </div>
       </section>
+      )}
 
       {/* ═══ SERVICES — Full-width on fretboard ═══ */}
       <section id="fret-services" className="fret-section relative py-24 md:py-32">
@@ -447,6 +476,7 @@ export function HomeFretboard() {
       </section>
 
       {/* ═══ TESTIMONIALS — Full-width quotes on fretboard ═══ */}
+      {testimonials.length > 0 && (
       <section id="fret-testimonials" className="fret-section relative py-24 md:py-32">
         <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
         <div className="mx-auto grid max-w-5xl gap-12 px-8 md:grid-cols-2 md:gap-16 md:px-16 lg:px-24">
@@ -458,8 +488,10 @@ export function HomeFretboard() {
           ))}
         </div>
       </section>
+      )}
 
       {/* ═══ MEDIA — Full-width grid on fretboard ═══ */}
+      {photos.length > 0 && (
       <section id="fret-media" className="fret-section relative py-24 md:py-32">
         <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
         <div className="mx-auto max-w-5xl px-8 md:px-16 lg:px-24">
@@ -467,18 +499,23 @@ export function HomeFretboard() {
             className="fret-text mb-10 text-xl font-bold uppercase text-white md:text-2xl"
             style={{ fontFamily: "'Syne', system-ui, sans-serif", letterSpacing: "0.05em" }}
           >
-            See &amp; Hear
+            Gallery
           </h2>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {photos.map((item, i) => (
               <div
                 key={item.id}
-                className={`fret-text relative flex cursor-pointer items-center justify-center overflow-hidden border border-white/[0.06] ${i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-[4/3]"}`}
+                className={`group fret-text relative flex cursor-pointer items-center justify-center overflow-hidden border border-white/[0.06] ${i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-[4/3]"}`}
                 onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))}
                 style={{ background: "rgba(255,255,255,0.03)" }}
               >
                 {item.imageUrl ? (
-                  <img src={item.imageUrl} alt={item.title} className="absolute inset-0 h-full w-full object-cover" />
+                  <>
+                    <img src={item.imageUrl} alt={item.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+                    <div className="absolute inset-x-0 bottom-0 translate-y-0 bg-black/70 px-3 py-2 backdrop-blur-sm transition-transform duration-300 md:translate-y-full md:group-hover:translate-y-0">
+                      <p className="text-xs font-medium text-white">{item.title}</p>
+                    </div>
+                  </>
                 ) : (
                   <span className="text-[9px] uppercase tracking-[0.2em] text-white/15">{item.title}</span>
                 )}
@@ -487,6 +524,7 @@ export function HomeFretboard() {
           </div>
         </div>
       </section>
+      )}
 
       {/* ═══ VIDEOS ═══ */}
       {videos.length > 0 && (
@@ -517,7 +555,7 @@ export function HomeFretboard() {
       {music.length > 0 && (
         <section className="fret-section relative py-24 md:py-32">
           <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
-          <div className="mx-auto max-w-4xl px-8 md:px-16 lg:px-24">
+          <div className="mx-auto max-w-5xl px-8 md:px-16 lg:px-24">
             <h2 className="fret-text mb-10 text-xl font-bold uppercase text-white md:text-2xl" style={{ fontFamily: "'Syne', system-ui, sans-serif", letterSpacing: "0.05em" }}>
               Music
             </h2>
@@ -529,7 +567,7 @@ export function HomeFretboard() {
       )}
 
       {/* ═══ CTA — Dm Chord ═══ */}
-      <section className="fret-section relative flex min-h-[60vh] flex-col items-center justify-center px-8">
+      <section id="fret-contact" className="fret-section relative flex min-h-[60vh] flex-col items-center justify-center px-8">
         <div className="absolute top-0 left-[12%] right-[12%] h-px bg-white/[0.12]" />
         <div className="chord-diagram mb-10">
           <ChordDiagram chord="Dm" scale={3} showLabel />
@@ -551,8 +589,18 @@ export function HomeFretboard() {
       </section>
 
       {/* ═══ FOOTER ═══ */}
-      <footer className="relative z-10 flex items-center justify-between px-6 py-8 text-[10px] tracking-[0.15em] text-white/20 md:px-12 lg:px-24">
+      <footer className="relative z-10 flex flex-col items-center gap-4 px-6 py-8 text-[10px] tracking-[0.15em] text-white/20 md:flex-row md:justify-between md:px-12 lg:px-24">
         <span>&copy; {new Date().getFullYear()} Francisco Catarro</span>
+        <div className="flex items-center gap-4">
+          {settings.socialLinks.map((link) => {
+            const Icon = getSocialIcon(link.platform);
+            return (
+              <a key={link.platform} href={link.url} target="_blank" rel="noopener noreferrer" aria-label={link.platform} className="flex h-10 w-10 items-center justify-center text-white/20 transition-colors hover:text-white/50">
+                <Icon size={14} />
+              </a>
+            );
+          })}
+        </div>
         <span>F &middot; C &middot; Am &middot; G &middot; Dm</span>
       </footer>
     </div>

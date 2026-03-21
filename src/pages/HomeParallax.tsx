@@ -14,7 +14,17 @@ import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { AudioCard } from "@/components/ui/AudioCard";
 import { VideoCard } from "@/components/ui/VideoCard";
-import { ArrowUpRight } from "lucide-react";
+import { MobileMenu } from "@/components/ui/MobileMenu";
+import { ArrowUpRight, Instagram, Youtube, Music2, Linkedin, Mail } from "lucide-react";
+
+function getSocialIcon(platform: string) {
+  const p = platform.toLowerCase();
+  if (p.includes("instagram")) return Instagram;
+  if (p.includes("youtube")) return Youtube;
+  if (p.includes("spotify") || p.includes("music")) return Music2;
+  if (p.includes("linkedin")) return Linkedin;
+  return Mail;
+}
 
 export function HomeParallax() {
   const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
@@ -147,6 +157,14 @@ export function HomeParallax() {
     return () => ctx.revert();
   }, [prefersReducedMotion, media.length]);
 
+  useEffect(() => {
+    if (!prefersReducedMotion || !containerRef.current) return;
+    containerRef.current.querySelectorAll(".counter").forEach((el) => {
+      const target = (el as HTMLElement).dataset.target || "0";
+      (el as HTMLElement).textContent = target + "+";
+    });
+  }, [prefersReducedMotion]);
+
   return (
     <div
       ref={containerRef}
@@ -190,6 +208,19 @@ export function HomeParallax() {
           ))}
           <ThemeSwitcher />
         </div>
+        <MobileMenu
+          links={[
+            { label: "About", id: "#parallax-about" },
+            { label: "Portfolio", id: "#parallax-portfolio" },
+            { label: "Work", id: "#parallax-work" },
+            { label: "Events", id: "#parallax-events" },
+            { label: "Contact", id: "#parallax-contact" },
+          ]}
+          scrollTo={(id: string) => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+          color="white"
+          bgColor="oklch(0.05 0.005 260)"
+          headingFont="'Syne', system-ui, sans-serif"
+        />
       </nav>
 
       {/* ═══ HERO — Name scales down as you scroll ═══ */}
@@ -243,7 +274,7 @@ export function HomeParallax() {
       {/* ═══ STATS — Counters animate on scroll ═══ */}
       <section className="grid grid-cols-2 border-t border-b border-white/10 md:grid-cols-4">
         {stats.map((stat, i) => (
-          <div key={i} className="flex flex-col items-center py-16 md:py-20" style={{ borderRight: i < stats.length - 1 ? "1px solid rgba(255,255,255,0.1)" : "none" }}>
+          <div key={i} className="flex flex-col items-center py-16 md:py-20">
             <span
               className="counter text-4xl md:text-5xl"
               data-target={stat.numericTarget}
@@ -310,55 +341,58 @@ export function HomeParallax() {
       </section>
 
       {/* ═══ HORIZONTAL SCROLL GALLERY ═══ */}
-      <section id="parallax-portfolio" className="h-scroll-section overflow-hidden">
-        <div className="flex min-h-screen flex-col justify-center py-16">
-          <div className="mb-10 flex items-end justify-between px-8 md:px-16 lg:px-24">
-            <div>
-              <p className="mb-2 text-[10px] tracking-[0.3em] uppercase text-white/30">Portfolio</p>
-              <h2
-                className="text-3xl md:text-5xl"
-                style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}
-              >
-                See &amp; Hear
-              </h2>
+      {photos.length > 0 && (
+        <section id="parallax-portfolio" className="h-scroll-section overflow-hidden">
+          <div className="flex min-h-screen flex-col justify-center py-16">
+            <div className="mb-10 flex items-end justify-between px-8 md:px-16 lg:px-24">
+              <div>
+                <p className="mb-2 text-[10px] tracking-[0.3em] uppercase text-white/30">Portfolio</p>
+                <h2
+                  className="text-3xl md:text-5xl"
+                  style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}
+                >
+                  Gallery
+                </h2>
+              </div>
+            </div>
+
+            <div className="h-scroll-track flex gap-4 px-8 md:px-16 lg:px-24">
+              {photos.map((item, i) => (
+                <div
+                  key={item.id}
+                  className="group relative flex-shrink-0 cursor-pointer overflow-hidden"
+                  onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))}
+                  style={{
+                    width: i === 0 ? "min(50vw, 400px)" : "min(35vw, 280px)",
+                    minWidth: i === 0 ? "280px" : "200px",
+                    aspectRatio: i === 0 ? "4/3" : "3/4",
+                    background: "rgba(255,255,255,0.08)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                  }}
+                  data-speed={i % 2 === 0 ? "0.05" : "-0.05"}
+                >
+                  {item.imageUrl ? (
+                    <img src={item.imageUrl} alt={item.title} loading="lazy" className="h-full w-full object-cover" />
+                  ) : (
+                    <div className="flex h-full items-center justify-center text-white/10">
+                      <span className="text-[10px] tracking-[0.2em] uppercase">{item.title}</span>
+                    </div>
+                  )}
+                  <div className="absolute inset-x-0 bottom-0 bg-black/80 p-5 translate-y-0 md:translate-y-full transition-transform duration-500 md:group-hover:translate-y-0">
+                    <p className="text-sm font-medium">{item.title}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-
-          <div className="h-scroll-track flex gap-4 px-8 md:px-16 lg:px-24">
-            {photos.map((item, i) => (
-              <div
-                key={item.id}
-                className="group relative flex-shrink-0 cursor-pointer overflow-hidden"
-                onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))}
-                style={{
-                  width: i === 0 ? "50vw" : "35vw",
-                  aspectRatio: i === 0 ? "4/3" : "3/4",
-                  background: "rgba(255,255,255,0.08)",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                }}
-                data-speed={i % 2 === 0 ? "0.05" : "-0.05"}
-              >
-                {item.imageUrl ? (
-                  <img src={item.imageUrl} alt={item.title} className="h-full w-full object-cover" />
-                ) : (
-                  <div className="flex h-full items-center justify-center text-white/10">
-                    <span className="text-[10px] tracking-[0.2em] uppercase">{item.title}</span>
-                  </div>
-                )}
-                <div className="absolute inset-x-0 bottom-0 bg-black/80 p-5 translate-y-full transition-transform duration-500 group-hover:translate-y-0">
-                  <p className="text-sm font-medium">{item.title}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ═══ VIDEOS ═══ */}
       {videos.length > 0 && (
         <section className="px-8 py-24 md:px-16 md:py-32 lg:px-24" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
           <p className="mb-2 text-[10px] tracking-[0.3em] uppercase text-white/30">Videos</p>
-          <h2 className="mb-12 text-3xl md:text-4xl" style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}>
+          <h2 className="mb-12 text-3xl md:text-5xl" style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}>
             In Motion
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
@@ -381,7 +415,7 @@ export function HomeParallax() {
       {music.length > 0 && (
         <section className="px-8 py-24 md:px-16 md:py-32 lg:px-24" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
           <p className="mb-2 text-[10px] tracking-[0.3em] uppercase text-white/30">Music</p>
-          <h2 className="mb-12 text-3xl md:text-4xl" style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}>
+          <h2 className="mb-12 text-3xl md:text-5xl" style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}>
             Listen
           </h2>
           <div className="mx-auto max-w-3xl">
@@ -393,93 +427,105 @@ export function HomeParallax() {
       )}
 
       {/* ═══ WORK / RESUME ═══ */}
-      <section id="parallax-work" className="px-8 py-24 md:px-16 md:py-32 lg:px-24">
-        <div className="mx-auto max-w-5xl">
-          <p className="reveal mb-3 text-[10px] tracking-[0.3em] uppercase text-white/30">Experience</p>
-          <h2
-            className="reveal mb-16 text-3xl md:text-5xl"
-            style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}
-          >
-            Work
-          </h2>
-          {experiences.map((item, i) => (
-            <div
-              key={i}
-              className="reveal flex items-center justify-between border-b border-white/10 py-8"
-              data-speed={0.01 * (i + 1)}
+      {experiences.length > 0 && (
+        <section id="parallax-work" className="px-8 py-24 md:px-16 md:py-32 lg:px-24">
+          <div className="mx-auto max-w-5xl">
+            <p className="reveal mb-3 text-[10px] tracking-[0.3em] uppercase text-white/30">Experience</p>
+            <h2
+              className="reveal mb-16 text-3xl md:text-5xl"
+              style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}
             >
-              <div className="flex items-baseline gap-8 md:gap-12">
-                <span
-                  className="w-36 text-sm font-bold uppercase md:text-base"
-                  style={{ fontFamily: "'Syne', system-ui, sans-serif", letterSpacing: "-0.01em" }}
-                >
-                  {item.title}
-                </span>
-                <span className="text-white/40">{item.organization}</span>
-              </div>
-              <span className="text-sm text-white/30">{item.period}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ═══ TESTIMONIALS — Accent break ═══ */}
-      <section id="parallax-testimonials" className="relative overflow-hidden px-8 py-24 md:px-16 md:py-32 lg:px-24" style={{ background: "oklch(0.62 0.25 28)" }}>
-        <div className="mx-auto max-w-5xl">
-          <div className="grid gap-12 md:grid-cols-2 md:gap-16">
-            {testimonials.map((t, i) => (
-              <blockquote key={i} className="reveal" data-speed={i === 0 ? "0.03" : "-0.03"}>
-                <p
-                  className="mb-6 text-xl leading-relaxed text-white md:text-2xl"
-                  style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 400 }}
-                >
-                  "{t.quote}"
-                </p>
-                <footer>
-                  <span className="text-sm font-bold text-white">{t.authorName}</span>
-                  <span className="ml-2 text-sm text-white/60">— {t.authorRole}</span>
-                </footer>
-              </blockquote>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ EVENTS with parallax offset ═══ */}
-      <section id="parallax-events" className="px-8 py-24 md:px-16 md:py-32 lg:px-24">
-        <div className="mx-auto max-w-5xl">
-          <p className="reveal mb-3 text-[10px] tracking-[0.3em] uppercase text-white/30">Upcoming</p>
-          <h2
-            className="reveal mb-16 text-3xl md:text-5xl"
-            style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}
-          >
-            Catch me live
-          </h2>
-          {events.map((event, i) => (
-            <div key={i} className="reveal group flex items-center justify-between border-b border-white/10 py-8 transition-colors hover:bg-white/[0.02]">
-              <div className="flex items-baseline gap-8 md:gap-12">
-                <span
-                  className="w-24 text-3xl text-white/20 md:text-4xl"
-                  style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700 }}
-                  data-speed="0.02"
-                >
-                  {event.dateShort}
-                </span>
-                <div>
-                  <h3
-                    className="text-lg font-bold uppercase md:text-xl"
+              Work
+            </h2>
+            {experiences.map((item, i) => (
+              <div
+                key={i}
+                className="reveal flex flex-col gap-2 border-b border-white/10 py-6 md:flex-row md:items-center md:justify-between md:py-8"
+                data-speed={0.01 * (i + 1)}
+              >
+                <div className="flex items-baseline gap-8 md:gap-12">
+                  <span
+                    className="text-sm font-bold uppercase md:w-36 md:text-base"
                     style={{ fontFamily: "'Syne', system-ui, sans-serif", letterSpacing: "-0.01em" }}
                   >
-                    {event.title}
-                  </h3>
-                  <p className="mt-1 text-sm text-white/40">{event.venue}</p>
+                    {item.title}
+                  </span>
+                  <span className="text-white/40">{item.organization}</span>
                 </div>
+                <span className="text-sm text-white/30">{item.period}</span>
               </div>
-              <ArrowUpRight size={20} className="text-white/20 transition-colors group-hover:text-white/60" />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ═══ TESTIMONIALS — Accent break ═══ */}
+      {testimonials.length > 0 && (
+        <section id="parallax-testimonials" className="relative overflow-hidden px-8 py-24 md:px-16 md:py-32 lg:px-24" style={{ background: "oklch(0.62 0.25 28)" }}>
+          <div className="mx-auto max-w-5xl">
+            <div className="grid gap-12 md:grid-cols-2 md:gap-16">
+              {testimonials.map((t, i) => (
+                <blockquote key={i} className="reveal" data-speed={i === 0 ? "0.03" : "-0.03"}>
+                  <p
+                    className="mb-6 text-xl leading-relaxed text-white md:text-2xl"
+                    style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 400 }}
+                  >
+                    "{t.quote}"
+                  </p>
+                  <footer>
+                    <span className="text-sm font-bold text-white">{t.authorName}</span>
+                    <span className="ml-2 text-sm text-white/60">— {t.authorRole}</span>
+                  </footer>
+                </blockquote>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
+
+      {/* ═══ EVENTS with parallax offset ═══ */}
+      {events.length > 0 && (
+        <section id="parallax-events" className="px-8 py-24 md:px-16 md:py-32 lg:px-24">
+          <div className="mx-auto max-w-5xl">
+            <p className="reveal mb-3 text-[10px] tracking-[0.3em] uppercase text-white/30">Events</p>
+            <h2
+              className="reveal mb-16 text-3xl md:text-5xl"
+              style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "-0.02em" }}
+            >
+              Catch me live
+            </h2>
+            {events.map((event, i) => (
+              <div key={i} className="reveal group flex flex-col gap-3 border-b border-white/10 py-6 transition-colors hover:bg-white/[0.02] md:flex-row md:items-center md:justify-between md:py-8">
+                <div className="flex items-baseline gap-8 md:gap-12">
+                  <span
+                    className="text-xl text-white/20 md:w-24 md:text-4xl"
+                    style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 700 }}
+                    data-speed="0.02"
+                  >
+                    {event.dateShort}
+                  </span>
+                  <div>
+                    <h3
+                      className="text-lg font-bold uppercase md:text-xl"
+                      style={{ fontFamily: "'Syne', system-ui, sans-serif", letterSpacing: "-0.01em" }}
+                    >
+                      {event.title}
+                    </h3>
+                    <p className="mt-1 text-sm text-white/40">{event.venue}</p>
+                  </div>
+                </div>
+                {event.ticketUrl ? (
+                  <a href={event.ticketUrl} target="_blank" rel="noopener noreferrer" className="text-white/20 transition-colors group-hover:text-white/60">
+                    <ArrowUpRight size={20} />
+                  </a>
+                ) : (
+                  <ArrowUpRight size={20} className="text-white/20" />
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ═══ CONTACT — Dramatic reveal ═══ */}
       <section id="parallax-contact" className="relative flex min-h-[60vh] items-center justify-center overflow-hidden" style={{ background: "oklch(0.62 0.25 28)" }}>
@@ -501,8 +547,20 @@ export function HomeParallax() {
       </section>
 
       {/* ═══ FOOTER ═══ */}
-      <footer className="flex items-center justify-between px-8 py-8 text-[11px] tracking-[0.15em] text-white/20 md:px-16 lg:px-24">
+      <footer className="flex flex-col items-center gap-4 px-8 py-8 text-[11px] tracking-[0.15em] text-white/20 md:flex-row md:justify-between md:px-16 lg:px-24">
         <span>&copy; {new Date().getFullYear()} Francisco Catarro</span>
+        {settings.socialLinks.length > 0 && (
+          <div className="flex items-center gap-4">
+            {settings.socialLinks.map((link) => {
+              const Icon = getSocialIcon(link.platform);
+              return (
+                <a key={link.platform} href={link.url} target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center text-white/20 transition-colors hover:text-white/50">
+                  <Icon size={16} />
+                </a>
+              );
+            })}
+          </div>
+        )}
         <span>Guitar &middot; Keys &middot; MD &middot; Production</span>
       </footer>
     </div>

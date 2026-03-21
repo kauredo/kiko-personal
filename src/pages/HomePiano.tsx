@@ -10,7 +10,8 @@ import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { AudioCard } from "@/components/ui/AudioCard";
 import { VideoCard } from "@/components/ui/VideoCard";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Mail, Instagram, Youtube, Music2, Linkedin } from "lucide-react";
+import { MobileMenu } from "@/components/ui/MobileMenu";
 import { useHomeData } from "@/hooks/useHomeData";
 import { useGallery } from "@/context/GalleryContext";
 
@@ -59,18 +60,34 @@ function useAudioContext() {
 }
 
 function PianoKeyboard({ activeNote, onPlay }: { activeNote: string | null; onPlay: (note: string) => void }) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
   const keyW = 80;
   const keyH = 260;
   const blackW = 48;
   const blackH = 165;
   const totalW = WHITE_KEYS.length * keyW;
 
+  useEffect(() => {
+    function updateScale() {
+      if (wrapperRef.current) {
+        const containerW = wrapperRef.current.clientWidth;
+        setScale(Math.min(1, containerW / totalW));
+      }
+    }
+    updateScale();
+    window.addEventListener("resize", updateScale);
+    return () => window.removeEventListener("resize", updateScale);
+  }, [totalW]);
+
   return (
-    <div className="relative mx-auto overflow-hidden" style={{ maxWidth: totalW, width: "100%", height: keyH, aspectRatio: `${totalW}/${keyH}` }}>
+    <div ref={wrapperRef} className="mx-auto w-full overflow-hidden" style={{ maxWidth: totalW, height: keyH * scale }}>
+      <div className="relative origin-top-left" style={{ width: totalW, height: keyH, transform: `scale(${scale})` }}>
       {/* White keys */}
       {WHITE_KEYS.map((note, i) => (
         <button
           key={note}
+          aria-label={note}
           onMouseDown={() => onPlay(note)}
           className="absolute top-0 transition-all duration-100"
           style={{
@@ -99,6 +116,7 @@ function PianoKeyboard({ activeNote, onPlay }: { activeNote: string | null; onPl
       {BLACK_KEYS.map(({ note, offset }) => (
         <button
           key={note}
+          aria-label={note}
           onMouseDown={() => onPlay(note)}
           className="absolute top-0 z-10 transition-all duration-100"
           style={{
@@ -118,8 +136,18 @@ function PianoKeyboard({ activeNote, onPlay }: { activeNote: string | null; onPl
           }}
         />
       ))}
+      </div>
     </div>
   );
+}
+
+function getSocialIcon(platform: string) {
+  const p = platform.toLowerCase();
+  if (p.includes("instagram")) return Instagram;
+  if (p.includes("youtube")) return Youtube;
+  if (p.includes("spotify") || p.includes("music")) return Music2;
+  if (p.includes("linkedin")) return Linkedin;
+  return Mail;
 }
 
 export function HomePiano() {
@@ -150,7 +178,7 @@ export function HomePiano() {
 
   const bg = "oklch(0.97 0.005 80)";
   const fg = "oklch(0.10 0.02 260)";
-  const primary = "oklch(0.12 0.005 260)";
+  const primary = "oklch(0.55 0.15 45)";
   const muted = "oklch(0.85 0.01 80)";
   const mutedFg = "oklch(0.50 0.01 260)";
 
@@ -164,6 +192,8 @@ export function HomePiano() {
         </div>
         <div className="flex items-center gap-6">
           {[
+            { label: "About", id: "#piano-about" },
+            { label: "Portfolio", id: "#piano-media" },
             { label: "Work", id: "#piano-work" },
             { label: "Events", id: "#piano-events" },
             { label: "Contact", id: "#piano-contact" },
@@ -173,6 +203,19 @@ export function HomePiano() {
             </button>
           ))}
           <ThemeSwitcher variant="dark" />
+          <MobileMenu
+            links={[
+              { label: "About", id: "#piano-about" },
+              { label: "Portfolio", id: "#piano-media" },
+              { label: "Work", id: "#piano-work" },
+              { label: "Events", id: "#piano-events" },
+              { label: "Contact", id: "#piano-contact" },
+            ]}
+            scrollTo={(id) => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+            color={fg}
+            bgColor={bg}
+            headingFont="'DM Serif Display', Georgia, serif"
+          />
         </div>
       </nav>
 
@@ -187,7 +230,8 @@ export function HomePiano() {
           </h1>
           <p className="text-sm leading-relaxed" style={{ color: mutedFg }}>
             Guitarist, pianist, musical director & producer.<br />
-            Play the keys below — or use your keyboard (A-L).
+            <span className="hidden md:inline">Play the keys below — or use your keyboard (A-L).</span>
+            <span className="md:hidden">Tap the keys below to play.</span>
           </p>
         </div>
 
@@ -213,7 +257,7 @@ export function HomePiano() {
       </section>
 
       {/* ═══ ABOUT — Musical staff inspired ═══ */}
-      <section className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
+      <section id="piano-about" className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
         <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2 md:gap-20">
           <div>
             <p className="mb-3 text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>About</p>
@@ -235,7 +279,7 @@ export function HomePiano() {
 
       {/* ═══ STATS ═══ */}
       <section id="piano-stats" className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
-        <div className="mx-auto grid max-w-5xl grid-cols-2 gap-10 md:grid-cols-4 md:gap-16">
+        <div className="mx-auto grid max-w-5xl grid-cols-2 gap-6 md:grid-cols-4 md:gap-16">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <p
@@ -275,9 +319,10 @@ export function HomePiano() {
       </section>
 
       {/* ═══ MEDIA ═══ */}
+      {photos.length > 0 && (
       <section id="piano-media" className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
         <div className="mx-auto max-w-5xl">
-          <p className="mb-3 text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>Media</p>
+          <p className="mb-3 text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>Portfolio</p>
           <h2 className="mb-12" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1 }}>
             In the <span style={{ fontStyle: "italic" }}>moment</span>
           </h2>
@@ -290,7 +335,7 @@ export function HomePiano() {
                 style={{ background: muted, border: `1px solid ${muted}`, aspectRatio: i === 0 ? undefined : "1/1", minHeight: i === 0 ? 280 : undefined }}
               >
                 {item.imageUrl ? (
-                  <img src={item.imageUrl} alt={item.title} className="absolute inset-0 h-full w-full object-cover" />
+                  <img src={item.imageUrl} alt={item.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
                 ) : (
                   <span className="text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>
                     {item.title}
@@ -301,6 +346,7 @@ export function HomePiano() {
           </div>
         </div>
       </section>
+      )}
 
       {/* ═══ VIDEOS ═══ */}
       {videos.length > 0 && (
@@ -343,16 +389,17 @@ export function HomePiano() {
       )}
 
       {/* ═══ WORK ═══ */}
-      <section id="piano-work" className="px-8 py-20 md:px-16 md:py-28 lg:px-24">
+      {experiences.length > 0 && (
+      <section id="piano-work" className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
         <div className="mx-auto max-w-5xl">
-          <p className="mb-3 text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>Resume</p>
+          <p className="mb-3 text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>Experience</p>
           <h2 className="mb-12" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1 }}>
             The work so far
           </h2>
           {experiences.map((w, i) => (
-            <div key={i} className="flex items-baseline justify-between py-5" style={{ borderTop: `1px solid ${muted}` }}>
+            <div key={i} className="flex flex-col gap-1 py-5 md:flex-row md:items-baseline md:justify-between" style={{ borderTop: `1px solid ${muted}` }}>
               <div>
-                <h3 className="text-base font-medium">{w.title}</h3>
+                <h3 className="text-base font-medium" style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}>{w.title}</h3>
                 <p className="mt-0.5 text-sm" style={{ color: mutedFg }}>{w.organization}</p>
               </div>
               <span className="text-sm" style={{ color: mutedFg }}>{w.startYear} —</span>
@@ -360,8 +407,10 @@ export function HomePiano() {
           ))}
         </div>
       </section>
+      )}
 
       {/* ═══ TESTIMONIALS ═══ */}
+      {testimonials.length > 0 && (
       <section id="piano-testimonials" className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
         <div className="mx-auto max-w-5xl">
           <p className="mb-3 text-[10px] uppercase" style={{ color: mutedFg, letterSpacing: "0.2em" }}>Testimonials</p>
@@ -384,16 +433,18 @@ export function HomePiano() {
           </div>
         </div>
       </section>
+      )}
 
       {/* ═══ EVENTS ═══ */}
-      <section id="piano-events" className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ background: primary, color: "white" }}>
+      {events.length > 0 && (
+      <section id="piano-events" className="px-8 py-20 md:px-16 md:py-28 lg:px-24" style={{ background: fg, color: bg, borderTop: `3px solid ${primary}` }}>
         <div className="mx-auto max-w-5xl">
           <p className="mb-3 text-[10px] uppercase text-white/40" style={{ letterSpacing: "0.2em" }}>Live</p>
           <h2 className="mb-12" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1 }}>
             Catch me live
           </h2>
           {events.map((e, i) => (
-            <div key={i} className="flex items-center justify-between border-t border-white/10 py-6">
+            <div key={i} className="flex flex-col gap-2 border-t border-white/10 py-5 md:flex-row md:items-center md:justify-between md:py-6">
               <div className="flex items-baseline gap-6">
                 <span className="text-sm text-white/40">{e.dateFormatted}</span>
                 <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}>{e.title}</h3>
@@ -403,6 +454,7 @@ export function HomePiano() {
           ))}
         </div>
       </section>
+      )}
 
       {/* ═══ CONTACT ═══ */}
       <section id="piano-contact" className="px-8 py-24 text-center md:px-16 md:py-32 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
@@ -426,6 +478,16 @@ export function HomePiano() {
         <p className="text-[11px] uppercase" style={{ color: mutedFg, letterSpacing: "0.15em" }}>
           &copy; {new Date().getFullYear()} Francisco Catarro
         </p>
+        <div className="flex items-center gap-4">
+          {settings.socialLinks.map((link) => {
+            const Icon = getSocialIcon(link.platform);
+            return (
+              <a key={link.platform} href={link.url} target="_blank" rel="noopener noreferrer" aria-label={link.platform} className="flex h-10 w-10 items-center justify-center transition-opacity hover:opacity-70" style={{ color: mutedFg }}>
+                <Icon size={16} />
+              </a>
+            );
+          })}
+        </div>
         <p className="text-sm" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontStyle: "italic", color: `${fg}66` }}>
           Music is the only language that doesn't need translation.
         </p>
