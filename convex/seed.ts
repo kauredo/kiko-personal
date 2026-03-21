@@ -152,3 +152,31 @@ export const init = mutation({
     return "Seeded with Francisco Catarro's real data. Admin: admin@franciscocatarro.com / changeme123";
   },
 });
+
+export const seedThemeAbout = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const bio = await ctx.db.query("bio").first();
+    if (!bio) return "No bio row found — run seed:init first";
+    if (bio.themeAbout) return "themeAbout already set";
+
+    await ctx.db.patch(bio._id, {
+      themeAbout: {
+        dark_electric:
+          "Born in Portugal, based in the UK. Guitar, keys, bass — over 10 years making rooms louder, tighter, and impossible to leave.",
+        raw_textured:
+          "Born in Portugal, now based in the UK — Francisco picked up a guitar at fourteen and never put it down. Over a decade later, he plays guitar, keys, and bass across stages, studios, and sessions throughout Europe.\n\nHe's shared stages with Kevin Davy White, Carla Prata, and Marta Per — and directed bands from intimate jazz clubs to festival crowds of thousands.",
+        hybrid:
+          "A multi-instrumentalist and musical director whose career spans concert stages, recording studios, and festival grounds across Portugal and the UK.\n\nFrancisco brings a rare combination: the instinct of a performer, the ear of a producer, and the discipline of someone who has led bands in front of thousands.",
+        parallax:
+          "Born in Portugal. Over a decade on stages across Europe — from underground jazz clubs in London to arena tours and festival headliners. Guitar, keys, bass, and musical direction.\n\nHe's opened for Westlife at Scarborough, directed bands at Festival Iminente in Lisbon, and held down residencies in London's live music scene. Every show is the only show.",
+        piano:
+          "Francisco Catarro is a guitarist, pianist, musical director, and producer who treats every performance like a composition — deliberate, dynamic, and impossible to ignore.\n\nBorn in Portugal, based in the UK. Over a decade moving between rock stages, jazz clubs, and studio sessions across Europe.",
+        guitar:
+          "Portuguese-born, UK-based. Guitar, keys, bass — 10+ years of performing, composing, and directing. The kind of musician who learns every part, understands every arrangement, and makes the band sound bigger than it is.",
+      },
+    });
+
+    return "themeAbout seeded";
+  },
+});
