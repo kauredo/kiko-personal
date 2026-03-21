@@ -158,13 +158,14 @@ export function HomeEditorial() {
           </div>
           <div className="flex flex-col justify-end gap-6">
             <p className="leading-relaxed" style={{ color: fg }}>
-              Francisco Catarro is a guitarist, pianist, musical director, and
-              producer whose playing carries the raw energy of a live stage and
-              the precision of years behind the keys.
+              A multi-instrumentalist and musical director whose career spans
+              concert stages, recording studios, and festival grounds across
+              Portugal and the UK.
             </p>
             <p className="leading-relaxed" style={{ color: mutedFg }}>
-              From rock clubs to symphony halls, from the studio console to
-              center stage — he doesn't just show up, he transforms the room.
+              Francisco brings a rare combination: the instinct of a performer,
+              the ear of a producer, and the discipline of someone who has led
+              bands in front of thousands.
             </p>
           </div>
         </div>
@@ -383,7 +384,7 @@ export function HomeEditorial() {
           </div>
         )}
         <p className="text-sm" style={{ fontFamily: headingFont, color: `${fg}88` }}>
-          Music is the only language that doesn't need translation.
+          Rooted in rock. Refined by everything since.
         </p>
       </footer>
     </div>

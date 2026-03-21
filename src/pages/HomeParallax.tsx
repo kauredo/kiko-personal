@@ -264,9 +264,8 @@ export function HomeParallax() {
             className="text-3xl leading-snug md:text-5xl lg:text-6xl"
             style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 600, letterSpacing: "-0.02em" }}
           >
-            Born in Portugal, based in the UK — over 10 years of guitar, keys, and bass. He doesn't
-            just show up, he{" "}
-            <span style={{ color: "oklch(0.62 0.25 28)" }}>transforms</span> the room.
+            Guitar, keys, bass — a decade of stages across two countries. Every room he walks into{" "}
+            <span style={{ color: "oklch(0.62 0.25 28)" }}>sounds different</span> when he leaves.
           </p>
         </div>
       </section>
@@ -301,10 +300,10 @@ export function HomeParallax() {
           </h2>
           <div className="grid gap-8 md:grid-cols-2 md:gap-16">
             <p className="reveal text-white/60 leading-relaxed">
-              Born in Portugal, Francisco carries the raw energy of a live stage and the precision of years behind the keys. Over 10 years of performing, composing, arranging, and recording across genres.
+              Born in Portugal. Over a decade on stages across Europe — from underground jazz clubs in London to arena tours and festival headliners. Guitar, keys, bass, and musical direction.
             </p>
             <p className="reveal text-white/40 leading-relaxed">
-              From rock clubs to symphony halls — he doesn't just show up, he transforms the room. Every performance is a statement, every note has purpose.
+              He's opened for Westlife at Scarborough, directed bands at Festival Iminente in Lisbon, and held down residencies in London's live music scene. Every show is the only show.
             </p>
           </div>
         </div>

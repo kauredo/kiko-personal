@@ -366,9 +366,9 @@ export function HomeFretboard() {
               About
             </h2>
             <p className="fret-text max-w-md text-sm leading-relaxed text-white/60">
-              Born in Portugal, based in the UK. Over 10 years of performing, composing,
-              arranging, and recording across genres. From rock clubs to symphony halls
-              — he doesn't just show up, he transforms the room.
+              Portuguese-born, UK-based. Guitar, keys, bass — 10+ years of performing,
+              composing, and directing. The kind of musician who learns every part,
+              understands every arrangement, and makes the band sound bigger than it is.
             </p>
           </div>
         </div>

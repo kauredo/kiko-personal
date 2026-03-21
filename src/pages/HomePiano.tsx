@@ -267,11 +267,13 @@ export function HomePiano() {
           </div>
           <div className="flex flex-col justify-end gap-5">
             <p className="leading-relaxed" style={{ color: fg }}>
-              Francisco Catarro is a guitarist, pianist, musical director, and producer whose playing
-              carries the raw energy of a live stage and the precision of years behind the keys.
+              Francisco Catarro is a guitarist, pianist, musical director, and producer
+              who treats every performance like a composition — deliberate,
+              dynamic, and impossible to ignore.
             </p>
             <p className="leading-relaxed" style={{ color: mutedFg }}>
-              From rock clubs to symphony halls — he doesn't just show up, he transforms the room.
+              Born in Portugal, based in the UK. Over a decade moving between
+              rock stages, jazz clubs, and studio sessions across Europe.
             </p>
           </div>
         </div>
@@ -489,7 +491,7 @@ export function HomePiano() {
           })}
         </div>
         <p className="text-sm" style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontStyle: "italic", color: `${fg}66` }}>
-          Music is the only language that doesn't need translation.
+          Every note is a choice.
         </p>
       </footer>
     </div>

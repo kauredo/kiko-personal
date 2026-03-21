@@ -130,12 +130,13 @@ export function HomeAnalog() {
           </div>
           <div className="flex flex-col justify-end gap-5">
             <p className="leading-relaxed" style={{ color: fg }}>
-              Francisco Catarro is a guitarist, pianist, musical director, and producer whose playing
-              carries the raw energy of a live stage and the precision of years behind the keys.
+              Born in Portugal, now based in the UK — Francisco picked up a guitar at fourteen
+              and never put it down. Over a decade later, he plays guitar, keys, and bass across
+              stages, studios, and sessions throughout Europe.
             </p>
             <p className="leading-relaxed" style={{ color: mutedFg }}>
-              Born in Portugal, based in the UK. Over 10 years of performing, composing, arranging,
-              and recording across genres — from rock clubs to symphony halls.
+              He's shared stages with Kevin Davy White, Carla Prata, and Marta Per —
+              and directed bands from intimate jazz clubs to festival crowds of thousands.
             </p>
           </div>
         </div>
@@ -346,7 +347,7 @@ export function HomeAnalog() {
           })}
         </div>
         <p className="text-sm" style={{ fontFamily: headingFont, fontStyle: "italic", color: `${fg}99` }}>
-          Music is the only language that doesn't need translation.
+          The music stays long after the room goes quiet.
         </p>
       </footer>
     </div>
