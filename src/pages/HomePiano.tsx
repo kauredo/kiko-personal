@@ -81,15 +81,15 @@ function PianoKeyboard({ activeNote, onPlay }: { activeNote: string | null; onPl
   }, [totalW]);
 
   return (
-    <div ref={wrapperRef} className="mx-auto w-full overflow-hidden" style={{ maxWidth: totalW, height: keyH * scale }}>
+    <div ref={wrapperRef} className="mx-auto w-full select-none overflow-hidden" style={{ maxWidth: totalW, height: keyH * scale }}>
       <div className="relative origin-top-left" style={{ width: totalW, height: keyH, transform: `scale(${scale})` }}>
       {/* White keys */}
       {WHITE_KEYS.map((note, i) => (
         <button
           key={note}
           aria-label={note}
-          onMouseDown={() => onPlay(note)}
-          className="absolute top-0 transition-all duration-100"
+          onPointerDown={() => onPlay(note)}
+          className="absolute top-0 transition-all duration-100 focus-visible:ring-2 focus-visible:ring-[oklch(0.55_0.15_45)] focus-visible:ring-offset-1"
           style={{
             left: i * keyW,
             width: keyW - 2,
@@ -107,7 +107,7 @@ function PianoKeyboard({ activeNote, onPlay }: { activeNote: string | null; onPl
               : "-1px 0 0 rgba(255,255,255,0.8) inset, 0 0 5px oklch(0.82 0.01 80) inset, 0 0 3px rgba(0,0,0,0.15)",
           }}
         >
-          <span className="absolute bottom-3 left-1/2 -translate-x-1/2 text-[10px] text-black/20">
+          <span aria-hidden="true" className="absolute bottom-3 left-1/2 -translate-x-1/2 text-[10px] text-black/30">
             {Object.entries(KEYBOARD_MAP).find(([, n]) => n === note)?.[0]?.toUpperCase()}
           </span>
         </button>
@@ -117,8 +117,8 @@ function PianoKeyboard({ activeNote, onPlay }: { activeNote: string | null; onPl
         <button
           key={note}
           aria-label={note}
-          onMouseDown={() => onPlay(note)}
-          className="absolute top-0 z-10 transition-all duration-100"
+          onPointerDown={() => onPlay(note)}
+          className="absolute top-0 z-10 transition-all duration-100 focus-visible:ring-2 focus-visible:ring-[oklch(0.55_0.15_45)]"
           style={{
             left: offset * keyW + keyW - blackW / 2,
             width: blackW,
@@ -188,7 +188,7 @@ export function HomePiano() {
       <nav className="flex items-center justify-between px-8 py-6 md:px-16 lg:px-24">
         <div className="flex items-center gap-3">
           <LogoMark size={28} style={{ color: fg }} />
-          <span className="hidden text-sm sm:block" style={{ fontFamily: "'DM Serif Display', Georgia, serif", color: fg }}>Francisco Catarro</span>
+          <span className="hidden text-sm sm:block" style={{ fontFamily: "'DM Serif Display', Georgia, serif", color: fg }}>{bio.name}</span>
         </div>
         <div className="flex items-center gap-6">
           {[
@@ -198,7 +198,7 @@ export function HomePiano() {
             { label: "Events", id: "#piano-events" },
             { label: "Contact", id: "#piano-contact" },
           ].map(({ label, id }) => (
-            <button key={label} onClick={() => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })} className="hidden text-xs uppercase md:block" style={{ letterSpacing: "0.15em", color: mutedFg, cursor: "pointer" }}>
+            <button key={label} onClick={() => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })} className="hidden text-xs uppercase transition-colors hover:opacity-70 focus-visible:underline md:block" style={{ letterSpacing: "0.15em", color: mutedFg }}>
               {label}
             </button>
           ))}
@@ -328,9 +328,9 @@ export function HomePiano() {
           </h2>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
             {photos.slice(0, 5).map((item, i) => (
-              <div
+              <button
                 key={item.id}
-                className={`relative flex cursor-pointer items-end overflow-hidden p-5 ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
+                className={`relative flex items-end overflow-hidden p-5 text-left focus-visible:ring-2 focus-visible:ring-[oklch(0.55_0.15_45)] ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
                 onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))}
                 style={{ background: muted, border: `1px solid ${muted}`, aspectRatio: i === 0 ? undefined : "1/1", minHeight: i === 0 ? 280 : undefined }}
               >
@@ -341,7 +341,7 @@ export function HomePiano() {
                     {item.title}
                   </span>
                 )}
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -446,10 +446,10 @@ export function HomePiano() {
           {events.map((e, i) => (
             <div key={i} className="flex flex-col gap-2 border-t border-white/10 py-5 md:flex-row md:items-center md:justify-between md:py-6">
               <div className="flex items-baseline gap-6">
-                <span className="text-sm text-white/40">{e.dateFormatted}</span>
+                <span className="text-sm text-white/50">{e.dateFormatted}</span>
                 <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}>{e.title}</h3>
               </div>
-              <span className="text-sm text-white/40">{e.venue}</span>
+              <span className="text-sm text-white/50">{e.venue}</span>
             </div>
           ))}
         </div>
@@ -466,7 +466,7 @@ export function HomePiano() {
         </p>
         <a
           href={`mailto:${settings.contactEmail}`}
-          className="inline-flex items-center gap-2 border-2 px-10 py-4 text-xs font-medium uppercase transition-colors"
+          className="inline-flex items-center gap-2 border-2 px-10 py-4 text-xs font-medium uppercase transition-colors focus-visible:ring-2 focus-visible:ring-[oklch(0.55_0.15_45)] focus-visible:ring-offset-2"
           style={{ borderColor: primary, color: primary, letterSpacing: "0.15em" }}
         >
           Get in touch <ArrowUpRight size={14} />
@@ -476,7 +476,7 @@ export function HomePiano() {
       {/* ═══ FOOTER ═══ */}
       <footer className="flex flex-col items-center gap-4 px-8 py-12 text-center md:flex-row md:justify-between md:px-16 lg:px-24" style={{ borderTop: `1px solid ${muted}` }}>
         <p className="text-[11px] uppercase" style={{ color: mutedFg, letterSpacing: "0.15em" }}>
-          &copy; {new Date().getFullYear()} Francisco Catarro
+          &copy; {new Date().getFullYear()} {bio.name}
         </p>
         <div className="flex items-center gap-4">
           {settings.socialLinks.map((link) => {
