@@ -295,7 +295,7 @@ export function HomeFretboard() {
       >
         <div className="flex items-center gap-3">
           <LogoMark size={26} className="text-white" />
-          <span className="hidden text-xs font-bold uppercase tracking-wider text-white sm:block" style={{ fontFamily: "'Syne', system-ui, sans-serif" }}>Francisco Catarro</span>
+          <span className="hidden text-xs font-bold uppercase tracking-wider text-white sm:block" style={{ fontFamily: "'Syne', system-ui, sans-serif" }}>{bio.name}</span>
         </div>
         <div className="flex items-center gap-6">
           {[
@@ -305,7 +305,7 @@ export function HomeFretboard() {
             { label: "Events", id: "#fret-events" },
             { label: "Contact", id: "#fret-contact" },
           ].map(({ label, id }) => (
-            <button key={label} onClick={() => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })} className="hidden text-xs uppercase text-white/40 transition-colors hover:text-white/70 md:block" style={{ letterSpacing: "0.15em" }}>
+            <button key={label} onClick={() => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })} className="hidden text-xs uppercase text-white/40 transition-colors hover:text-white/70 focus-visible:underline md:block" style={{ letterSpacing: "0.15em" }}>
               {label}
             </button>
           ))}
@@ -503,9 +503,9 @@ export function HomeFretboard() {
           </h2>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {photos.map((item, i) => (
-              <div
+              <button
                 key={item.id}
-                className={`group fret-text relative flex cursor-pointer items-center justify-center overflow-hidden border border-white/[0.06] ${i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-[4/3]"}`}
+                className={`group fret-text relative flex items-center justify-center overflow-hidden border border-white/[0.06] text-left focus-visible:ring-2 focus-visible:ring-white/30 ${i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-[4/3]"}`}
                 onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))}
                 style={{ background: "rgba(255,255,255,0.03)" }}
               >
@@ -519,7 +519,7 @@ export function HomeFretboard() {
                 ) : (
                   <span className="text-[9px] uppercase tracking-[0.2em] text-white/15">{item.title}</span>
                 )}
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -590,7 +590,7 @@ export function HomeFretboard() {
 
       {/* ═══ FOOTER ═══ */}
       <footer className="relative z-10 flex flex-col items-center gap-4 px-6 py-8 text-[10px] tracking-[0.15em] text-white/20 md:flex-row md:justify-between md:px-12 lg:px-24">
-        <span>&copy; {new Date().getFullYear()} Francisco Catarro</span>
+        <span>&copy; {new Date().getFullYear()} {bio.name}</span>
         <div className="flex items-center gap-4">
           {settings.socialLinks.map((link) => {
             const Icon = getSocialIcon(link.platform);

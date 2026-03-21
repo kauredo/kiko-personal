@@ -62,11 +62,11 @@ export function HomeElectric() {
       >
         <div className="flex items-center gap-3">
           <LogoMark size={28} className="text-white" />
-          <span className="hidden text-xs font-bold uppercase tracking-wider text-white sm:block" style={{ fontFamily: "'Syne', system-ui, sans-serif" }}>Francisco Catarro</span>
+          <span className="hidden text-xs font-bold uppercase tracking-wider text-white sm:block" style={{ fontFamily: "'Syne', system-ui, sans-serif" }}>{bio.name}</span>
         </div>
         <div className="flex items-center gap-8">
           {NAV_LINKS.map(({ label, id }) => (
-            <button key={label} onClick={() => lenis?.scrollTo(id, { offset: -60, duration: 1.5 })} className="hidden text-xs uppercase text-white/50 transition-colors hover:text-white md:block" style={{ letterSpacing: "0.15em" }}>
+            <button key={label} onClick={() => lenis?.scrollTo(id, { offset: -60, duration: 1.5 })} className="hidden text-xs uppercase text-white/50 transition-colors hover:text-white focus-visible:underline md:block" style={{ letterSpacing: "0.15em" }}>
               {label}
             </button>
           ))}
@@ -179,12 +179,12 @@ export function HomeElectric() {
           </div>
           <div className="flex gap-3 overflow-x-auto px-8 pb-4 md:px-16 lg:px-24">
             {photos.map((item, i) => (
-              <motion.div
+              <motion.button
                 key={item.id}
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1 + i * 0.08, duration: 0.5 }}
-                className="group relative aspect-[3/4] w-64 flex-shrink-0 cursor-pointer overflow-hidden bg-white/[0.10] md:w-80"
+                className="group relative aspect-[3/4] w-64 flex-shrink-0 overflow-hidden bg-white/[0.10] text-left focus-visible:ring-2 focus-visible:ring-[oklch(0.62_0.25_28)] md:w-80"
                 onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))}
               >
                 {item.imageUrl ? (
@@ -197,7 +197,7 @@ export function HomeElectric() {
                 <div className="absolute inset-x-0 bottom-0 bg-[oklch(0.06_0.005_260)] p-4 translate-y-0 md:translate-y-full transition-transform duration-300 md:group-hover:translate-y-0">
                   <p className="text-sm font-medium text-white">{item.title}</p>
                 </div>
-              </motion.div>
+              </motion.button>
             ))}
           </div>
         </section>
@@ -361,7 +361,7 @@ export function HomeElectric() {
 
       {/* ═══ FOOTER ═══ */}
       <footer className="flex flex-col items-center gap-4 border-t border-white/10 px-8 py-8 text-xs text-white/30 md:flex-row md:justify-between md:px-16 lg:px-24" style={{ letterSpacing: "0.1em" }}>
-        <span>&copy; {new Date().getFullYear()} Francisco Catarro</span>
+        <span>&copy; {new Date().getFullYear()} {bio.name}</span>
         <div className="flex items-center gap-4">
           {settings.socialLinks.map((link) => {
             const Icon = getSocialIcon(link.platform);

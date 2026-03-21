@@ -71,7 +71,7 @@ export function HomeAnalog() {
             </div>
             <div className="flex items-center gap-6">
               {NAV_LINKS.map(({ label, id }) => (
-                <button key={label} onClick={() => lenis?.scrollTo(id, { offset: -40, duration: 1.5 })} className="hidden text-xs uppercase transition-colors hover:opacity-70 md:block" style={{ letterSpacing: "0.15em", color: mutedFg }}>
+                <button key={label} onClick={() => lenis?.scrollTo(id, { offset: -40, duration: 1.5 })} className="hidden text-xs uppercase transition-colors hover:opacity-70 focus-visible:underline md:block" style={{ letterSpacing: "0.15em", color: mutedFg }}>
                   {label}
                 </button>
               ))}
@@ -160,13 +160,13 @@ export function HomeAnalog() {
           </div>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
             {photos.map((item, i) => (
-              <motion.div
+              <motion.button
                 key={item.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ delay: i * 0.06, duration: 0.5 }}
-                className="group relative cursor-pointer overflow-hidden"
+                className="group relative overflow-hidden text-left focus-visible:ring-2 focus-visible:ring-[oklch(0.38_0.14_28)]"
                 onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))}
                 style={{
                   background: `${fg}dd`,
@@ -185,7 +185,7 @@ export function HomeAnalog() {
                 <div className="absolute inset-x-0 bottom-0 p-2.5 opacity-100 md:translate-y-full md:opacity-0 md:transition-all md:duration-300 md:group-hover:translate-y-0 md:group-hover:opacity-100" style={{ background: `linear-gradient(to top, ${fg}, transparent)` }}>
                   <p className="text-[11px] font-medium" style={{ color: bg }}>{item.title}</p>
                 </div>
-              </motion.div>
+              </motion.button>
             ))}
           </div>
         </section>

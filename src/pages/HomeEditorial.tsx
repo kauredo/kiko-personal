@@ -61,7 +61,7 @@ export function HomeEditorial() {
       >
         <div className="flex items-center gap-3">
           <LogoMark size={28} style={{ color: fg }} />
-          <span className="hidden text-sm sm:block" style={{ fontFamily: headingFont, color: fg }}>Francisco Catarro</span>
+          <span className="hidden text-sm sm:block" style={{ fontFamily: headingFont, color: fg }}>{bio.name}</span>
         </div>
         <div className="flex items-center gap-8">
           {[
@@ -70,7 +70,7 @@ export function HomeEditorial() {
             { label: "Events", id: "#editorial-events" },
             { label: "Contact", id: "#editorial-contact" },
           ].map(({ label, id }) => (
-            <button key={label} onClick={() => lenis?.scrollTo(id, { offset: -60, duration: 1.5 })} className="hidden text-xs uppercase md:block" style={{ color: mutedFg, letterSpacing: "0.15em", cursor: "pointer" }}>
+            <button key={label} onClick={() => lenis?.scrollTo(id, { offset: -60, duration: 1.5 })} className="hidden text-xs uppercase transition-colors hover:opacity-70 focus-visible:underline md:block" style={{ color: mutedFg, letterSpacing: "0.15em" }}>
               {label}
             </button>
           ))}
@@ -216,13 +216,13 @@ export function HomeEditorial() {
             </h2>
             <div className="columns-2 gap-4 md:columns-3">
               {photos.map((item, i) => (
-                <motion.div
+                <motion.button
                   key={item.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05, duration: 0.5 }}
-                  className="group relative mb-4 cursor-pointer overflow-hidden break-inside-avoid"
+                  className="group relative mb-4 w-full overflow-hidden break-inside-avoid text-left focus-visible:ring-2 focus-visible:ring-[oklch(0.72_0.12_70)]"
                   onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))}
                   style={{ border: `1px solid ${border}` }}
                 >
@@ -236,7 +236,7 @@ export function HomeEditorial() {
                   <div className="absolute inset-x-0 bottom-0 p-4 translate-y-0 md:translate-y-full transition-transform duration-300 md:group-hover:translate-y-0" style={{ background: `${bg}ee` }}>
                     <p className="text-sm" style={{ fontFamily: headingFont }}>{item.title}</p>
                   </div>
-                </motion.div>
+                </motion.button>
               ))}
             </div>
           </div>
@@ -368,7 +368,7 @@ export function HomeEditorial() {
       {/* ═══ FOOTER ═══ */}
       <footer className="flex flex-col items-center gap-6 px-6 md:px-16 lg:px-24 xl:px-32 py-16 text-center md:flex-row md:justify-between" style={{ borderTop: `1px solid ${border}` }}>
         <p className="text-[11px] uppercase" style={{ color: mutedFg, letterSpacing: "0.15em" }}>
-          &copy; {new Date().getFullYear()} Francisco Catarro
+          &copy; {new Date().getFullYear()} {bio.name}
         </p>
         {settings.socialLinks.length > 0 && (
           <div className="flex items-center gap-4">

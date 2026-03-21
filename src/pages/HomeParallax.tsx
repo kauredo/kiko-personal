@@ -192,7 +192,7 @@ export function HomeParallax() {
       >
         <div className="flex items-center gap-3">
           <LogoMark size={26} />
-          <span className="hidden text-xs font-bold uppercase tracking-wider sm:block" style={{ fontFamily: "'Syne', system-ui, sans-serif" }}>Francisco Catarro</span>
+          <span className="hidden text-xs font-bold uppercase tracking-wider sm:block" style={{ fontFamily: "'Syne', system-ui, sans-serif" }}>{bio.name}</span>
         </div>
         <div className="flex items-center gap-6">
           {[
@@ -202,7 +202,7 @@ export function HomeParallax() {
             { label: "Events", id: "#parallax-events" },
             { label: "Contact", id: "#parallax-contact" },
           ].map(({ label, id }) => (
-            <button key={label} onClick={() => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })} className="hidden text-xs uppercase text-white/50 transition-colors hover:text-white md:block" style={{ letterSpacing: "0.15em" }}>
+            <button key={label} onClick={() => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })} className="hidden text-xs uppercase text-white/50 transition-colors hover:text-white focus-visible:underline md:block" style={{ letterSpacing: "0.15em" }}>
               {label}
             </button>
           ))}
@@ -358,9 +358,9 @@ export function HomeParallax() {
 
             <div className="h-scroll-track flex gap-4 px-8 md:px-16 lg:px-24">
               {photos.map((item, i) => (
-                <div
+                <button
                   key={item.id}
-                  className="group relative flex-shrink-0 cursor-pointer overflow-hidden"
+                  className="group relative flex-shrink-0 overflow-hidden text-left focus-visible:ring-2 focus-visible:ring-white/50"
                   onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))}
                   style={{
                     width: i === 0 ? "min(50vw, 400px)" : "min(35vw, 280px)",
@@ -381,7 +381,7 @@ export function HomeParallax() {
                   <div className="absolute inset-x-0 bottom-0 bg-black/80 p-5 translate-y-0 md:translate-y-full transition-transform duration-500 md:group-hover:translate-y-0">
                     <p className="text-sm font-medium">{item.title}</p>
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           </div>
@@ -548,7 +548,7 @@ export function HomeParallax() {
 
       {/* ═══ FOOTER ═══ */}
       <footer className="flex flex-col items-center gap-4 px-8 py-8 text-[11px] tracking-[0.15em] text-white/20 md:flex-row md:justify-between md:px-16 lg:px-24">
-        <span>&copy; {new Date().getFullYear()} Francisco Catarro</span>
+        <span>&copy; {new Date().getFullYear()} {bio.name}</span>
         {settings.socialLinks.length > 0 && (
           <div className="flex items-center gap-4">
             {settings.socialLinks.map((link) => {
