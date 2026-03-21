@@ -299,7 +299,7 @@ export function HomeParallax() {
             based in the UK.
           </h2>
           <div className="grid gap-8 md:grid-cols-2 md:gap-16">
-            {(bio.themeAbout["parallax"] ?? "").split("\n\n").filter(Boolean).map((p, i) => (
+            {(bio.themeAbout.parallax ?? "").split("\n\n").filter(Boolean).map((p, i) => (
               <p key={i} className={`reveal leading-relaxed ${i === 0 ? "text-white/60" : "text-white/40"}`}>
                 {p}
               </p>

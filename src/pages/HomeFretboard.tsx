@@ -366,7 +366,7 @@ export function HomeFretboard() {
               About
             </h2>
             <p className="fret-text max-w-md text-sm leading-relaxed text-white/60">
-              {bio.themeAbout["guitar"] ?? ""}
+              {bio.themeAbout.guitar ?? ""}
             </p>
           </div>
         </div>

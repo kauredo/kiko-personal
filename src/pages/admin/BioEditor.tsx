@@ -9,8 +9,8 @@ import type { ThemeAbout } from "@/data/fallbacks";
 type ThemeName = keyof ThemeAbout;
 
 const THEMES: { key: ThemeName; label: string; icon: typeof Zap }[] = [
-  { key: "dark-electric", label: "Electric", icon: Zap },
-  { key: "raw-textured", label: "Analog", icon: Disc3 },
+  { key: "dark_electric", label: "Electric", icon: Zap },
+  { key: "raw_textured", label: "Analog", icon: Disc3 },
   { key: "hybrid", label: "Editorial", icon: Blend },
   { key: "parallax", label: "Parallax", icon: Layers },
   { key: "piano", label: "Piano", icon: Piano },
@@ -26,7 +26,7 @@ export function BioEditor() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [themeAbout, setThemeAbout] = useState<ThemeAbout>({});
-  const [activeTheme, setActiveTheme] = useState<ThemeName>("dark-electric");
+  const [activeTheme, setActiveTheme] = useState<ThemeName>("dark_electric");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 

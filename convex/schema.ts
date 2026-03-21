@@ -33,8 +33,8 @@ export default defineSchema({
     ),
     themeAbout: v.optional(
       v.object({
-        "dark-electric": v.optional(v.string()),
-        "raw-textured": v.optional(v.string()),
+        dark_electric: v.optional(v.string()),
+        raw_textured: v.optional(v.string()),
         hybrid: v.optional(v.string()),
         parallax: v.optional(v.string()),
         piano: v.optional(v.string()),

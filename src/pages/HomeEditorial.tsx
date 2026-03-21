@@ -157,7 +157,7 @@ export function HomeEditorial() {
             </h2>
           </div>
           <div className="flex flex-col justify-end gap-6">
-            {(bio.themeAbout["hybrid"] ?? "").split("\n\n").filter(Boolean).map((p, i) => (
+            {(bio.themeAbout.hybrid ?? "").split("\n\n").filter(Boolean).map((p, i) => (
               <p key={i} className="leading-relaxed" style={{ color: i === 0 ? fg : mutedFg }}>
                 {p}
               </p>

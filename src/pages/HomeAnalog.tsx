@@ -129,7 +129,7 @@ export function HomeAnalog() {
             </h2>
           </div>
           <div className="flex flex-col justify-end gap-5">
-            {(bio.themeAbout["raw-textured"] ?? "").split("\n\n").filter(Boolean).map((p, i) => (
+            {(bio.themeAbout.raw_textured ?? "").split("\n\n").filter(Boolean).map((p, i) => (
               <p key={i} className="leading-relaxed" style={{ color: i === 0 ? fg : mutedFg }}>
                 {p}
               </p>

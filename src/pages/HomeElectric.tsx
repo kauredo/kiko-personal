@@ -118,7 +118,7 @@ export function HomeElectric() {
             className="text-2xl leading-relaxed text-white/70 md:text-3xl lg:text-4xl"
             style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 400 }}
           >
-            {bio.themeAbout["dark-electric"] ?? ""}
+            {bio.themeAbout.dark_electric ?? ""}
           </p>
         </div>
       </section>

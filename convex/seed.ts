@@ -47,9 +47,9 @@ export const init = mutation({
         { platform: "audio", url: "https://audio.com/francisco-catarro" },
       ],
       themeAbout: {
-        "dark-electric":
+        dark_electric:
           "Born in Portugal, based in the UK. Guitar, keys, bass — over 10 years making rooms louder, tighter, and impossible to leave.",
-        "raw-textured":
+        raw_textured:
           "Born in Portugal, now based in the UK — Francisco picked up a guitar at fourteen and never put it down. Over a decade later, he plays guitar, keys, and bass across stages, studios, and sessions throughout Europe.\n\nHe's shared stages with Kevin Davy White, Carla Prata, and Marta Per — and directed bands from intimate jazz clubs to festival crowds of thousands.",
         hybrid:
           "A multi-instrumentalist and musical director whose career spans concert stages, recording studios, and festival grounds across Portugal and the UK.\n\nFrancisco brings a rare combination: the instinct of a performer, the ear of a producer, and the discipline of someone who has led bands in front of thousands.",
