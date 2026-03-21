@@ -9,10 +9,12 @@
  */
 
 import { ConvexHttpClient } from "convex/browser";
-import { api } from "../convex/_generated/api.mjs";
+import { anyApi } from "convex/server";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+
+const api = anyApi;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const IG_DIR = path.join(__dirname, "francisco.catarro");
@@ -157,13 +159,6 @@ const photos = [
     caption: "Carla Prata set at Festival Iminente. Lisbon, 2022.",
     category: "live",
     featured: false,
-  },
-  {
-    file: "tagged/2022-09-24_Ci5Ne39MVld_1.jpg",
-    title: "Keys at Festival Iminente",
-    caption: "Playing keys with Carla Prata at Festival Iminente. Lisbon, 2022.",
-    category: "live",
-    featured: true,
   },
   {
     file: "tagged/2022-09-24_Ci5Ne39MVld_5.jpg",

@@ -364,7 +364,7 @@ export function HomeParallax() {
           <div className="grid gap-4 md:grid-cols-2">
             {videos.map((item) => (
               item.imageUrl ? (
-                <VideoCard key={item.id} src={item.imageUrl!} title={item.title} onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }} />
+                <VideoCard key={item.id} src={item.imageUrl!} title={item.title} onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }} />
               ) : (
                 <div key={item.id} style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
                   <div className="flex h-full items-center justify-center text-white/10">

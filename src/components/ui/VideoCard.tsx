@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import { Volume2, VolumeX, Expand } from "lucide-react";
 
 type VideoCardProps = {
@@ -12,6 +12,14 @@ type VideoCardProps = {
 export function VideoCard({ src, title, className = "", style, onClick }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
+  const [aspect, setAspect] = useState<string | undefined>(undefined);
+
+  const onLoadedMetadata = useCallback(() => {
+    const v = videoRef.current;
+    if (v && v.videoWidth && v.videoHeight) {
+      setAspect(`${v.videoWidth}/${v.videoHeight}`);
+    }
+  }, []);
 
   function handleMouseEnter() {
     videoRef.current?.play();
@@ -36,7 +44,7 @@ export function VideoCard({ src, title, className = "", style, onClick }: VideoC
   return (
     <div
       className={`group relative cursor-pointer overflow-hidden ${className}`}
-      style={style}
+      style={{ ...style, aspectRatio: aspect ?? style?.aspectRatio }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
@@ -49,6 +57,7 @@ export function VideoCard({ src, title, className = "", style, onClick }: VideoC
         loop
         playsInline
         preload="metadata"
+        onLoadedMetadata={onLoadedMetadata}
       />
       {/* Title overlay */}
       <div className="absolute inset-x-0 bottom-0 z-10 bg-black/70 px-4 py-3 translate-y-full backdrop-blur-sm transition-transform duration-300 group-hover:translate-y-0">

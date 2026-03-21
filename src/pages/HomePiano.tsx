@@ -313,7 +313,7 @@ export function HomePiano() {
             <div className="grid gap-4 md:grid-cols-2">
               {videos.map((item) => (
                 item.imageUrl ? (
-                  <VideoCard key={item.id} src={item.imageUrl!} title={item.title} onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} style={{ aspectRatio: "16/9", background: muted, border: `1px solid ${muted}` }} />
+                  <VideoCard key={item.id} src={item.imageUrl!} title={item.title} onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} style={{ background: muted, border: `1px solid ${muted}` }} />
                 ) : (
                   <div key={item.id} style={{ aspectRatio: "16/9", background: muted, border: `1px solid ${muted}` }}>
                     <div className="flex h-full items-center justify-center" style={{ color: mutedFg }}>

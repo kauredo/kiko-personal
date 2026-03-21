@@ -195,9 +195,9 @@ export function HomeElectric() {
           <div className="flex gap-3 overflow-x-auto px-8 pb-4 md:px-16 lg:px-24">
             {videos.map((item, i) => (
               item.imageUrl ? (
-                <VideoCard key={item.id} src={item.imageUrl!} title={item.title} className="aspect-[16/9] w-80 flex-shrink-0 bg-white/[0.10] md:w-96" onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} />
+                <VideoCard key={item.id} src={item.imageUrl!} title={item.title} className="h-64 flex-shrink-0 bg-white/[0.10] md:h-80" onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} />
               ) : (
-                <div key={item.id} className="aspect-[16/9] w-80 flex-shrink-0 bg-white/[0.10] md:w-96">
+                <div key={item.id} className="aspect-video h-64 flex-shrink-0 bg-white/[0.10] md:h-80">
                   <div className="flex h-full items-center justify-center text-white/15">
                     <span className="text-[10px] uppercase" style={{ letterSpacing: "0.2em" }}>video</span>
                   </div>

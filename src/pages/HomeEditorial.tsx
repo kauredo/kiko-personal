@@ -229,7 +229,7 @@ export function HomeEditorial() {
             <div className="grid gap-4 md:grid-cols-2">
               {videos.map((item) => (
                 item.imageUrl ? (
-                  <VideoCard key={item.id} src={item.imageUrl!} title={item.title} onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} style={{ aspectRatio: "16/9", background: "oklch(0.14 0.01 55)", border: "1px solid oklch(0.24 0.01 55)" }} />
+                  <VideoCard key={item.id} src={item.imageUrl!} title={item.title} onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} style={{ background: "oklch(0.14 0.01 55)", border: "1px solid oklch(0.24 0.01 55)" }} />
                 ) : (
                   <div key={item.id} style={{ aspectRatio: "16/9", background: "oklch(0.14 0.01 55)", border: "1px solid oklch(0.24 0.01 55)" }}>
                     <div className="flex h-full items-center justify-center" style={{ color: "oklch(0.50 0.01 55)" }}>

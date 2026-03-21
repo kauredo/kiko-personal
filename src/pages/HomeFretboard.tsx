@@ -499,7 +499,7 @@ export function HomeFretboard() {
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               {videos.map((item) => (
                 item.imageUrl ? (
-                  <VideoCard key={item.id} src={item.imageUrl!} title={item.title} onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} className="fret-text border border-white/[0.06]" style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.03)" }} />
+                  <VideoCard key={item.id} src={item.imageUrl!} title={item.title} onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} className="fret-text border border-white/[0.06]" style={{ background: "rgba(255,255,255,0.03)" }} />
                 ) : (
                   <div key={item.id} className="fret-text border border-white/[0.06]" style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.03)" }}>
                     <div className="flex h-full items-center justify-center">

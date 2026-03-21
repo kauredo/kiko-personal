@@ -187,7 +187,7 @@ export function HomeAnalog() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {videos.map((item) => (
               item.imageUrl ? (
-                <VideoCard key={item.id} src={item.imageUrl!} title={item.title} onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} style={{ background: `${fg}dd`, aspectRatio: "16/9", borderRadius: "3px", border: `1px solid ${bg}15` }} />
+                <VideoCard key={item.id} src={item.imageUrl!} title={item.title} onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} style={{ background: `${fg}dd`, borderRadius: "3px", border: `1px solid ${bg}15` }} />
               ) : (
                 <div key={item.id} style={{ background: `${fg}dd`, aspectRatio: "16/9", borderRadius: "3px", border: `1px solid ${bg}15` }}>
                   <div className="flex h-full items-center justify-center" style={{ color: `${bg}33` }}>
