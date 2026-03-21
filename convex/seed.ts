@@ -158,7 +158,7 @@ export const seedThemeAbout = mutation({
   handler: async (ctx) => {
     const bio = await ctx.db.query("bio").first();
     if (!bio) return "No bio row found — run seed:init first";
-    if (bio.themeAbout) return "themeAbout already set";
+    if (bio.themeAbout && Object.keys(bio.themeAbout).length > 0) return "themeAbout already set";
 
     await ctx.db.patch(bio._id, {
       themeAbout: {
