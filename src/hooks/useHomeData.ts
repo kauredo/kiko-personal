@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import {
@@ -101,11 +102,18 @@ export function useHomeData() {
   const settings: HomeSettings = rawSettings === undefined
     ? FALLBACK_SETTINGS
     : {
-        heroTagline: rawSettings.heroTagline,
         heroSubtitle: rawSettings.heroSubtitle ?? FALLBACK_SETTINGS.heroSubtitle,
+        siteTitle: rawSettings.siteTitle,
+        metaDescription: rawSettings.metaDescription ?? FALLBACK_SETTINGS.metaDescription,
         contactEmail: rawSettings.contactEmail,
         socialLinks: rawSettings.socialLinks,
       };
+
+  useEffect(() => {
+    document.title = settings.siteTitle;
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute("content", settings.metaDescription);
+  }, [settings.siteTitle, settings.metaDescription]);
 
   return {
     events,

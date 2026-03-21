@@ -345,7 +345,7 @@ export function HomeFretboard() {
               {bio.firstName}<br />{bio.lastName}
             </h1>
             <p className="fret-text text-xs tracking-[0.3em] uppercase text-white/40">
-              Guitar &middot; Keys &middot; Bass &middot; Live Performance
+              {settings.heroSubtitle}
             </p>
           </div>
         </div>

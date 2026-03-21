@@ -104,7 +104,7 @@ export function HomeElectric() {
               <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </button>
             <p className="text-xs text-white/40" style={{ letterSpacing: "0.2em" }}>
-              GUITAR &middot; KEYS &middot; MUSICAL DIRECTION &middot; PRODUCTION
+              {settings.heroSubtitle}
             </p>
           </div>
         </div>
@@ -372,7 +372,7 @@ export function HomeElectric() {
             );
           })}
         </div>
-        <span>GUITAR &middot; KEYS &middot; MD &middot; PRODUCTION</span>
+        <span>{settings.heroSubtitle}</span>
       </footer>
     </div>
   );

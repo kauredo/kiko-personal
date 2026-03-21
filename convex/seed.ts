@@ -23,7 +23,6 @@ export const init = mutation({
 
     // ── Site Settings ──
     await ctx.db.insert("siteSettings", {
-      heroTagline: "Francisco Catarro",
       heroSubtitle: "Guitar | Keys | Musical Direction | Production",
       siteTitle: "Francisco Catarro — Musician",
       metaDescription:
@@ -132,25 +131,6 @@ export const init = mutation({
 
     for (const exp of experiences) {
       await ctx.db.insert("experiences", exp);
-    }
-
-    // ── Skills ──
-    const skills = [
-      { name: "Electric Guitar", category: "instruments" },
-      { name: "Acoustic Guitar", category: "instruments" },
-      { name: "Bass Guitar", category: "instruments" },
-      { name: "Piano / Keys", category: "instruments" },
-      { name: "Live Performance", category: "performance" },
-      { name: "Band Leadership", category: "performance" },
-      { name: "Musical Direction", category: "performance" },
-      { name: "Composition", category: "production" },
-      { name: "Arranging", category: "production" },
-      { name: "Recording", category: "production" },
-      { name: "Session Work", category: "production" },
-    ];
-
-    for (const skill of skills) {
-      await ctx.db.insert("skills", skill);
     }
 
     // Events and testimonials are managed via admin panel — no placeholders seeded.

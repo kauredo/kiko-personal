@@ -19,7 +19,6 @@ export const get = query({
 export const upsert = mutation({
   args: {
     token: v.string(),
-    heroTagline: v.string(),
     heroSubtitle: v.optional(v.string()),
     siteTitle: v.string(),
     metaDescription: v.optional(v.string()),

@@ -94,7 +94,7 @@ export function HomeEditorial() {
       <section className="flex min-h-screen flex-col items-center justify-center px-6 md:px-12 lg:px-24 xl:px-32 text-center">
         <div ref={heroRef}>
           <p className="hero-fade mb-6 text-xs uppercase" style={{ color: mutedFg, letterSpacing: "0.3em" }}>
-            Guitarist &middot; Pianist &middot; Musical Director &middot; Producer
+            {settings.heroSubtitle}
           </p>
           <h1
             className="hero-fade"

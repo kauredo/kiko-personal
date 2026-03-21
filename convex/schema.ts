@@ -79,23 +79,6 @@ export default defineSchema({
     .index("by_category", ["category"])
     .index("by_order", ["order"]),
 
-  // Resume: Education
-  education: defineTable({
-    institution: v.string(),
-    degree: v.string(),
-    startDate: v.string(),
-    endDate: v.optional(v.string()),
-    description: v.optional(v.string()),
-    order: v.number(),
-  }).index("by_order", ["order"]),
-
-  // Resume: Skills
-  skills: defineTable({
-    name: v.string(),
-    category: v.string(),
-    order: v.optional(v.number()),
-  }).index("by_category", ["category"]),
-
   // Resume: Awards/Credits
   awards: defineTable({
     title: v.string(),
@@ -150,7 +133,6 @@ export default defineSchema({
 
   // Site settings (single-row)
   siteSettings: defineTable({
-    heroTagline: v.string(),
     heroSubtitle: v.optional(v.string()),
     siteTitle: v.string(),
     metaDescription: v.optional(v.string()),

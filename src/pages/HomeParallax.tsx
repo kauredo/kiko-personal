@@ -245,7 +245,7 @@ export function HomeParallax() {
 
           <div className="hero-subtext mt-8 text-center">
             <p className="text-sm tracking-[0.3em] uppercase text-white/40">
-              Guitar &middot; Keys &middot; Musical Direction &middot; Production
+              {settings.heroSubtitle}
             </p>
           </div>
 

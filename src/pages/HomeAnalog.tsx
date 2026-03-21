@@ -86,7 +86,7 @@ export function HomeAnalog() {
               <span style={{ color: primary }}>{bio.lastName}</span>
             </h1>
             <p className="mt-6 max-w-sm text-sm leading-relaxed" style={{ color: mutedFg }}>
-              Guitarist, pianist &amp; multi-instrumentalist. Born in Portugal,
+              {settings.heroSubtitle}. Born in Portugal,
               based in the UK. Over 10 years of live and studio experience.
             </p>
             <button

@@ -61,8 +61,9 @@ export type HomeBio = {
 };
 
 export type HomeSettings = {
-  heroTagline: string;
   heroSubtitle: string;
+  siteTitle: string;
+  metaDescription: string;
   contactEmail: string;
   socialLinks: { platform: string; url: string }[];
 };
@@ -126,8 +127,9 @@ export const FALLBACK_BIO: HomeBio = {
 };
 
 export const FALLBACK_SETTINGS: HomeSettings = {
-  heroTagline: "Francisco Catarro",
   heroSubtitle: "Guitar | Keys | Musical Direction | Production",
+  siteTitle: "Francisco Catarro — Musician",
+  metaDescription: "Francisco Catarro — versatile guitarist, pianist, musical director, and producer. Born in Portugal, based in the UK. Over 10 years of live and studio experience.",
   contactEmail: "contact@franciscocatarro.com",
   socialLinks: [
     { platform: "instagram", url: "https://www.instagram.com/francisco.catarro/" },

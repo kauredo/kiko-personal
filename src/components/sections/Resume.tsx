@@ -43,15 +43,6 @@ const PLACEHOLDER_ENTRIES: TimelineEntry[] = [
       "Producing and arranging tracks for emerging artists, blending genres from soul to electronic.",
     category: "producing",
   },
-  {
-    id: "4",
-    title: "Music Performance Degree",
-    organization: "Conservatory of Music",
-    period: "2016 — 2020",
-    description:
-      "Specialized in classical guitar and piano with focus on contemporary performance.",
-    category: "education",
-  },
 ];
 
 export function Resume() {

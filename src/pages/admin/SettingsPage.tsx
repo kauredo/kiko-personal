@@ -26,7 +26,6 @@ export function SettingsPage() {
   const changePassword = useMutation(api.auth.changePassword);
   const updateProfilePhoto = useMutation(api.bio.updateProfilePhoto);
 
-  const [heroTagline, setHeroTagline] = useState("");
   const [heroSubtitle, setHeroSubtitle] = useState("");
   const [siteTitle, setSiteTitle] = useState("");
   const [metaDescription, setMetaDescription] = useState("");
@@ -57,7 +56,6 @@ export function SettingsPage() {
 
   useEffect(() => {
     if (settings) {
-      setHeroTagline(settings.heroTagline);
       setHeroSubtitle(settings.heroSubtitle ?? "");
       setSiteTitle(settings.siteTitle);
       setMetaDescription(settings.metaDescription ?? "");
@@ -75,7 +73,6 @@ export function SettingsPage() {
     try {
       await upsert({
         token,
-        heroTagline: settings.heroTagline,
         heroSubtitle: settings.heroSubtitle || undefined,
         siteTitle: settings.siteTitle,
         metaDescription: settings.metaDescription || undefined,
@@ -100,7 +97,6 @@ export function SettingsPage() {
     try {
       await upsert({
         token,
-        heroTagline,
         heroSubtitle: heroSubtitle || undefined,
         siteTitle,
         metaDescription: metaDescription || undefined,
@@ -310,31 +306,17 @@ export function SettingsPage() {
           </h2>
 
           <div className="space-y-5">
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div>
-                <label className="mb-1.5 block text-xs font-medium uppercase text-muted-foreground" style={{ letterSpacing: "var(--label-tracking)" }}>
-                  Hero Tagline
-                </label>
-                <input
-                  type="text"
-                  value={heroTagline}
-                  onChange={(e) => setHeroTagline(e.target.value)}
-                  className={inputClasses}
-                  style={{ borderRadius: "var(--radius)" }}
-                />
-              </div>
-              <div>
-                <label className="mb-1.5 block text-xs font-medium uppercase text-muted-foreground" style={{ letterSpacing: "var(--label-tracking)" }}>
-                  Hero Subtitle
-                </label>
-                <input
-                  type="text"
-                  value={heroSubtitle}
-                  onChange={(e) => setHeroSubtitle(e.target.value)}
-                  className={inputClasses}
-                  style={{ borderRadius: "var(--radius)" }}
-                />
-              </div>
+            <div>
+              <label className="mb-1.5 block text-xs font-medium uppercase text-muted-foreground" style={{ letterSpacing: "var(--label-tracking)" }}>
+                Hero Subtitle
+              </label>
+              <input
+                type="text"
+                value={heroSubtitle}
+                onChange={(e) => setHeroSubtitle(e.target.value)}
+                className={inputClasses}
+                style={{ borderRadius: "var(--radius)" }}
+              />
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">

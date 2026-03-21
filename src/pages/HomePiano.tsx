@@ -225,7 +225,7 @@ export function HomePiano() {
             {bio.firstName} <span style={{ fontStyle: "italic" }}>{bio.lastName}</span>
           </h1>
           <p className="text-sm leading-relaxed" style={{ color: mutedFg }}>
-            Guitarist, pianist, musical director & producer.<br />
+            {settings.heroSubtitle}<br />
             <span className="hidden md:inline">Play the keys below — or use your keyboard (A-L).</span>
             <span className="md:hidden">Tap the keys below to play.</span>
           </p>
