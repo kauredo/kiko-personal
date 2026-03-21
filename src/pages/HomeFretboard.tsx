@@ -366,9 +366,7 @@ export function HomeFretboard() {
               About
             </h2>
             <p className="fret-text max-w-md text-sm leading-relaxed text-white/60">
-              Portuguese-born, UK-based. Guitar, keys, bass — 10+ years of performing,
-              composing, and directing. The kind of musician who learns every part,
-              understands every arrangement, and makes the band sound bigger than it is.
+              {bio.themeAbout["guitar"] ?? ""}
             </p>
           </div>
         </div>

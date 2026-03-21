@@ -129,15 +129,11 @@ export function HomeAnalog() {
             </h2>
           </div>
           <div className="flex flex-col justify-end gap-5">
-            <p className="leading-relaxed" style={{ color: fg }}>
-              Born in Portugal, now based in the UK — Francisco picked up a guitar at fourteen
-              and never put it down. Over a decade later, he plays guitar, keys, and bass across
-              stages, studios, and sessions throughout Europe.
-            </p>
-            <p className="leading-relaxed" style={{ color: mutedFg }}>
-              He's shared stages with Kevin Davy White, Carla Prata, and Marta Per —
-              and directed bands from intimate jazz clubs to festival crowds of thousands.
-            </p>
+            {(bio.themeAbout["raw-textured"] ?? "").split("\n\n").filter(Boolean).map((p, i) => (
+              <p key={i} className="leading-relaxed" style={{ color: i === 0 ? fg : mutedFg }}>
+                {p}
+              </p>
+            ))}
           </div>
         </div>
       </section>

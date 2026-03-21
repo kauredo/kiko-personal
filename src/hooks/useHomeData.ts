@@ -97,6 +97,7 @@ export function useHomeData() {
         title: rawBio?.title ?? FALLBACK_BIO.title,
         content: rawBio?.content ?? "",
         profilePhotoUrl: (rawBio as Record<string, unknown>)?.profilePhotoUrl as string | null ?? null,
+        themeAbout: (rawBio as Record<string, unknown>)?.themeAbout as HomeBio["themeAbout"] ?? FALLBACK_BIO.themeAbout,
       };
 
   const settings: HomeSettings = rawSettings === undefined

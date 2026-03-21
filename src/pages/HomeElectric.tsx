@@ -118,8 +118,7 @@ export function HomeElectric() {
             className="text-2xl leading-relaxed text-white/70 md:text-3xl lg:text-4xl"
             style={{ fontFamily: "'Syne', system-ui, sans-serif", fontWeight: 400 }}
           >
-            Born in Portugal, based in the UK. Guitar, keys, bass — over 10 years
-            making rooms <span className="text-[oklch(0.62_0.25_28)]">louder, tighter, and impossible to leave</span>.
+            {bio.themeAbout["dark-electric"] ?? ""}
           </p>
         </div>
       </section>

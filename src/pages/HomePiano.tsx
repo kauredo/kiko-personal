@@ -262,15 +262,11 @@ export function HomePiano() {
             </h2>
           </div>
           <div className="flex flex-col justify-end gap-5">
-            <p className="leading-relaxed" style={{ color: fg }}>
-              Francisco Catarro is a guitarist, pianist, musical director, and producer
-              who treats every performance like a composition — deliberate,
-              dynamic, and impossible to ignore.
-            </p>
-            <p className="leading-relaxed" style={{ color: mutedFg }}>
-              Born in Portugal, based in the UK. Over a decade moving between
-              rock stages, jazz clubs, and studio sessions across Europe.
-            </p>
+            {(bio.themeAbout["piano"] ?? "").split("\n\n").filter(Boolean).map((p, i) => (
+              <p key={i} className="leading-relaxed" style={{ color: i === 0 ? fg : mutedFg }}>
+                {p}
+              </p>
+            ))}
           </div>
         </div>
       </section>

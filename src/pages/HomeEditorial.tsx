@@ -157,16 +157,11 @@ export function HomeEditorial() {
             </h2>
           </div>
           <div className="flex flex-col justify-end gap-6">
-            <p className="leading-relaxed" style={{ color: fg }}>
-              A multi-instrumentalist and musical director whose career spans
-              concert stages, recording studios, and festival grounds across
-              Portugal and the UK.
-            </p>
-            <p className="leading-relaxed" style={{ color: mutedFg }}>
-              Francisco brings a rare combination: the instinct of a performer,
-              the ear of a producer, and the discipline of someone who has led
-              bands in front of thousands.
-            </p>
+            {(bio.themeAbout["hybrid"] ?? "").split("\n\n").filter(Boolean).map((p, i) => (
+              <p key={i} className="leading-relaxed" style={{ color: i === 0 ? fg : mutedFg }}>
+                {p}
+              </p>
+            ))}
           </div>
         </div>
 

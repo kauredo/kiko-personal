@@ -299,12 +299,11 @@ export function HomeParallax() {
             based in the UK.
           </h2>
           <div className="grid gap-8 md:grid-cols-2 md:gap-16">
-            <p className="reveal text-white/60 leading-relaxed">
-              Born in Portugal. Over a decade on stages across Europe — from underground jazz clubs in London to arena tours and festival headliners. Guitar, keys, bass, and musical direction.
-            </p>
-            <p className="reveal text-white/40 leading-relaxed">
-              He's opened for Westlife at Scarborough, directed bands at Festival Iminente in Lisbon, and held down residencies in London's live music scene. Every show is the only show.
-            </p>
+            {(bio.themeAbout["parallax"] ?? "").split("\n\n").filter(Boolean).map((p, i) => (
+              <p key={i} className={`reveal leading-relaxed ${i === 0 ? "text-white/60" : "text-white/40"}`}>
+                {p}
+              </p>
+            ))}
           </div>
         </div>
       </section>
