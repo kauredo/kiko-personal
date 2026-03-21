@@ -190,6 +190,14 @@ function getSocialIcon(platform: string) {
 
 export function HomeFretboard() {
   const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
+
+  const navLinks = [
+    { label: "About", id: "#fret-about" },
+    ...(photos.length > 0 ? [{ label: "Portfolio", id: "#fret-media" }] : []),
+    ...(experiences.length > 0 ? [{ label: "Work", id: "#fret-experience" }] : []),
+    ...(events.length > 0 ? [{ label: "Events", id: "#fret-events" }] : []),
+    { label: "Contact", id: "#fret-contact" },
+  ];
   const openGallery = useGallery();
   const allMedia = [...photos, ...videos, ...music];
   const containerRef = useRef<HTMLDivElement>(null);
@@ -298,26 +306,14 @@ export function HomeFretboard() {
           <span className="hidden text-xs font-bold uppercase tracking-wider text-white sm:block" style={{ fontFamily: "'Syne', system-ui, sans-serif" }}>{bio.name}</span>
         </div>
         <div className="flex items-center gap-6">
-          {[
-            { label: "About", id: "#fret-about" },
-            { label: "Portfolio", id: "#fret-media" },
-            { label: "Work", id: "#fret-experience" },
-            { label: "Events", id: "#fret-events" },
-            { label: "Contact", id: "#fret-contact" },
-          ].map(({ label, id }) => (
+          {navLinks.map(({ label, id }) => (
             <button key={label} onClick={() => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })} className="hidden text-xs uppercase text-white/40 transition-colors hover:text-white/70 focus-visible:underline md:block" style={{ letterSpacing: "0.15em" }}>
               {label}
             </button>
           ))}
           <ThemeSwitcher />
           <MobileMenu
-            links={[
-              { label: "About", id: "#fret-about" },
-              { label: "Portfolio", id: "#fret-media" },
-              { label: "Work", id: "#fret-experience" },
-              { label: "Events", id: "#fret-events" },
-              { label: "Contact", id: "#fret-contact" },
-            ]}
+            links={navLinks}
             scrollTo={(id) => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
             color="white"
             bgColor="oklch(0.065 0.008 40)"

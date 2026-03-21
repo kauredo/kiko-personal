@@ -32,16 +32,16 @@ function getSocialIcon(platform: string) {
   return Mail;
 }
 
-const NAV_LINKS = [
-  { label: "About", id: "#electric-about" },
-  { label: "Portfolio", id: "#electric-portfolio" },
-  { label: "Work", id: "#electric-work" },
-  { label: "Events", id: "#electric-events" },
-  { label: "Contact", id: "#electric-contact" },
-];
-
 export function HomeElectric() {
   const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
+
+  const navLinks = [
+    { label: "About", id: "#electric-about" },
+    ...(photos.length > 0 ? [{ label: "Portfolio", id: "#electric-portfolio" }] : []),
+    ...(experiences.length > 0 ? [{ label: "Work", id: "#electric-work" }] : []),
+    ...(events.length > 0 ? [{ label: "Events", id: "#electric-events" }] : []),
+    { label: "Contact", id: "#electric-contact" },
+  ];
   const openGallery = useGallery();
   const allMedia = [...photos, ...videos, ...music];
   const nameRef = useRef<HTMLHeadingElement>(null);
@@ -65,13 +65,13 @@ export function HomeElectric() {
           <span className="hidden text-xs font-bold uppercase tracking-wider text-white sm:block" style={{ fontFamily: "'Syne', system-ui, sans-serif" }}>{bio.name}</span>
         </div>
         <div className="flex items-center gap-8">
-          {NAV_LINKS.map(({ label, id }) => (
+          {navLinks.map(({ label, id }) => (
             <button key={label} onClick={() => lenis?.scrollTo(id, { offset: -60, duration: 1.5 })} className="hidden text-xs uppercase text-white/50 transition-colors hover:text-white focus-visible:underline md:block" style={{ letterSpacing: "0.15em" }}>
               {label}
             </button>
           ))}
           <ThemeSwitcher />
-          <MobileMenu links={NAV_LINKS} scrollTo={(id) => lenis?.scrollTo(id, { offset: -60, duration: 1.5 })} color="white" bgColor={bgColor} headingFont="'Syne', system-ui, sans-serif" />
+          <MobileMenu links={navLinks} scrollTo={(id) => lenis?.scrollTo(id, { offset: -60, duration: 1.5 })} color="white" bgColor={bgColor} headingFont="'Syne', system-ui, sans-serif" />
         </div>
       </nav>
 

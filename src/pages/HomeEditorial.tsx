@@ -43,6 +43,14 @@ export function HomeEditorial() {
   const prefersReducedMotion = usePrefersReducedMotion();
   const lenis = useLenis();
   const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
+
+  const navLinks = [
+    { label: "About", id: "#editorial-about" },
+    ...(photos.length > 0 ? [{ label: "Portfolio", id: "#editorial-portfolio" }] : []),
+    ...(experiences.length > 0 ? [{ label: "Work", id: "#editorial-work" }] : []),
+    ...(events.length > 0 ? [{ label: "Events", id: "#editorial-events" }] : []),
+    { label: "Contact", id: "#editorial-contact" },
+  ];
   const openGallery = useGallery();
   const allMedia = [...photos, ...videos, ...music];
 
@@ -64,12 +72,7 @@ export function HomeEditorial() {
           <span className="hidden text-sm sm:block" style={{ fontFamily: headingFont, color: fg }}>{bio.name}</span>
         </div>
         <div className="flex items-center gap-8">
-          {[
-            { label: "About", id: "#editorial-about" },
-            { label: "Portfolio", id: "#editorial-portfolio" },
-            { label: "Events", id: "#editorial-events" },
-            { label: "Contact", id: "#editorial-contact" },
-          ].map(({ label, id }) => (
+          {navLinks.map(({ label, id }) => (
             <button key={label} onClick={() => lenis?.scrollTo(id, { offset: -60, duration: 1.5 })} className="hidden text-xs uppercase transition-colors hover:opacity-70 focus-visible:underline md:block" style={{ color: mutedFg, letterSpacing: "0.15em" }}>
               {label}
             </button>
@@ -77,12 +80,7 @@ export function HomeEditorial() {
           <ThemeSwitcher />
         </div>
         <MobileMenu
-          links={[
-            { label: "About", id: "#editorial-about" },
-            { label: "Portfolio", id: "#editorial-portfolio" },
-            { label: "Events", id: "#editorial-events" },
-            { label: "Contact", id: "#editorial-contact" },
-          ]}
+          links={navLinks}
           scrollTo={(id) => lenis?.scrollTo(id, { offset: -60, duration: 1.5 })}
           color={fg}
           bgColor={bg}

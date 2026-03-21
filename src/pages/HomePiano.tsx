@@ -150,16 +150,16 @@ function getSocialIcon(platform: string) {
   return Mail;
 }
 
-const NAV_LINKS = [
-  { label: "About", id: "#piano-about" },
-  { label: "Portfolio", id: "#piano-media" },
-  { label: "Work", id: "#piano-work" },
-  { label: "Events", id: "#piano-events" },
-  { label: "Contact", id: "#piano-contact" },
-];
-
 export function HomePiano() {
   const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
+
+  const navLinks = [
+    { label: "About", id: "#piano-about" },
+    ...(photos.length > 0 ? [{ label: "Portfolio", id: "#piano-media" }] : []),
+    ...(experiences.length > 0 ? [{ label: "Work", id: "#piano-work" }] : []),
+    ...(events.length > 0 ? [{ label: "Events", id: "#piano-events" }] : []),
+    { label: "Contact", id: "#piano-contact" },
+  ];
   const openGallery = useGallery();
   const allMedia = [...photos, ...videos, ...music];
   const play = useAudioContext();
@@ -199,14 +199,14 @@ export function HomePiano() {
           <span className="hidden text-sm sm:block" style={{ fontFamily: "'DM Serif Display', Georgia, serif", color: fg }}>{bio.name}</span>
         </div>
         <div className="flex items-center gap-6">
-          {NAV_LINKS.map(({ label, id }) => (
+          {navLinks.map(({ label, id }) => (
             <button key={label} onClick={() => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })} className="hidden text-xs uppercase transition-colors hover:opacity-70 focus-visible:underline md:block" style={{ letterSpacing: "0.15em", color: mutedFg }}>
               {label}
             </button>
           ))}
           <ThemeSwitcher variant="dark" />
           <MobileMenu
-            links={NAV_LINKS}
+            links={navLinks}
             scrollTo={(id) => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
             color={fg}
             bgColor={bg}

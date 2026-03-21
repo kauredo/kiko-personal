@@ -28,6 +28,14 @@ function getSocialIcon(platform: string) {
 
 export function HomeParallax() {
   const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
+
+  const navLinks = [
+    { label: "About", id: "#parallax-about" },
+    ...(photos.length > 0 ? [{ label: "Portfolio", id: "#parallax-portfolio" }] : []),
+    ...(experiences.length > 0 ? [{ label: "Work", id: "#parallax-work" }] : []),
+    ...(events.length > 0 ? [{ label: "Events", id: "#parallax-events" }] : []),
+    { label: "Contact", id: "#parallax-contact" },
+  ];
   const openGallery = useGallery();
   const allMedia = [...photos, ...videos, ...music];
   const containerRef = useRef<HTMLDivElement>(null);
@@ -195,13 +203,7 @@ export function HomeParallax() {
           <span className="hidden text-xs font-bold uppercase tracking-wider sm:block" style={{ fontFamily: "'Syne', system-ui, sans-serif" }}>{bio.name}</span>
         </div>
         <div className="flex items-center gap-6">
-          {[
-            { label: "About", id: "#parallax-about" },
-            { label: "Portfolio", id: "#parallax-portfolio" },
-            { label: "Work", id: "#parallax-work" },
-            { label: "Events", id: "#parallax-events" },
-            { label: "Contact", id: "#parallax-contact" },
-          ].map(({ label, id }) => (
+          {navLinks.map(({ label, id }) => (
             <button key={label} onClick={() => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })} className="hidden text-xs uppercase text-white/50 transition-colors hover:text-white focus-visible:underline md:block" style={{ letterSpacing: "0.15em" }}>
               {label}
             </button>
@@ -209,13 +211,7 @@ export function HomeParallax() {
           <ThemeSwitcher />
         </div>
         <MobileMenu
-          links={[
-            { label: "About", id: "#parallax-about" },
-            { label: "Portfolio", id: "#parallax-portfolio" },
-            { label: "Work", id: "#parallax-work" },
-            { label: "Events", id: "#parallax-events" },
-            { label: "Contact", id: "#parallax-contact" },
-          ]}
+          links={navLinks}
           scrollTo={(id: string) => document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
           color="white"
           bgColor="oklch(0.05 0.005 260)"

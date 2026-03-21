@@ -37,17 +37,17 @@ function getSocialIcon(platform: string) {
   return Mail;
 }
 
-const NAV_LINKS = [
-  { label: "About", id: "#analog-about" },
-  { label: "Portfolio", id: "#analog-media" },
-  { label: "Work", id: "#analog-work" },
-  { label: "Events", id: "#analog-events" },
-  { label: "Contact", id: "#analog-contact" },
-];
-
 export function HomeAnalog() {
   const lenis = useLenis();
   const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
+
+  const navLinks = [
+    { label: "About", id: "#analog-about" },
+    ...(photos.length > 0 ? [{ label: "Portfolio", id: "#analog-media" }] : []),
+    ...(experiences.length > 0 ? [{ label: "Work", id: "#analog-work" }] : []),
+    ...(events.length > 0 ? [{ label: "Events", id: "#analog-events" }] : []),
+    { label: "Contact", id: "#analog-contact" },
+  ];
   const openGallery = useGallery();
   const allMedia = [...photos, ...videos, ...music];
   const submitContact = useMutation(api.contact.submit);
@@ -70,13 +70,13 @@ export function HomeAnalog() {
               <LogoMark size={24} style={{ color: fg }} />
             </div>
             <div className="flex items-center gap-6">
-              {NAV_LINKS.map(({ label, id }) => (
+              {navLinks.map(({ label, id }) => (
                 <button key={label} onClick={() => lenis?.scrollTo(id, { offset: -40, duration: 1.5 })} className="hidden text-xs uppercase transition-colors hover:opacity-70 focus-visible:underline md:block" style={{ letterSpacing: "0.15em", color: mutedFg }}>
                   {label}
                 </button>
               ))}
               <ThemeSwitcher variant="dark" />
-              <MobileMenu links={NAV_LINKS} scrollTo={(id) => lenis?.scrollTo(id, { offset: -40, duration: 1.5 })} color={fg} bgColor={bg} headingFont={headingFont} />
+              <MobileMenu links={navLinks} scrollTo={(id) => lenis?.scrollTo(id, { offset: -40, duration: 1.5 })} color={fg} bgColor={bg} headingFont={headingFont} />
             </div>
           </nav>
 
