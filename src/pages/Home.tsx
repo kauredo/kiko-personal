@@ -24,7 +24,7 @@ export function Home() {
 
   return (
     <PageWrapper>
-      <Suspense fallback={null}>
+      <Suspense fallback={<div className="min-h-screen bg-background" />}>
         <Component />
       </Suspense>
     </PageWrapper>
