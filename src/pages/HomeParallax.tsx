@@ -12,6 +12,7 @@ import { useHomeData } from "@/hooks/useHomeData";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { AudioCard } from "@/components/ui/AudioCard";
+import { VideoCard } from "@/components/ui/VideoCard";
 import { ArrowUpRight } from "lucide-react";
 
 export function HomeParallax() {
@@ -333,9 +334,7 @@ export function HomeParallax() {
                 }}
                 data-speed={i % 2 === 0 ? "0.05" : "-0.05"}
               >
-                {item.imageUrl && item.type === "video" ? (
-                  <video src={item.imageUrl} className="h-full w-full object-cover" muted loop playsInline onMouseEnter={e => (e.target as HTMLVideoElement).play()} onMouseLeave={e => (e.target as HTMLVideoElement).pause()} />
-                ) : item.imageUrl ? (
+                {item.imageUrl ? (
                   <img src={item.imageUrl} alt={item.title} className="h-full w-full object-cover" />
                 ) : (
                   <div className="flex h-full items-center justify-center text-white/10">
@@ -360,20 +359,15 @@ export function HomeParallax() {
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
             {videos.map((item) => (
-              <div key={item.id} className="group relative overflow-hidden" style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                {item.imageUrl ? (
-                  <video src={item.imageUrl} className="h-full w-full object-cover" muted loop playsInline
-                    onMouseEnter={e => (e.target as HTMLVideoElement).play()}
-                    onMouseLeave={e => (e.target as HTMLVideoElement).pause()} />
-                ) : (
+              item.imageUrl ? (
+                <VideoCard key={item.id} src={item.imageUrl!} title={item.title} style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }} />
+              ) : (
+                <div key={item.id} style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
                   <div className="flex h-full items-center justify-center text-white/10">
                     <span className="text-[10px] tracking-[0.2em] uppercase">video</span>
                   </div>
-                )}
-                <div className="absolute inset-x-0 bottom-0 bg-black/80 p-5 translate-y-full transition-transform duration-500 group-hover:translate-y-0">
-                  <p className="text-sm font-medium">{item.title}</p>
                 </div>
-              </div>
+              )
             ))}
           </div>
         </section>

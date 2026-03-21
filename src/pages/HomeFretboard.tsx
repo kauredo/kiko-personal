@@ -13,6 +13,7 @@ import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { LogoFull } from "@/components/ui/LogoFull";
 import { AudioCard } from "@/components/ui/AudioCard";
+import { VideoCard } from "@/components/ui/VideoCard";
 import { ArrowUpRight } from "lucide-react";
 import { useHomeData } from "@/hooks/useHomeData";
 
@@ -493,20 +494,15 @@ export function HomeFretboard() {
             </h2>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               {videos.map((item) => (
-                <div key={item.id} className="fret-text group relative overflow-hidden border border-white/[0.06]" style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.03)" }}>
-                  {item.imageUrl ? (
-                    <video src={item.imageUrl} className="h-full w-full object-cover" muted loop playsInline
-                      onMouseEnter={e => (e.target as HTMLVideoElement).play()}
-                      onMouseLeave={e => (e.target as HTMLVideoElement).pause()} />
-                  ) : (
+                item.imageUrl ? (
+                  <VideoCard key={item.id} src={item.imageUrl!} title={item.title} className="fret-text border border-white/[0.06]" style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.03)" }} />
+                ) : (
+                  <div key={item.id} className="fret-text border border-white/[0.06]" style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.03)" }}>
                     <div className="flex h-full items-center justify-center">
                       <span className="text-[9px] uppercase tracking-[0.2em] text-white/15">video</span>
                     </div>
-                  )}
-                  <div className="absolute inset-x-0 bottom-0 bg-black/80 p-4 translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-                    <p className="text-sm font-medium text-white">{item.title}</p>
                   </div>
-                </div>
+                )
               ))}
             </div>
           </div>

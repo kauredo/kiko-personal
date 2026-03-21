@@ -12,6 +12,7 @@ import { LogoMark } from "@/components/ui/LogoMark";
 import { LogoFull } from "@/components/ui/LogoFull";
 import { ArrowDown } from "lucide-react";
 import { AudioCard } from "@/components/ui/AudioCard";
+import { VideoCard } from "@/components/ui/VideoCard";
 
 const bg = "oklch(0.93 0.015 75)";
 const fg = "oklch(0.15 0.03 40)";
@@ -181,29 +182,15 @@ export function HomeAnalog() {
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {videos.map((item) => (
-              <div
-                key={item.id}
-                className="group relative cursor-pointer overflow-hidden"
-                style={{
-                  background: `${fg}dd`,
-                  aspectRatio: "16/9",
-                  borderRadius: "3px",
-                  border: `1px solid ${bg}15`,
-                }}
-              >
-                {item.imageUrl ? (
-                  <video src={item.imageUrl} className="h-full w-full object-cover" muted loop playsInline
-                    onMouseEnter={e => (e.target as HTMLVideoElement).play()}
-                    onMouseLeave={e => (e.target as HTMLVideoElement).pause()} />
-                ) : (
+              item.imageUrl ? (
+                <VideoCard key={item.id} src={item.imageUrl!} title={item.title} style={{ background: `${fg}dd`, aspectRatio: "16/9", borderRadius: "3px", border: `1px solid ${bg}15` }} />
+              ) : (
+                <div key={item.id} style={{ background: `${fg}dd`, aspectRatio: "16/9", borderRadius: "3px", border: `1px solid ${bg}15` }}>
                   <div className="flex h-full items-center justify-center" style={{ color: `${bg}33` }}>
                     <span className="text-[10px] uppercase" style={{ letterSpacing: "0.2em" }}>video</span>
                   </div>
-                )}
-                <div className="absolute inset-x-0 bottom-0 p-3 translate-y-full transition-transform duration-300 group-hover:translate-y-0" style={{ background: fg }}>
-                  <p className="text-xs font-medium" style={{ color: bg }}>{item.title}</p>
                 </div>
-              </div>
+              )
             ))}
           </div>
         </section>

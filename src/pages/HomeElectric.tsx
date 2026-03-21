@@ -16,6 +16,7 @@ import { LogoFull } from "@/components/ui/LogoFull";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { useHomeData } from "@/hooks/useHomeData";
 import { AudioCard } from "@/components/ui/AudioCard";
+import { VideoCard } from "@/components/ui/VideoCard";
 
 export function HomeElectric() {
   const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
@@ -189,20 +190,15 @@ export function HomeElectric() {
           </div>
           <div className="flex gap-3 overflow-x-auto px-8 pb-4 md:px-16 lg:px-24">
             {videos.map((item, i) => (
-              <div key={item.id} className="group relative aspect-[16/9] w-80 flex-shrink-0 cursor-pointer overflow-hidden bg-white/[0.10] md:w-96">
-                {item.imageUrl ? (
-                  <video src={item.imageUrl} className="h-full w-full object-cover" muted loop playsInline
-                    onMouseEnter={e => (e.target as HTMLVideoElement).play()}
-                    onMouseLeave={e => (e.target as HTMLVideoElement).pause()} />
-                ) : (
+              item.imageUrl ? (
+                <VideoCard key={item.id} src={item.imageUrl!} title={item.title} className="aspect-[16/9] w-80 flex-shrink-0 bg-white/[0.10] md:w-96" />
+              ) : (
+                <div key={item.id} className="aspect-[16/9] w-80 flex-shrink-0 bg-white/[0.10] md:w-96">
                   <div className="flex h-full items-center justify-center text-white/15">
                     <span className="text-[10px] uppercase" style={{ letterSpacing: "0.2em" }}>video</span>
                   </div>
-                )}
-                <div className="absolute inset-x-0 bottom-0 bg-[oklch(0.06_0.005_260)] p-4 translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-                  <p className="text-sm font-medium text-white">{item.title}</p>
                 </div>
-              </div>
+              )
             ))}
           </div>
         </section>
