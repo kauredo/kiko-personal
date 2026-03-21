@@ -9,6 +9,7 @@ import { useRef, useEffect } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { useHomeData } from "@/hooks/useHomeData";
+import { useGallery } from "@/context/GalleryContext";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { AudioCard } from "@/components/ui/AudioCard";
@@ -17,6 +18,8 @@ import { ArrowUpRight } from "lucide-react";
 
 export function HomeParallax() {
   const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
+  const openGallery = useGallery();
+  const allMedia = [...photos, ...videos, ...music];
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -326,6 +329,7 @@ export function HomeParallax() {
               <div
                 key={item.id}
                 className="group relative flex-shrink-0 cursor-pointer overflow-hidden"
+                onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))}
                 style={{
                   width: i === 0 ? "50vw" : "35vw",
                   aspectRatio: i === 0 ? "4/3" : "3/4",
@@ -360,7 +364,7 @@ export function HomeParallax() {
           <div className="grid gap-4 md:grid-cols-2">
             {videos.map((item) => (
               item.imageUrl ? (
-                <VideoCard key={item.id} src={item.imageUrl!} title={item.title} style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }} />
+                <VideoCard key={item.id} src={item.imageUrl!} title={item.title} onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }} />
               ) : (
                 <div key={item.id} style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
                   <div className="flex h-full items-center justify-center text-white/10">

@@ -4,6 +4,7 @@ import { ConvexProvider, ConvexReactClient } from "convex/react";
 import { Home } from "@/pages/Home";
 import { AuthProvider } from "@/components/admin/AuthProvider";
 import { AdminLayout } from "@/components/admin/shared/AdminLayout";
+import { GalleryProvider } from "@/context/GalleryContext";
 
 const convex = new ConvexReactClient(
   import.meta.env.VITE_CONVEX_URL ?? "https://placeholder.convex.cloud",
@@ -61,6 +62,7 @@ function AdminLoading() {
 export function App() {
   return (
     <ConvexProvider client={convex}>
+      <GalleryProvider>
       <BrowserRouter>
         <Routes>
           {/* Public */}
@@ -120,6 +122,7 @@ export function App() {
           />
         </Routes>
       </BrowserRouter>
+      </GalleryProvider>
     </ConvexProvider>
   );
 }

@@ -1,49 +1,45 @@
 import { useRef, useState } from "react";
-import { Volume2, VolumeX, Maximize2 } from "lucide-react";
+import { Volume2, VolumeX, Expand } from "lucide-react";
 
 type VideoCardProps = {
   src: string;
   title: string;
   className?: string;
   style?: React.CSSProperties;
+  onClick?: () => void;
 };
 
-export function VideoCard({ src, title, className = "", style }: VideoCardProps) {
+export function VideoCard({ src, title, className = "", style, onClick }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
-  const [playing, setPlaying] = useState(false);
 
   function handleMouseEnter() {
     videoRef.current?.play();
-    setPlaying(true);
   }
 
   function handleMouseLeave() {
     if (!videoRef.current) return;
     videoRef.current.pause();
     videoRef.current.currentTime = 0;
-    setPlaying(false);
     setMuted(true);
+    if (videoRef.current) videoRef.current.muted = true;
   }
 
   function toggleMute(e: React.MouseEvent) {
     e.stopPropagation();
     if (!videoRef.current) return;
-    videoRef.current.muted = !muted;
-    setMuted(!muted);
-  }
-
-  function openFullscreen(e: React.MouseEvent) {
-    e.stopPropagation();
-    videoRef.current?.requestFullscreen?.();
+    const next = !muted;
+    videoRef.current.muted = next;
+    setMuted(next);
   }
 
   return (
     <div
-      className={`group relative overflow-hidden ${className}`}
+      className={`group relative cursor-pointer overflow-hidden ${className}`}
       style={style}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={onClick}
     >
       <video
         ref={videoRef}
@@ -54,24 +50,24 @@ export function VideoCard({ src, title, className = "", style }: VideoCardProps)
         playsInline
         preload="metadata"
       />
-      {/* Controls — visible on hover */}
-      <div className="absolute right-2 bottom-2 flex gap-1.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+      {/* Title overlay */}
+      <div className="absolute inset-x-0 bottom-0 z-10 bg-black/70 px-4 py-3 translate-y-full backdrop-blur-sm transition-transform duration-300 group-hover:translate-y-0">
+        <p className="text-sm font-medium text-white">{title}</p>
+      </div>
+      {/* Controls */}
+      <div className="absolute right-3 top-3 z-20 flex gap-1.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
         <button
           onClick={toggleMute}
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm transition-colors hover:bg-black/80"
+          className="flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm transition-colors hover:bg-black/80"
         >
-          {muted ? <VolumeX size={14} /> : <Volume2 size={14} />}
+          {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
         </button>
         <button
-          onClick={openFullscreen}
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm transition-colors hover:bg-black/80"
+          onClick={(e) => { e.stopPropagation(); onClick?.(); }}
+          className="flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm transition-colors hover:bg-black/80"
         >
-          <Maximize2 size={14} />
+          <Expand size={16} />
         </button>
-      </div>
-      {/* Title overlay */}
-      <div className="absolute inset-x-0 bottom-0 bg-black/70 p-4 translate-y-full backdrop-blur-sm transition-transform duration-300 group-hover:translate-y-0">
-        <p className="text-sm font-medium text-white">{title}</p>
       </div>
     </div>
   );

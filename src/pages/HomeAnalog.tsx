@@ -7,6 +7,7 @@
 import { motion } from "framer-motion";
 import { useLenis } from "@/hooks/useLenis";
 import { useHomeData } from "@/hooks/useHomeData";
+import { useGallery } from "@/context/GalleryContext";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { LogoFull } from "@/components/ui/LogoFull";
@@ -26,6 +27,8 @@ const bodyFont = "'Space Grotesk', system-ui, sans-serif";
 export function HomeAnalog() {
   const lenis = useLenis();
   const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
+  const openGallery = useGallery();
+  const allMedia = [...photos, ...videos, ...music];
 
   return (
     <div className="min-h-screen" style={{ background: bg, color: fg, fontFamily: bodyFont }}>
@@ -151,6 +154,7 @@ export function HomeAnalog() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: i * 0.06, duration: 0.5 }}
               className="group relative cursor-pointer overflow-hidden"
+              onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))}
               style={{
                 background: `${fg}dd`,
                 aspectRatio: "4/5",
@@ -183,7 +187,7 @@ export function HomeAnalog() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {videos.map((item) => (
               item.imageUrl ? (
-                <VideoCard key={item.id} src={item.imageUrl!} title={item.title} style={{ background: `${fg}dd`, aspectRatio: "16/9", borderRadius: "3px", border: `1px solid ${bg}15` }} />
+                <VideoCard key={item.id} src={item.imageUrl!} title={item.title} onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} style={{ background: `${fg}dd`, aspectRatio: "16/9", borderRadius: "3px", border: `1px solid ${bg}15` }} />
               ) : (
                 <div key={item.id} style={{ background: `${fg}dd`, aspectRatio: "16/9", borderRadius: "3px", border: `1px solid ${bg}15` }}>
                   <div className="flex h-full items-center justify-center" style={{ color: `${bg}33` }}>

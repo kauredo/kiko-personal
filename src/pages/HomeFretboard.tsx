@@ -16,6 +16,7 @@ import { AudioCard } from "@/components/ui/AudioCard";
 import { VideoCard } from "@/components/ui/VideoCard";
 import { ArrowUpRight } from "lucide-react";
 import { useHomeData } from "@/hooks/useHomeData";
+import { useGallery } from "@/context/GalleryContext";
 
 // ── Chord Data ──
 // Standard guitar chord voicings: [lowE, A, D, G, B, highE]
@@ -179,6 +180,8 @@ function ChordDiagram({
 
 export function HomeFretboard() {
   const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
+  const openGallery = useGallery();
+  const allMedia = [...photos, ...videos, ...music];
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -470,7 +473,8 @@ export function HomeFretboard() {
             {photos.map((item, i) => (
               <div
                 key={item.id}
-                className={`fret-text relative flex items-center justify-center overflow-hidden border border-white/[0.06] ${i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-[4/3]"}`}
+                className={`fret-text relative flex cursor-pointer items-center justify-center overflow-hidden border border-white/[0.06] ${i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-[4/3]"}`}
+                onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))}
                 style={{ background: "rgba(255,255,255,0.03)" }}
               >
                 {item.imageUrl ? (
@@ -495,7 +499,7 @@ export function HomeFretboard() {
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               {videos.map((item) => (
                 item.imageUrl ? (
-                  <VideoCard key={item.id} src={item.imageUrl!} title={item.title} className="fret-text border border-white/[0.06]" style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.03)" }} />
+                  <VideoCard key={item.id} src={item.imageUrl!} title={item.title} onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} className="fret-text border border-white/[0.06]" style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.03)" }} />
                 ) : (
                   <div key={item.id} className="fret-text border border-white/[0.06]" style={{ aspectRatio: "16/9", background: "rgba(255,255,255,0.03)" }}>
                     <div className="flex h-full items-center justify-center">

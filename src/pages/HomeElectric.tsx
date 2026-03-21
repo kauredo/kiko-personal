@@ -15,11 +15,14 @@ import { LogoMark } from "@/components/ui/LogoMark";
 import { LogoFull } from "@/components/ui/LogoFull";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { useHomeData } from "@/hooks/useHomeData";
+import { useGallery } from "@/context/GalleryContext";
 import { AudioCard } from "@/components/ui/AudioCard";
 import { VideoCard } from "@/components/ui/VideoCard";
 
 export function HomeElectric() {
   const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
+  const openGallery = useGallery();
+  const allMedia = [...photos, ...videos, ...music];
   const nameRef = useRef<HTMLHeadingElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const lenis = useLenis();
@@ -166,6 +169,7 @@ export function HomeElectric() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 + i * 0.08, duration: 0.5 }}
               className="group relative aspect-[3/4] w-64 flex-shrink-0 cursor-pointer overflow-hidden bg-white/[0.10] md:w-80"
+              onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))}
             >
               {item.imageUrl ? (
                 <img src={item.imageUrl} alt={item.title} className="h-full w-full object-cover" />
@@ -191,7 +195,7 @@ export function HomeElectric() {
           <div className="flex gap-3 overflow-x-auto px-8 pb-4 md:px-16 lg:px-24">
             {videos.map((item, i) => (
               item.imageUrl ? (
-                <VideoCard key={item.id} src={item.imageUrl!} title={item.title} className="aspect-[16/9] w-80 flex-shrink-0 bg-white/[0.10] md:w-96" />
+                <VideoCard key={item.id} src={item.imageUrl!} title={item.title} className="aspect-[16/9] w-80 flex-shrink-0 bg-white/[0.10] md:w-96" onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} />
               ) : (
                 <div key={item.id} className="aspect-[16/9] w-80 flex-shrink-0 bg-white/[0.10] md:w-96">
                   <div className="flex h-full items-center justify-center text-white/15">

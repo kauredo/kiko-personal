@@ -10,6 +10,7 @@ import { gsap } from "@/lib/gsap";
 import { useLenis } from "@/hooks/useLenis";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { useHomeData } from "@/hooks/useHomeData";
+import { useGallery } from "@/context/GalleryContext";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { LogoFull } from "@/components/ui/LogoFull";
@@ -32,6 +33,8 @@ export function HomeEditorial() {
   const prefersReducedMotion = usePrefersReducedMotion();
   const lenis = useLenis();
   const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
+  const openGallery = useGallery();
+  const allMedia = [...photos, ...videos, ...music];
 
   useEffect(() => {
     if (prefersReducedMotion || !heroRef.current) return;
@@ -197,7 +200,8 @@ export function HomeEditorial() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05, duration: 0.5 }}
-                className="group relative mb-4 overflow-hidden break-inside-avoid"
+                className="group relative mb-4 cursor-pointer overflow-hidden break-inside-avoid"
+                onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))}
                 style={{ border: `1px solid ${border}` }}
               >
                 {item.imageUrl ? (
@@ -225,7 +229,7 @@ export function HomeEditorial() {
             <div className="grid gap-4 md:grid-cols-2">
               {videos.map((item) => (
                 item.imageUrl ? (
-                  <VideoCard key={item.id} src={item.imageUrl!} title={item.title} style={{ aspectRatio: "16/9", background: "oklch(0.14 0.01 55)", border: "1px solid oklch(0.24 0.01 55)" }} />
+                  <VideoCard key={item.id} src={item.imageUrl!} title={item.title} onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} style={{ aspectRatio: "16/9", background: "oklch(0.14 0.01 55)", border: "1px solid oklch(0.24 0.01 55)" }} />
                 ) : (
                   <div key={item.id} style={{ aspectRatio: "16/9", background: "oklch(0.14 0.01 55)", border: "1px solid oklch(0.24 0.01 55)" }}>
                     <div className="flex h-full items-center justify-center" style={{ color: "oklch(0.50 0.01 55)" }}>

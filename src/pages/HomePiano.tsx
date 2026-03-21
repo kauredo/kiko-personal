@@ -12,6 +12,7 @@ import { AudioCard } from "@/components/ui/AudioCard";
 import { VideoCard } from "@/components/ui/VideoCard";
 import { ArrowUpRight } from "lucide-react";
 import { useHomeData } from "@/hooks/useHomeData";
+import { useGallery } from "@/context/GalleryContext";
 
 // ── Web Audio Piano ──
 const NOTE_FREQS: Record<string, number> = {
@@ -123,6 +124,8 @@ function PianoKeyboard({ activeNote, onPlay }: { activeNote: string | null; onPl
 
 export function HomePiano() {
   const { events, experiences, testimonials, stats, services, settings, media, photos, videos, music, bio } = useHomeData();
+  const openGallery = useGallery();
+  const allMedia = [...photos, ...videos, ...music];
   const play = useAudioContext();
   const [activeNote, setActiveNote] = useState<string | null>(null);
   const [playedNotes, setPlayedNotes] = useState<string[]>([]);
@@ -282,7 +285,8 @@ export function HomePiano() {
             {photos.slice(0, 5).map((item, i) => (
               <div
                 key={item.id}
-                className={`relative flex items-end overflow-hidden p-5 ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
+                className={`relative flex cursor-pointer items-end overflow-hidden p-5 ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
+                onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))}
                 style={{ background: muted, border: `1px solid ${muted}`, aspectRatio: i === 0 ? undefined : "1/1", minHeight: i === 0 ? 280 : undefined }}
               >
                 {item.imageUrl ? (
@@ -309,7 +313,7 @@ export function HomePiano() {
             <div className="grid gap-4 md:grid-cols-2">
               {videos.map((item) => (
                 item.imageUrl ? (
-                  <VideoCard key={item.id} src={item.imageUrl!} title={item.title} style={{ aspectRatio: "16/9", background: muted, border: `1px solid ${muted}` }} />
+                  <VideoCard key={item.id} src={item.imageUrl!} title={item.title} onClick={() => openGallery(allMedia, allMedia.findIndex(m => m.id === item.id))} style={{ aspectRatio: "16/9", background: muted, border: `1px solid ${muted}` }} />
                 ) : (
                   <div key={item.id} style={{ aspectRatio: "16/9", background: muted, border: `1px solid ${muted}` }}>
                     <div className="flex h-full items-center justify-center" style={{ color: mutedFg }}>
