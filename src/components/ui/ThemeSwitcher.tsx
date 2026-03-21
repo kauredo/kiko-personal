@@ -4,12 +4,12 @@ import { Zap, Disc3, Blend, Layers, Piano, Music } from "lucide-react";
 import type { ThemeName } from "@/types/theme";
 
 const themes: { name: ThemeName; icon: typeof Zap; label: string }[] = [
-  { name: "dark-electric", icon: Zap, label: "Electric" },
-  { name: "raw-textured", icon: Disc3, label: "Analog" },
-  { name: "hybrid", icon: Blend, label: "Editorial" },
-  { name: "parallax", icon: Layers, label: "Parallax" },
   { name: "piano", icon: Piano, label: "Piano" },
   { name: "guitar", icon: Music, label: "Fretboard" },
+  { name: "raw-textured", icon: Disc3, label: "Analog" },
+  { name: "hybrid", icon: Blend, label: "Editorial" },
+  { name: "dark-electric", icon: Zap, label: "Electric" },
+  { name: "parallax", icon: Layers, label: "Parallax" },
 ];
 
 export function ThemeSwitcher({ variant = "light" }: { variant?: "light" | "dark" }) {

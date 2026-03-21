@@ -9,12 +9,12 @@ import type { Id } from "../../../convex/_generated/dataModel";
 const PLATFORMS = ["Instagram", "YouTube", "Spotify", "LinkedIn", "TikTok", "Twitter/X", "Facebook", "Website"];
 
 const OG_STYLES = [
-  { key: "dark-electric", label: "Electric", icon: Zap },
-  { key: "raw-textured", label: "Analog", icon: Disc3 },
-  { key: "hybrid", label: "Editorial", icon: Blend },
-  { key: "parallax", label: "Parallax", icon: Layers },
   { key: "piano", label: "Piano", icon: Piano },
   { key: "guitar", label: "Fretboard", icon: Music },
+  { key: "raw-textured", label: "Analog", icon: Disc3 },
+  { key: "hybrid", label: "Editorial", icon: Blend },
+  { key: "dark-electric", label: "Electric", icon: Zap },
+  { key: "parallax", label: "Parallax", icon: Layers },
 ] as const;
 
 export function SettingsPage() {

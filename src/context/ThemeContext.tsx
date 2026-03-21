@@ -15,7 +15,7 @@ interface ThemeContextValue {
 export const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 const STORAGE_KEY = "fc-theme";
-const DEFAULT_THEME: ThemeName = "dark-electric";
+const DEFAULT_THEME: ThemeName = "piano";
 
 function getStoredTheme(): ThemeName {
   const stored = localStorage.getItem(STORAGE_KEY);
