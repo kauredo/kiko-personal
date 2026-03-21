@@ -30,3 +30,4 @@ seed-data/ig_cookies.txt
 *.njsproj
 *.sln
 *.sw?
+.vercel

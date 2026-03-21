@@ -96,18 +96,6 @@ export function App() {
                         element={<ExperienceManager />}
                       />
                       <Route
-                        path="resume/education"
-                        element={<ExperienceManager />}
-                      />
-                      <Route
-                        path="resume/skills"
-                        element={<ExperienceManager />}
-                      />
-                      <Route
-                        path="resume/awards"
-                        element={<ExperienceManager />}
-                      />
-                      <Route
                         path="testimonials"
                         element={<TestimonialsManager />}
                       />

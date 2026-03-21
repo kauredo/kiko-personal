@@ -2,6 +2,9 @@ import { useState, useEffect, type FormEvent } from "react";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useAuth } from "@/hooks/useAuth";
+import { Plus, Trash2 } from "lucide-react";
+
+const PLATFORMS = ["Instagram", "YouTube", "Spotify", "LinkedIn", "TikTok", "Twitter/X", "Facebook", "Website"];
 
 export function SettingsPage() {
   const { token } = useAuth();
@@ -13,6 +16,7 @@ export function SettingsPage() {
   const [siteTitle, setSiteTitle] = useState("");
   const [metaDescription, setMetaDescription] = useState("");
   const [contactEmail, setContactEmail] = useState("");
+  const [socialLinks, setSocialLinks] = useState<{platform: string; url: string}[]>([]);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
@@ -23,6 +27,7 @@ export function SettingsPage() {
       setSiteTitle(settings.siteTitle);
       setMetaDescription(settings.metaDescription ?? "");
       setContactEmail(settings.contactEmail);
+      setSocialLinks(settings.socialLinks);
     }
   }, [settings]);
 
@@ -38,13 +43,25 @@ export function SettingsPage() {
         siteTitle,
         metaDescription: metaDescription || undefined,
         contactEmail,
-        socialLinks: settings?.socialLinks ?? [],
+        socialLinks,
       });
       setSaved(true);
       setTimeout(() => setSaved(false), 2000);
     } finally {
       setSaving(false);
     }
+  }
+
+  function addSocialLink() {
+    setSocialLinks(prev => [...prev, { platform: "Instagram", url: "" }]);
+  }
+
+  function removeSocialLink(index: number) {
+    setSocialLinks(prev => prev.filter((_, i) => i !== index));
+  }
+
+  function updateSocialLink(index: number, field: "platform" | "url", value: string) {
+    setSocialLinks(prev => prev.map((link, i) => i === index ? { ...link, [field]: value } : link));
   }
 
   const inputClasses =
@@ -74,6 +91,26 @@ export function SettingsPage() {
         <div>
           <label className="mb-1 block text-sm font-medium text-foreground">Contact Email</label>
           <input type="email" value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} className={inputClasses} />
+        </div>
+
+        <div>
+          <label className="mb-1 block text-sm font-medium text-foreground">Social Links</label>
+          <div className="space-y-3">
+            {socialLinks.map((link, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <select value={link.platform} onChange={(e) => updateSocialLink(i, "platform", e.target.value)} className={inputClasses + " max-w-[160px]"}>
+                  {PLATFORMS.map(p => <option key={p} value={p}>{p}</option>)}
+                </select>
+                <input type="url" value={link.url} onChange={(e) => updateSocialLink(i, "url", e.target.value)} placeholder="https://..." className={inputClasses} />
+                <button type="button" onClick={() => removeSocialLink(i)} className="p-1 text-muted-foreground hover:text-destructive flex-shrink-0">
+                  <Trash2 size={16} />
+                </button>
+              </div>
+            ))}
+          </div>
+          <button type="button" onClick={addSocialLink} className="mt-3 flex items-center gap-2 text-sm text-primary hover:text-primary/80">
+            <Plus size={14} /> Add social link
+          </button>
         </div>
 
         <button type="submit" disabled={saving} className="rounded bg-primary px-6 py-2 font-medium text-primary-foreground transition-colors hover:bg-accent disabled:opacity-50">
