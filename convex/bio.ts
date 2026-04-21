@@ -1,4 +1,4 @@
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { requireAdmin } from "./auth";
 
@@ -24,7 +24,7 @@ export const updateProfilePhoto = mutation({
   handler: async (ctx, { token, photoStorageId }) => {
     await requireAdmin(ctx, token);
     const bio = await ctx.db.query("bio").first();
-    if (!bio) throw new Error("Bio not found");
+    if (!bio) throw new ConvexError("Bio not found");
     await ctx.db.patch(bio._id, { profilePhoto: photoStorageId });
   },
 });

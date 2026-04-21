@@ -1,4 +1,4 @@
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
 import { mutation, query, type QueryCtx, type MutationCtx } from "./_generated/server";
 
 // Simple crypto helpers using Web Crypto API
@@ -50,7 +50,7 @@ export async function requireAdmin(
 ) {
   const user = await getAuthenticatedUser(ctx, token);
   if (!user || !user.isAdmin) {
-    throw new Error("Unauthorized");
+    throw new ConvexError("Unauthorized");
   }
   return user;
 }
@@ -65,10 +65,10 @@ export const login = mutation({
       .withIndex("by_email", (q) => q.eq("email", email))
       .first();
 
-    if (!user) throw new Error("Invalid credentials");
+    if (!user) throw new ConvexError("Invalid credentials");
 
     const hash = await hashPassword(password, user.salt);
-    if (hash !== user.passwordHash) throw new Error("Invalid credentials");
+    if (hash !== user.passwordHash) throw new ConvexError("Invalid credentials");
 
     // Clean up old sessions for this user
     const oldSessions = await ctx.db
@@ -127,7 +127,7 @@ export const changePassword = mutation({
 
     const currentHash = await hashPassword(currentPassword, user.salt);
     if (currentHash !== user.passwordHash) {
-      throw new Error("Current password is incorrect");
+      throw new ConvexError("Current password is incorrect");
     }
 
     const salt = generateSalt();

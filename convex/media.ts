@@ -1,4 +1,4 @@
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { requireAdmin } from "./auth";
 
@@ -103,7 +103,7 @@ export const update = mutation({
   handler: async (ctx, { token, id, ...data }) => {
     await requireAdmin(ctx, token);
     const existing = await ctx.db.get(id);
-    if (!existing) throw new Error("Not found");
+    if (!existing) throw new ConvexError("Not found");
 
     // Clean up old files if replacing
     if (data.imageFile && existing.imageFile && data.imageFile !== existing.imageFile) {
