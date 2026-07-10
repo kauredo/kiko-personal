@@ -32,6 +32,7 @@ function isRealPagePath(path: string): boolean {
   if (!path.startsWith("/")) return false;
   const p = path.toLowerCase();
   if (p.startsWith("/.")) return false;
+  if (p.startsWith("/__")) return false;
   if (SCANNER_PREFIXES.some((prefix) => p.startsWith(prefix))) return false;
   const last = p.split("?")[0].replace(/\/+$/, "").split("/").pop() ?? "";
   return !last.includes(".");
