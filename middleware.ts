@@ -17,6 +17,26 @@ const AI_REFERER_RE =
 const BOT_UA_RE =
   /bot|crawl|spider|slurp|gptbot|claudebot|ccbot|facebookexternalhit|embedly|preview|lighthouse|headless|monitor|pingdom|uptime/i;
 
+// Skip vuln-scanner / asset probes (/wp-admin, /.env, /2000.php) so they don't
+// inflate page hits. Mirrors analytics-hub convex/lib/pagePaths.ts — keep in sync.
+const SCANNER_PREFIXES = [
+  "/wp-admin",
+  "/wp-content",
+  "/wp-includes",
+  "/wp-json",
+  "/wp-login",
+  "/xmlrpc",
+  "/wp/",
+];
+function isRealPagePath(path: string): boolean {
+  if (!path.startsWith("/")) return false;
+  const p = path.toLowerCase();
+  if (p.startsWith("/.")) return false;
+  if (SCANNER_PREFIXES.some((prefix) => p.startsWith(prefix))) return false;
+  const last = p.split("?")[0].replace(/\/+$/, "").split("/").pop() ?? "";
+  return !last.includes(".");
+}
+
 // Consent-free page beacon (Vercel Edge Middleware, framework-agnostic). Counts
 // every non-bot page load server-side and flags AI-referred ones — no cookie,
 // no PII — so it's unaffected by GA consent gates and ad-blockers. Mirrors the
@@ -39,13 +59,15 @@ export default function middleware(request: Request, context: RequestContext) {
           // ignore unparseable Referer
         }
       }
-      context.waitUntil(
-        fetch(url, {
-          method: "POST",
-          headers: { "content-type": "application/json", "x-beacon-secret": secret },
-          body: JSON.stringify({ domain: u.hostname, path: u.pathname, referer }),
-        }).catch(() => {}),
-      );
+      if (isRealPagePath(u.pathname)) {
+        context.waitUntil(
+          fetch(url, {
+            method: "POST",
+            headers: { "content-type": "application/json", "x-beacon-secret": secret },
+            body: JSON.stringify({ domain: u.hostname, path: u.pathname, referer }),
+          }).catch(() => {}),
+        );
+      }
     }
   }
   return next();
