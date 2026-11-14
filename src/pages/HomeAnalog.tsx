@@ -306,8 +306,8 @@ export function HomeAnalog() {
             }
           }}>
             <div className="grid gap-4 sm:grid-cols-2">
-              <input type="text" placeholder="Your name" value={formData.name} onChange={(e) => setFormData(prev => ({...prev, name: e.target.value}))} className="w-full border px-4 py-3 text-sm placeholder:opacity-40 focus:outline-none focus:border-[oklch(0.38_0.14_28)]" style={{ borderColor: muted, background: bg, borderRadius: "3px", color: fg }} />
-              <input type="email" placeholder="Your email" value={formData.email} onChange={(e) => setFormData(prev => ({...prev, email: e.target.value}))} className="w-full border px-4 py-3 text-sm placeholder:opacity-40 focus:outline-none focus:border-[oklch(0.38_0.14_28)]" style={{ borderColor: muted, background: bg, borderRadius: "3px", color: fg }} />
+              <input type="text" autoComplete="name" placeholder="Your name" value={formData.name} onChange={(e) => setFormData(prev => ({...prev, name: e.target.value}))} className="w-full border px-4 py-3 text-sm placeholder:opacity-40 focus:outline-none focus:border-[oklch(0.38_0.14_28)]" style={{ borderColor: muted, background: bg, borderRadius: "3px", color: fg }} />
+              <input type="email" autoComplete="email" placeholder="Your email" value={formData.email} onChange={(e) => setFormData(prev => ({...prev, email: e.target.value}))} className="w-full border px-4 py-3 text-sm placeholder:opacity-40 focus:outline-none focus:border-[oklch(0.38_0.14_28)]" style={{ borderColor: muted, background: bg, borderRadius: "3px", color: fg }} />
             </div>
             <textarea placeholder="Your message" rows={4} value={formData.message} onChange={(e) => setFormData(prev => ({...prev, message: e.target.value}))} className="w-full resize-none border px-4 py-3 text-sm placeholder:opacity-40 focus:outline-none focus:border-[oklch(0.38_0.14_28)]" style={{ borderColor: muted, background: bg, borderRadius: "3px", color: fg }} />
             <div className="flex justify-center">
