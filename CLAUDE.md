@@ -30,7 +30,7 @@ This was a bug that caused all padding/margin classes to stop working.
 - Query pattern: use ternary for optional index filtering, not let/reassign
   (Convex types don't allow reassigning QueryInitializer after withIndex).
 - Seed: `npx convex run seed:init` creates admin user + default content.
-- `convex/_generated/` is gitignored — run `npx convex dev` to regenerate.
+- `convex/_generated/` is tracked because Vercel builds need it. Regenerate with `npx convex dev` and commit it after adding or removing a Convex module.
 
 ## Commands
 
