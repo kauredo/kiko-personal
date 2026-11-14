@@ -73,6 +73,7 @@ export function Contact() {
                 <input
                   type="text"
                   name="name"
+                  autoComplete="name"
                   placeholder="Your Name"
                   required
                   className={inputClasses}
@@ -81,6 +82,7 @@ export function Contact() {
                 <input
                   type="email"
                   name="email"
+                  autoComplete="email"
                   placeholder="Your Email"
                   required
                   className={inputClasses}

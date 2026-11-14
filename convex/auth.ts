@@ -1,5 +1,5 @@
 import { ConvexError, v } from "convex/values";
-import { mutation, query, type QueryCtx, type MutationCtx } from "./_generated/server";
+import { internalMutation, mutation, query, type QueryCtx, type MutationCtx } from "./_generated/server";
 
 // Simple crypto helpers using Web Crypto API
 async function hashPassword(password: string, salt: string): Promise<string> {
@@ -139,7 +139,7 @@ export const changePassword = mutation({
 });
 
 // Used by seed to create the initial admin
-export const createAdmin = mutation({
+export const createAdmin = internalMutation({
   args: { email: v.string(), password: v.string(), name: v.string() },
   handler: async (ctx, { email, password, name }) => {
     const existing = await ctx.db

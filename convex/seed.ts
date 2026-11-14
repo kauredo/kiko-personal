@@ -1,7 +1,7 @@
-import { mutation } from "./_generated/server";
-import { api } from "./_generated/api";
+import { internalMutation } from "./_generated/server";
+import { internal } from "./_generated/api";
 
-export const init = mutation({
+export const init = internalMutation({
   args: {},
   handler: async (ctx) => {
     // Check if already seeded
@@ -15,7 +15,7 @@ export const init = mutation({
     if (existingUser) return "Already seeded";
 
     // Create admin via auth module
-    await ctx.scheduler.runAfter(0, api.auth.createAdmin, {
+    await ctx.scheduler.runAfter(0, internal.auth.createAdmin, {
       email: "admin@franciscocatarro.com",
       password: "changeme123",
       name: "Francisco Catarro",
@@ -153,7 +153,7 @@ export const init = mutation({
   },
 });
 
-export const seedThemeAbout = mutation({
+export const seedThemeAbout = internalMutation({
   args: {},
   handler: async (ctx) => {
     const bio = await ctx.db.query("bio").first();
