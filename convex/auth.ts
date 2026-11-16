@@ -72,7 +72,8 @@ export const login = mutation({
 
     if (!user) throw new ConvexError("Invalid credentials");
     if (user.lockedUntil && user.lockedUntil > Date.now()) {
-      throw new ConvexError("Too many attempts, try again later");
+      // Same message as a wrong email, so a lock does not confirm the address.
+      throw new ConvexError("Invalid credentials");
     }
 
     const hash = await hashPassword(password, user.salt);
