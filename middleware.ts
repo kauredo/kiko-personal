@@ -17,25 +17,11 @@ const AI_REFERER_RE =
 const BOT_UA_RE =
   /bot|crawl|spider|slurp|gptbot|claudebot|ccbot|facebookexternalhit|embedly|preview|lighthouse|headless|monitor|pingdom|uptime/i;
 
-// Skip vuln-scanner / asset probes (/wp-admin, /.env, /2000.php) so they don't
-// inflate page hits. Mirrors analytics-hub convex/lib/pagePaths.ts — keep in sync.
-const SCANNER_PREFIXES = [
-  "/wp-admin",
-  "/wp-content",
-  "/wp-includes",
-  "/wp-json",
-  "/wp-login",
-  "/xmlrpc",
-  "/wp/",
-];
+// The SPA answers every path with 200, so beacon only the routes the app has
+// (/ and /admin/*). Any other path would add a row in analytics-hub.
 function isRealPagePath(path: string): boolean {
-  if (!path.startsWith("/")) return false;
-  const p = path.toLowerCase();
-  if (p.startsWith("/.")) return false;
-  if (p.startsWith("/__")) return false;
-  if (SCANNER_PREFIXES.some((prefix) => p.startsWith(prefix))) return false;
-  const last = p.split("?")[0].replace(/\/+$/, "").split("/").pop() ?? "";
-  return !last.includes(".");
+  const p = path.toLowerCase().replace(/\/+$/, "");
+  return p === "" || p === "/admin" || p.startsWith("/admin/");
 }
 
 // Consent-free page beacon (Vercel Edge Middleware, framework-agnostic). Counts

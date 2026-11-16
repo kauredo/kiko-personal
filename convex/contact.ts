@@ -15,10 +15,28 @@ export const submit = mutation({
       v.literal("general"),
     ),
     message: v.string(),
+    // Honeypot: hidden from people, so only a bot fills it in. The name means
+    // nothing to browser autofill.
+    hp: v.optional(v.string()),
   },
-  handler: async (ctx, data) => {
+  handler: async (ctx, { hp, ...data }) => {
+    if (hp) return null;
+    const name = data.name.trim();
+    const email = data.email.trim();
+    const message = data.message.trim();
+    if (!name || name.length > 100) throw new Error("Invalid name");
+    if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      throw new Error("Invalid email");
+    }
+    if (data.phone !== undefined && data.phone.length > 40) {
+      throw new Error("Invalid phone");
+    }
+    if (!message || message.length > 5000) throw new Error("Invalid message");
     return await ctx.db.insert("contactSubmissions", {
       ...data,
+      name,
+      email,
+      message,
       read: false,
     });
   },

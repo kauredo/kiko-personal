@@ -27,6 +27,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = useCallback(
     async (email: string, password: string) => {
       const result = await loginMutation({ email, password });
+      if (!result) throw new Error("Invalid credentials");
       localStorage.setItem(TOKEN_KEY, result.token);
       setToken(result.token);
     },

@@ -57,6 +57,11 @@ export async function requireAdmin(
 
 // Mutations & queries
 
+const MAX_FAILED_LOGINS = 5;
+const LOCK_MS = 15 * 60 * 1000;
+
+// A wrong password returns null instead of throwing, because a throw would
+// roll back the failed-attempt count.
 export const login = mutation({
   args: { email: v.string(), password: v.string() },
   handler: async (ctx, { email, password }) => {
@@ -66,9 +71,22 @@ export const login = mutation({
       .first();
 
     if (!user) throw new ConvexError("Invalid credentials");
+    if (user.lockedUntil && user.lockedUntil > Date.now()) {
+      // Same message as a wrong email, so a lock does not confirm the address.
+      throw new ConvexError("Invalid credentials");
+    }
 
     const hash = await hashPassword(password, user.salt);
-    if (hash !== user.passwordHash) throw new ConvexError("Invalid credentials");
+    if (hash !== user.passwordHash) {
+      const failedLogins = (user.failedLogins ?? 0) + 1;
+      await ctx.db.patch(user._id, failedLogins >= MAX_FAILED_LOGINS
+        ? { failedLogins: 0, lockedUntil: Date.now() + LOCK_MS }
+        : { failedLogins });
+      return null;
+    }
+    if (user.failedLogins || user.lockedUntil) {
+      await ctx.db.patch(user._id, { failedLogins: 0, lockedUntil: undefined });
+    }
 
     // Clean up old sessions for this user
     const oldSessions = await ctx.db
