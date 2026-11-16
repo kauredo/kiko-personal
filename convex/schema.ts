@@ -9,6 +9,8 @@ export default defineSchema({
     salt: v.string(),
     name: v.string(),
     isAdmin: v.boolean(),
+    failedLogins: v.optional(v.number()),
+    lockedUntil: v.optional(v.number()),
   }).index("by_email", ["email"]),
 
   sessions: defineTable({
