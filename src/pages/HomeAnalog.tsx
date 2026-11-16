@@ -51,7 +51,7 @@ export function HomeAnalog() {
   const openGallery = useGallery();
   const allMedia = [...photos, ...videos, ...music];
   const submitContact = useMutation(api.contact.submit);
-  const [formData, setFormData] = useState({ name: "", email: "", message: "", website: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "", hp: "" });
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   return (
@@ -297,15 +297,15 @@ export function HomeAnalog() {
             if (!formData.name || !formData.email || !formData.message) return;
             setFormStatus("sending");
             try {
-              await submitContact({ name: formData.name, email: formData.email, message: formData.message, website: formData.website, inquiryType: "general" });
+              await submitContact({ name: formData.name, email: formData.email, message: formData.message, hp: formData.hp, inquiryType: "general" });
               setFormStatus("sent");
-              setFormData({ name: "", email: "", message: "", website: "" });
+              setFormData({ name: "", email: "", message: "", hp: "" });
               setTimeout(() => setFormStatus("idle"), 3000);
             } catch {
               setFormStatus("error");
             }
           }}>
-            <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" value={formData.website} onChange={(e) => setFormData(prev => ({...prev, website: e.target.value}))} className="absolute -left-[9999px] h-px w-px opacity-0" />
+            <input type="text" name="hp" tabIndex={-1} autoComplete="off" aria-hidden="true" value={formData.hp} onChange={(e) => setFormData(prev => ({...prev, hp: e.target.value}))} className="absolute -left-[9999px] h-px w-px opacity-0" />
             <div className="grid gap-4 sm:grid-cols-2">
               <input type="text" autoComplete="name" placeholder="Your name" maxLength={100} value={formData.name} onChange={(e) => setFormData(prev => ({...prev, name: e.target.value}))} className="w-full border px-4 py-3 text-sm placeholder:opacity-40 focus:outline-none focus:border-[oklch(0.38_0.14_28)]" style={{ borderColor: muted, background: bg, borderRadius: "3px", color: fg }} />
               <input type="email" autoComplete="email" placeholder="Your email" maxLength={254} value={formData.email} onChange={(e) => setFormData(prev => ({...prev, email: e.target.value}))} className="w-full border px-4 py-3 text-sm placeholder:opacity-40 focus:outline-none focus:border-[oklch(0.38_0.14_28)]" style={{ borderColor: muted, background: bg, borderRadius: "3px", color: fg }} />

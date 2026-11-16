@@ -15,11 +15,12 @@ export const submit = mutation({
       v.literal("general"),
     ),
     message: v.string(),
-    // Honeypot: hidden from people, so only a bot fills it in.
-    website: v.optional(v.string()),
+    // Honeypot: hidden from people, so only a bot fills it in. The name means
+    // nothing to browser autofill.
+    hp: v.optional(v.string()),
   },
-  handler: async (ctx, { website, ...data }) => {
-    if (website) return null;
+  handler: async (ctx, { hp, ...data }) => {
+    if (hp) return null;
     const name = data.name.trim();
     const email = data.email.trim();
     const message = data.message.trim();
