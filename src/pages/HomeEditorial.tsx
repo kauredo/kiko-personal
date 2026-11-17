@@ -17,7 +17,8 @@ import { LogoFull } from "@/components/ui/LogoFull";
 import { AudioCard } from "@/components/ui/AudioCard";
 import { VideoCard } from "@/components/ui/VideoCard";
 import { MobileMenu } from "@/components/ui/MobileMenu";
-import { ArrowDown, Instagram, Youtube, Music2, Linkedin, Mail } from "lucide-react";
+import { ArrowDown, Music2, Mail } from "lucide-react";
+import { Instagram, Youtube, Linkedin } from "@/components/brandIcons";
 
 function getSocialIcon(platform: string) {
   const p = platform.toLowerCase();

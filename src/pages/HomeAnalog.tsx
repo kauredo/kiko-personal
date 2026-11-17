@@ -15,7 +15,8 @@ import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { MobileMenu } from "@/components/ui/MobileMenu";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { LogoFull } from "@/components/ui/LogoFull";
-import { ArrowDown, Mail, Instagram, Youtube, Music2, Linkedin } from "lucide-react";
+import { ArrowDown, Mail, Music2 } from "lucide-react";
+import { Instagram, Youtube, Linkedin } from "@/components/brandIcons";
 import { AudioCard } from "@/components/ui/AudioCard";
 import { VideoCard } from "@/components/ui/VideoCard";
 
