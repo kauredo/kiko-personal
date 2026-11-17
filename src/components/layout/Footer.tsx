@@ -1,4 +1,5 @@
-import { Instagram, Youtube, Music, Mail } from "lucide-react";
+import { Music, Mail } from "lucide-react";
+import { Instagram, Youtube } from "@/components/brandIcons";
 
 const socialLinks = [
   { icon: Instagram, href: "#", label: "Instagram" },
