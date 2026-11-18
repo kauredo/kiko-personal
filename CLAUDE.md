@@ -40,3 +40,7 @@ npm run build     # vp build
 npm run lint      # vp lint (Oxlint)
 npm run fmt       # vp fmt (Oxfmt)
 ```
+
+## Audit
+
+Audit, Nov 2026: `docs/audit-2026-11.md` lists open work, won't-do decisions and competitors; open work has plans in `plans/`.
