@@ -35,12 +35,6 @@ export function About() {
       <div ref={sectionRef} className="mx-auto max-w-6xl">
         <div className="mb-12 grid gap-8 md:grid-cols-[1fr_1.5fr] md:gap-16">
           <div>
-            <p
-              className="mb-4 text-xs uppercase text-primary/70"
-              style={{ letterSpacing: "var(--label-tracking)" }}
-            >
-              About
-            </p>
             <SplitHeading
               as="h2"
               className="text-3xl md:text-5xl"

@@ -37,12 +37,6 @@ export function MediaGallery() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <p
-              className="mb-3 text-xs uppercase text-primary/70"
-              style={{ letterSpacing: "var(--label-tracking)" }}
-            >
-              Portfolio
-            </p>
             <SplitHeading className="text-3xl md:text-5xl">
               See &amp; Hear
             </SplitHeading>

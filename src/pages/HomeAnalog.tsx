@@ -124,7 +124,6 @@ export function HomeAnalog() {
       <section id="analog-about" className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ borderTop: `1px solid ${muted}` }}>
         <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2 md:gap-20">
           <div>
-            <p className="mb-2 text-xs uppercase" style={{ color: primary, letterSpacing: "0.2em" }}>About</p>
             <h2 style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>
               Where soul<br />meets precision.
             </h2>
@@ -153,7 +152,6 @@ export function HomeAnalog() {
       {photos.length > 0 && (
         <section id="analog-media" className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ background: fg, color: bg }}>
           <div className="mb-12">
-            <p className="mb-2 text-xs uppercase" style={{ color: `${bg}88`, letterSpacing: "0.2em" }}>Portfolio</p>
             <h2 style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)", color: bg }}>Photos</h2>
           </div>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
@@ -193,7 +191,6 @@ export function HomeAnalog() {
       {videos.length > 0 && (
         <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ background: fg, color: bg, borderTop: `1px solid ${bg}15` }}>
           <div className="mb-12">
-            <p className="mb-2 text-xs uppercase" style={{ color: `${bg}88`, letterSpacing: "0.2em" }}>Portfolio</p>
             <h2 style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)", color: bg }}>Videos</h2>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -216,7 +213,6 @@ export function HomeAnalog() {
       {music.length > 0 && (
         <section className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ borderTop: `1px solid ${muted}` }}>
           <div className="mb-12">
-            <p className="mb-2 text-xs uppercase" style={{ color: primary, letterSpacing: "0.2em" }}>Listen</p>
             <h2 style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>Music</h2>
           </div>
           <div className="mx-auto max-w-3xl">
@@ -231,7 +227,6 @@ export function HomeAnalog() {
       {experiences.length > 0 && (
         <section id="analog-work" className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ borderTop: `1px solid ${muted}` }}>
           <div className="mb-12">
-            <p className="mb-2 text-xs uppercase" style={{ color: primary, letterSpacing: "0.2em" }}>Experience</p>
             <h2 style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>The work so far</h2>
           </div>
           {experiences.map((w, i) => (
@@ -250,7 +245,6 @@ export function HomeAnalog() {
       {/* ═══ SERVICES ═══ */}
       <section id="analog-services" className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ background: card }}>
         <div className="mx-auto max-w-5xl">
-          <p className="mb-2 text-xs uppercase" style={{ color: primary, letterSpacing: "0.2em" }}>Services</p>
           <h2 className="mb-12" style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>What I do</h2>
           <div className="grid gap-8 sm:grid-cols-2">
             {services.map((s) => (
@@ -268,7 +262,6 @@ export function HomeAnalog() {
         <section id="analog-events" className="px-6 md:px-12 lg:px-24 xl:px-32 py-20 md:py-28" style={{ borderTop: `1px solid ${muted}` }}>
           <div className="mb-12 flex items-end justify-between">
             <div>
-              <p className="mb-2 text-xs uppercase" style={{ color: primary, letterSpacing: "0.2em" }}>Events</p>
               <h2 style={{ fontFamily: headingFont, fontStyle: "italic", fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>Catch me live</h2>
             </div>
           </div>
