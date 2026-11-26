@@ -44,3 +44,10 @@ npm run fmt       # vp fmt (Oxfmt)
 ## Audit
 
 Audit, Nov 2026: `docs/audit-2026-11.md` lists open work, won't-do decisions and competitors; open work has plans in `plans/`.
+
+## Design
+
+- A section opens with its heading; the one label on a page goes where the heading cannot name its category.
+- A headline is one sentence.
+- Buttons share one corner radius.
+- Icons come from lucide-react.

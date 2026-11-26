@@ -78,9 +78,6 @@ export function Resume() {
     >
       <div className="mx-auto max-w-5xl">
         <div className="mb-20">
-          <p className="mb-3 text-xs uppercase text-primary/70" style={{ letterSpacing: "var(--label-tracking)" }}>
-            Resume
-          </p>
           <SplitHeading className="text-3xl md:text-5xl">
             The work so far
           </SplitHeading>

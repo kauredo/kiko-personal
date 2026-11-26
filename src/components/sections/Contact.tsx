@@ -40,7 +40,7 @@ export function Contact() {
         <SplitHeading className="mb-4 text-center text-3xl md:text-5xl">
           Let's make something
         </SplitHeading>
-        <p className="mb-12 text-center text-xs uppercase text-muted-foreground" style={{ letterSpacing: "var(--label-tracking)" }}>
+        <p className="mb-12 text-center text-sm text-muted-foreground">
           Booking &middot; Collaboration &middot; Lessons &middot; Just say hi
         </p>
 
